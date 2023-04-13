@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:sketch/screen/dashbord_screen/dashbord.dart';
-import 'package:sketch/screen/dashbord_screen/home_screen/home_screen.dart';
+import 'package:sketch/screen/home_screen/home_screen.dart';
+
 
 void main() {
   runApp(const MyApp());

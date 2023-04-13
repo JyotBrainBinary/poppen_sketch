@@ -1,12 +1,12 @@
 
-import 'package:chewie/chewie.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sketch/screen/dashbord_screen/home_screen/videoPlayerWidget.dart';
-import 'package:video_player/video_player.dart';
+import 'package:sketch/screen/home_screen/videoPlayerWidget.dart';
+
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

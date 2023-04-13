@@ -38,7 +38,6 @@ dependencies:
   get: ^4.6.5
   
   # ------ video -----
-
   video_player: ^2.6.1
   chewie: ^1.4.0
 
