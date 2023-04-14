@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sketch/screen/common/widget/textStyle.dart';
+import 'package:sketch/common/widget/textStyle.dart';
+
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -12,7 +13,7 @@ Widget bottomNavigationBar(BuildContext context) {
   HomeController homeController  = Get.put(HomeController());
   return Container(
     width: Get.width,
-    height: 90,
+    height: Get.height * 0.15,
     decoration: BoxDecoration(
       color: ColorRes.color161823,
       boxShadow: [
@@ -28,10 +29,11 @@ Widget bottomNavigationBar(BuildContext context) {
       id: "bottomBar",
         builder: (homeController){
       return Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+        padding: const EdgeInsets.only(top: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
+            SizedBox(width: Get.width * 0.05),
             InkWell(
               onTap: (){
                 homeController.index = 0;
@@ -54,6 +56,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
+            SizedBox(width: Get.width * 0.07),
             InkWell(
               onTap: (){
                 homeController.index = 1;
@@ -76,6 +79,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
+            SizedBox(width: Get.width * 0.06),
             InkWell(
               onTap: (){
                 homeController.index = 2;
@@ -98,6 +102,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
+            SizedBox(width: Get.width * 0.025),
             InkWell(
               onTap: (){
                 homeController.index = 3;
@@ -120,6 +125,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
+            SizedBox(width: Get.width * 0.05),
             InkWell(
               onTap: (){
                 homeController.index = 4;
@@ -142,6 +148,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
+            SizedBox(width: Get.width * 0.05),
           ],
         ),
       );

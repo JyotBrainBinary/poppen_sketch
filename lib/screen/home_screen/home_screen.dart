@@ -1,10 +1,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sketch/screen/common/bottomBar.dart';
-import 'package:sketch/screen/home_screen/videoPlayerWidget.dart';
-import 'package:sketch/utils/color_res.dart';
+import 'package:sketch/common/bottomBar.dart';
+
+
+import 'package:sketch/screen/home_screen/widget/videoPlayerWidget.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.8),
+      backgroundColor: Colors.black,
       body: PageView.builder(
           //controller: pageController,
           scrollDirection: Axis.vertical,

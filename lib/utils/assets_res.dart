@@ -6,8 +6,7 @@ class AssetsRes{
 ///---------------------- Images-----------------
 
 static String homeImage = "${images}home_image.png";
-
-  static String restaurantLogo = "${images}restaurantLogo.png";
+static String restaurantLogo = "${images}restaurantLogo.png";
 
 
   ///-------------- icons -----------
@@ -23,5 +22,8 @@ static String star = "${icons}star.png";
 static String visitersPic = "${icons}visitersPic.png";
 static String visitPic2 = "${icons}visitPic2.png";
 static String visitPic3 = "${icons}visitPic3.png";
+
+  static String search = "${icons}search.png";
+
 
 }
