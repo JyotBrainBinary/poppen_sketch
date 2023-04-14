@@ -19,21 +19,27 @@ class _HomeScreenState extends State<HomeScreen> {
     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
   ];
 
+  /*PageController pageController = PageController(
+    initialPage: 0
+  );
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.5),
-      body: SizedBox(
-          height: Get.height * 0.998,
-          width: Get.width ,
-        child: ListView.builder(
-          shrinkWrap: true,
+      body: PageView.builder(
+          //controller: pageController,
+          scrollDirection: Axis.vertical,
           itemCount: videoUrl.length,
-            itemBuilder: (context, index){
-          return VideoPlayerWidget(videoUrl: videoUrl[index]);
-        })
-      ),
+          itemBuilder: (context, index){
+            return VideoPlayerWidget(video: videoUrl[index], autoPlay: true,);
+          }),
     );
   }
 
