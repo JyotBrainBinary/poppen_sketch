@@ -210,14 +210,18 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    print('Dispose Video Contoller');
+  disposeVideo(){
     videoPlayerController.dispose();
     if (timer != null) {
       timer.cancel();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('Dispose Video Contoller');
+    disposeVideo();
   }
 
   @override
@@ -279,7 +283,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
         /// ----- on video ui --------------
 
-        onVideoUi(),
+        onVideoUi(videoPlayerController),
       ],
     );
   }

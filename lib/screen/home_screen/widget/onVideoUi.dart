@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
+import 'package:video_player/video_player.dart';
 
-Widget onVideoUi(){
+Widget onVideoUi(VideoPlayerController controller){
+
   HomeController homeController = Get.put(HomeController());
   return Padding(
     padding: const EdgeInsets.only(left: 20, right: 20),
@@ -72,7 +75,13 @@ Widget onVideoUi(){
         SizedBox(height: Get.height * 0.06),
 
         /// ----------- top 2 ------------
-        Image.asset(AssetsRes.restaurantLogo, height: Get.height * 0.1,),
+       InkWell(
+         onTap: () async{
+           await controller.pause();
+           Get.to(() => ProfileScreen());
+         },
+         child:  Image.asset(AssetsRes.restaurantLogo, height: Get.height * 0.1,),
+       ),
         const SizedBox(height: 5),
         Container(
           height: Get.height * 0.045,

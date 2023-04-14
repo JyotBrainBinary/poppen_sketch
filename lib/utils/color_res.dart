@@ -17,5 +17,10 @@ static const colorBFBFBF = Color(0XFFBFBFBF);
 static const color4A48F1 = Color(0XFF4A48F1);
 static const colorEA4258 = Color(0XFFEA4258);
 static const colorEFC744 = Color(0XFFEFC744);
+static const colorD5D6D7 = Color(0XFFD5D6D7);
+static const color7F0E1A = Color(0XFF7F0E1A);
+
+static const color979797 = Color(0XFF979797);
+
 
 }

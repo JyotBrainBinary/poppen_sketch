@@ -8,7 +8,6 @@ import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
 
 
-
 Widget bottomNavigationBar(BuildContext context) {
   HomeController homeController  = Get.put(HomeController());
   return Container(
