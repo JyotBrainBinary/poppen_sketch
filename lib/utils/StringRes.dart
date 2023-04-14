@@ -7,4 +7,11 @@ class StringRes {
   static const notifications = "Notifications";
   static const me = "Me";
 
+  /// profile
+
+  static const directions = "Directions";
+  static const message = "Message";
+  static const bookNow = "Book Now";
+
+
 }

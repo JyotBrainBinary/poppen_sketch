@@ -21,6 +21,7 @@ static const colorD5D6D7 = Color(0XFFD5D6D7);
 static const color7F0E1A = Color(0XFF7F0E1A);
 
 static const color979797 = Color(0XFF979797);
+static const colorE9E9E9 = Color(0XFFE9E9E9);
 
 
 }

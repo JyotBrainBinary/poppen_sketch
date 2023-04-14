@@ -25,6 +25,7 @@ static String visitPic3 = "${icons}visitPic3.png";
 
   static String search = "${icons}search.png";
   static String backButton = "${icons}backButton.png";
+  static String direction = "${icons}direction.png";
 
 
 }
