@@ -32,7 +32,7 @@ Widget bottomNavigationBar(BuildContext context) {
         child: Row(
 
           children: [
-            SizedBox(width: Get.width * 0.05),
+            SizedBox(width: Get.width * 0.03),
             InkWell(
               onTap: (){
                 homeController.index = 0;
@@ -147,7 +147,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 ],
               ),
             ),
-            SizedBox(width: Get.width * 0.05),
+            SizedBox(width: Get.width * 0.03),
           ],
         ),
       );

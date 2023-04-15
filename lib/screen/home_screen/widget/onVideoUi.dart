@@ -78,7 +78,7 @@ Widget onVideoUi(VideoPlayerController controller){
        InkWell(
          onTap: () async{
            await controller.pause();
-           Get.to(() => ProfileScreen());
+           Get.to(() =>  ProfileScreen());
          },
          child:  Image.asset(AssetsRes.restaurantLogo, height: Get.height * 0.1,),
        ),

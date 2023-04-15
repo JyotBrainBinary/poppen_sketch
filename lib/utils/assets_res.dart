@@ -2,6 +2,7 @@ class AssetsRes{
 
   static String images = "assets/images/";
   static String icons = "assets/icons/";
+  static String profileFeedImage = "assets/profileFeedImage/";
 
 ///---------------------- Images-----------------
 
@@ -19,13 +20,24 @@ static String meIcon = "${icons}meIcon.png";
 static String message = "${icons}message.png";
 static String share = "${icons}share.png";
 static String star = "${icons}star.png";
-static String visitersPic = "${icons}visitersPic.png";
-static String visitPic2 = "${icons}visitPic2.png";
-static String visitPic3 = "${icons}visitPic3.png";
 
-  static String search = "${icons}search.png";
-  static String backButton = "${icons}backButton.png";
-  static String direction = "${icons}direction.png";
+static String search = "${icons}search.png";
+static String backButton = "${icons}backButton.png";
+static String direction = "${icons}direction.png";
+static String feedIcon = "${icons}feedIcon.png";
+static String location = "${icons}location.png";
+static String phone = "${icons}phone.png";
+static String timer = "${icons}timer.png";
 
+
+
+  /// ----------- profileFeedImage ---------------
+
+  static String image1 = "${profileFeedImage}image1.png";
+  static String image2 = "${profileFeedImage}image2.png";
+  static String image3 = "${profileFeedImage}image3.png";
+  static String image4 = "${profileFeedImage}image4.png";
+  static String image5 = "${profileFeedImage}image5.png";
+  static String image6 = "${profileFeedImage}image6.png";
 
 }
