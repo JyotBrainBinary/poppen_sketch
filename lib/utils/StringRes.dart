@@ -19,4 +19,8 @@ class StringRes {
   static const phoneNumber = "Phone Number";
   static const openingHours = "Opening Hours";
 
+
+  /// favourites
+
+
 }

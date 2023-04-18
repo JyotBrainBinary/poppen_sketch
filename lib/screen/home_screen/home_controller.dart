@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import 'package:sketch/utils/assets_res.dart';
+import 'package:video_player/video_player.dart';
 
 class HomeController extends GetxController{
+
+  late VideoPlayerController videoPlayerController;
 
   int index = 0;
 

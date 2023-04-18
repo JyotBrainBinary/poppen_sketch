@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/widget/textStyle.dart';
-
+import 'package:sketch/screen/Favourites/favourites_screen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
+import 'package:sketch/screen/home_screen/home_screen.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
-
 
 Widget bottomNavigationBar(BuildContext context) {
   HomeController homeController  = Get.put(HomeController());
@@ -37,6 +37,7 @@ Widget bottomNavigationBar(BuildContext context) {
               onTap: (){
                 homeController.index = 0;
                 homeController.update(["bottomBar"]);
+                Get.to(()=>HomeScreen());
               },
               child: Column(
                 children: [
@@ -83,6 +84,9 @@ Widget bottomNavigationBar(BuildContext context) {
               onTap: (){
                 homeController.index = 2;
                 homeController.update(["bottomBar"]);
+
+                homeController.videoPlayerController.pause();
+                Get.to(()=>FavouritesScreen());
               },
               child: Column(
                 children: [

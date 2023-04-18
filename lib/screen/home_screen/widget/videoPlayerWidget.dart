@@ -138,6 +138,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/home_screen/widget/onVideoUi.dart';
 import 'package:video_player/video_player.dart';
 
@@ -167,8 +169,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   // late CachedVideoPlayerController videoPlayerController;
 
 
+HomeController homeController = Get.put(HomeController());
 
-  late VideoPlayerController videoPlayerController;
   bool isPlay = false;
   bool isLoading = false;
   bool isPlayPauseTimerExceeded = false;
@@ -187,14 +189,14 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     });
 
     // load and play video from url
-    videoPlayerController = VideoPlayerController.network(widget.video)
+    homeController.videoPlayerController = VideoPlayerController.network(widget.video)
       ..initialize().then((value) {
         setState(() {
           isLoading = false;
         });
-        videoPlayerController.setVolume(1);
+        homeController.videoPlayerController.setVolume(1);
         if (widget.autoPlay) {
-          videoPlayerController.play();
+          homeController.videoPlayerController.play();
         }
       });
   }
@@ -211,7 +213,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   disposeVideo(){
-    videoPlayerController.dispose();
+    homeController.videoPlayerController.dispose();
     if (timer != null) {
       timer.cancel();
     }
@@ -244,7 +246,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       alignment: Alignment.topCenter,
       children: [
         /// -------- video -----------
-        VideoPlayer(videoPlayerController),
+        VideoPlayer(homeController.videoPlayerController),
 
         /// ---------- play-pause-button ------
         if ((widget.showPlayPause && !widget.touchToSeePlayPause) ||
@@ -254,9 +256,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             child: IconButton(
               onPressed: () {
                 if (isPlay) {
-                  videoPlayerController.pause();
+                  homeController.videoPlayerController.pause();
                 } else {
-                  videoPlayerController.play();
+                  homeController.videoPlayerController.play();
                 }
 
                 setState(() {
@@ -283,7 +285,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
         /// ----- on video ui --------------
 
-        onVideoUi(videoPlayerController),
+        onVideoUi(homeController.videoPlayerController),
       ],
     );
   }
