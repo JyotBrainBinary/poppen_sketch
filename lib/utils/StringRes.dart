@@ -1,5 +1,15 @@
 class StringRes {
 
+  static const appName= "Poppen";
+
+  ///////
+
+
+  static const introOnBoard= "Discover things to do and places to go.";
+  static const createAccount= "CREATE ACCOUNT";
+  static const signIn= "SIGN IN";
+
+
   ///  bottomBar
   static const nearMe = "Near Me";
   static const places = "Places";

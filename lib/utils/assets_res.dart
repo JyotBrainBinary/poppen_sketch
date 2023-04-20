@@ -8,6 +8,9 @@ class AssetsRes{
 
 static String homeImage = "${images}home_image.png";
 static String restaurantLogo = "${images}restaurantLogo.png";
+static String appLogo = "${images}app_logo.png";
+static String google = "${images}facebook.png";
+static String facebook = "${images}facebook.png";
 
 
   ///-------------- icons -----------
@@ -20,6 +23,7 @@ static String meIcon = "${icons}meIcon.png";
 static String message = "${icons}message.png";
 static String share = "${icons}share.png";
 static String star = "${icons}star.png";
+static String arrowRight = "${icons}arrow_right.png";
 
 static String search = "${icons}search.png";
 static String backButton = "${icons}backButton.png";

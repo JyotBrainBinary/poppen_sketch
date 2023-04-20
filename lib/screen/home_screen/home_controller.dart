@@ -6,7 +6,7 @@ class HomeController extends GetxController{
 
 
 
-  int index = 0;
+  // int index = 0;
 
   List visitsPeopleImage = [
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpAyuyKd40qgvtzB31luFHUbBH3Ye0fP5sB_kXZ67rfGJe9W1aRw5obRi1cLDfGcNmBo&usqp=CAU",

@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sketch/common/bottomBar.dart';
+import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/home_screen/widget/videoPlayerWidget.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,35 +12,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  final controller = Get.put(HomeController());
   List videoUrl = [
     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
     'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
   ];
 
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: Colors.black,
-      body: PageView.builder(
-          //controller: pageController,
-          scrollDirection: Axis.vertical,
-          itemCount: videoUrl.length,
-          itemBuilder: (context, index){
-            return VideoPlayerWidget(video: videoUrl[index], autoPlay: true,);
-          }),
-      bottomNavigationBar: bottomNavigationBar(context),
-    );
+    return PageView.builder(
+        //controller: pageController,
+        scrollDirection: Axis.vertical,
+        itemCount: videoUrl.length,
+        itemBuilder: (context, index) {
+          return VideoPlayerWidget(
+            video: videoUrl[index],
+            autoPlay: true,
+          );
+        });
   }
-
-
 }
-
-
-
-
 
 /*class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -316,4 +306,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 }*/
-
