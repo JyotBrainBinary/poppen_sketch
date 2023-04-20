@@ -85,7 +85,7 @@ Widget bottomNavigationBar(BuildContext context) {
                 homeController.index = 2;
                 homeController.update(["bottomBar"]);
 
-                homeController.videoPlayerController.pause();
+                //homeController.videoPlayerController.pause();
                 Get.to(()=>FavouritesScreen());
               },
               child: Column(

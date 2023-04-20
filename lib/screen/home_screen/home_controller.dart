@@ -4,7 +4,7 @@ import 'package:video_player/video_player.dart';
 
 class HomeController extends GetxController{
 
-  late VideoPlayerController videoPlayerController;
+
 
   int index = 0;
 

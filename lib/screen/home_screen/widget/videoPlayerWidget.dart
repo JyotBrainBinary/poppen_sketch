@@ -166,10 +166,10 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  // late CachedVideoPlayerController videoPlayerController;
+   late VideoPlayerController videoPlayerController;
 
 
-HomeController homeController = Get.put(HomeController());
+//HomeController homeController = Get.put(HomeController());
 
   bool isPlay = false;
   bool isLoading = false;
@@ -189,14 +189,14 @@ HomeController homeController = Get.put(HomeController());
     });
 
     // load and play video from url
-    homeController.videoPlayerController = VideoPlayerController.network(widget.video)
+    videoPlayerController = VideoPlayerController.network(widget.video)
       ..initialize().then((value) {
         setState(() {
           isLoading = false;
         });
-        homeController.videoPlayerController.setVolume(1);
+        videoPlayerController.setVolume(1);
         if (widget.autoPlay) {
-          homeController.videoPlayerController.play();
+          videoPlayerController.play();
         }
       });
   }
@@ -213,7 +213,7 @@ HomeController homeController = Get.put(HomeController());
   }
 
   disposeVideo(){
-    homeController.videoPlayerController.dispose();
+    videoPlayerController.dispose();
     if (timer != null) {
       timer.cancel();
     }
@@ -246,7 +246,7 @@ HomeController homeController = Get.put(HomeController());
       alignment: Alignment.topCenter,
       children: [
         /// -------- video -----------
-        VideoPlayer(homeController.videoPlayerController),
+        VideoPlayer(videoPlayerController),
 
         /// ---------- play-pause-button ------
         if ((widget.showPlayPause && !widget.touchToSeePlayPause) ||
@@ -256,9 +256,9 @@ HomeController homeController = Get.put(HomeController());
             child: IconButton(
               onPressed: () {
                 if (isPlay) {
-                  homeController.videoPlayerController.pause();
+                  videoPlayerController.pause();
                 } else {
-                  homeController.videoPlayerController.play();
+                  videoPlayerController.play();
                 }
 
                 setState(() {
@@ -285,7 +285,7 @@ HomeController homeController = Get.put(HomeController());
 
         /// ----- on video ui --------------
 
-        onVideoUi(homeController.videoPlayerController),
+        onVideoUi(videoPlayerController),
       ],
     );
   }

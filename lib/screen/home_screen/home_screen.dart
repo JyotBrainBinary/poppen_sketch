@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:sketch/common/bottomBar.dart';
-
-
 import 'package:sketch/screen/home_screen/widget/videoPlayerWidget.dart';
 
 
