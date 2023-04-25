@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/common/widget/common_button.dart';
+import 'package:sketch/screen/auth/create_account/ceate_account_screen.dart';
 import 'package:sketch/screen/on_board/on_board_controller.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -38,7 +40,7 @@ class OnBoardScreen extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: width,
-                              height: height * 0.63,
+                              height: height * 0.6,
                               child: Image.asset(
                                 AssetsRes.homeImage,
                                 fit: BoxFit.fitWidth,
@@ -147,52 +149,24 @@ class OnBoardScreen extends StatelessWidget {
                         SizedBox(
                           height: height * 0.02,
                         ),
-                        GestureDetector(
-                          onTap: (){},
-                          child: Container(
-                            height: height * 0.075,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: width * 0.03,
-                                vertical: height * 0.015),
-                            decoration: BoxDecoration(
-                              color: ColorRes.color8401FF,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Center(
-                              child: Text(
-                                StringRes.createAccount,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: width * 0.045,
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorRes.colorWhite),
-                              ),
-                            ),
-                          ),
+                        CommonButton(
+                          height: height,
+                          width: width,
+                          color: ColorRes.color8401FF,
+                          text: StringRes.createAccount.toUpperCase(),
+                          onTap: () {
+                            Get.to(()=>CreateAccountScreen());
+                          },
                         ),
-                        SizedBox(height: height*0.01,),
-                        GestureDetector(
-                          onTap: (){},
-                          child: Container(
-                            height: height * 0.075,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: width * 0.03,
-                                vertical: height * 0.015),
-                            decoration: BoxDecoration(
-                              color: ColorRes.colorBlack,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Center(
-                              child: Text(
-                                StringRes.signIn,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: width * 0.045,
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorRes.colorWhite),
-                              ),
-                            ),
-                          ),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        CommonButton(
+                          height: height,
+                          width: width,
+                          color: ColorRes.colorBlack,
+                          text: StringRes.signIn,
+                          onTap: () {},
                         ),
                       ],
                     ),
@@ -298,3 +272,5 @@ class OnBoardScreen extends StatelessWidget {
   //   );
   // }
 }
+
+
