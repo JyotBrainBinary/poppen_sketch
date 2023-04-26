@@ -36,6 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  http: ^0.13.5
+  shared_preferences: ^2.1.0
 
   #---- ui ---
   image_stack: ^2.1.1
@@ -46,6 +48,11 @@ dependencies:
   # ------ video -----
   video_player: ^2.6.1
   chewie: ^1.4.0
+
+  #-------Firebase------
+  firebase_core: ^2.10.0
+  firebase_auth: ^4.4.2
+  cloud_firestore: ^4.5.2
 
 
 dev_dependencies:

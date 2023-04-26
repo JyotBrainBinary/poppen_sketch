@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "216448659868",
+    "project_id": "poppen-a29bf",
+    "storage_bucket": "poppen-a29bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216448659868:android:99a8525458faa256241859",
+        "android_client_info": {
+          "package_name": "com.whatspoppen.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216448659868-8d6trjct9th1gr9qs7r686256bb0v17l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatspoppen.com",
+            "certificate_hash": "168af2c4988cacf4c391250ba3e0b752c2079b52"
+          }
+        },
+        {
+          "client_id": "216448659868-uecc16r1m1hgtt3tkn8v1j5mlpkmb85m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whatspoppen.com",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "216448659868-m3evbmk1bj28elhn78hv1lk8smcc0ilb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIQpDjmLVeyxQiZz7BeRw-VMQRynbsl5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216448659868-m3evbmk1bj28elhn78hv1lk8smcc0ilb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "216448659868-qqcf2mroi0oa5jg2amgr1c8nqdur5jqm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.whatspoppen.com"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

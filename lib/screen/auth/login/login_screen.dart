@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sketch/screen/auth/create_account/sign_up_with_mobile/signup_with_mobile.dart';
+import 'package:sketch/common/widget/loaders.dart';
+import 'package:sketch/screen/auth/login/login_controller.dart';
 import 'package:sketch/screen/auth/widget/auth_top_area.dart';
 import 'package:sketch/common/widget/common_button.dart';
 import 'package:sketch/common/widget/common_text_field.dart';
@@ -11,102 +12,117 @@ import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
+  LoginScreen({Key? key}) : super(key: key);
+  final LoginController controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     double height = Get.height;
     double width = Get.width;
     return Scaffold(
       backgroundColor: ColorRes.colorWhite,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonTopAuthScreen(
-                  height: height,
-                  width: width,
-                  title: StringRes.signIn,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.04),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonTopAuthScreen(
+                      height: height,
+                      width: width,
+                      title: StringRes.signIn,
+                    ),
+                     CommonTextField(
+                      controller: controller.emailController,
+                      hintText: StringRes.emailHint,
+                      title: StringRes.email,
+                      istitle: true,
+                    ),
+                    SizedBox(
+                      height: height * 0.03,
+                    ),
+                     CommonTextField(
+                      controller: controller.passController,
+                      hintText: StringRes.passHint,
+                      title: StringRes.password,
+                      istitle: true,
+                    ),
+                    SizedBox(
+                      height: height * 0.055,
+                    ),
+                    CommonButton(
+                      height: height,
+                      width: width,
+                      color: ColorRes.color8401FF,
+                      text: StringRes.signIn,
+                      isRightArrow: true,
+                      onTap: () {
+                        controller.validateForm();
+
+                      },
+                    ),
+                    SizedBox(
+                      height: height * 0.04,
+                    ),
+                    Row(children: const [
+                      Expanded(
+                          child: Divider(
+                        color: ColorRes.colorD8D8D8,
+                        thickness: 1,
+                        height: 1,
+                      )),
+                      Text(
+                        "    OR    ",
+                        style: TextStyle(
+                            fontSize: 14, color: ColorRes.colorB0B0B0),
+                      ),
+                      Expanded(child: Divider()),
+                    ]),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    _buildSignInWithContainer(
+                        height: height,
+                        width: width,
+                        text: StringRes.signInWithGoogle,
+                        image: AssetsRes.google,
+                        ontap: () {}),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                    _buildSignInWithContainer(
+                        height: height,
+                        width: width,
+                        text: StringRes.signInWithFacebook,
+                        image: AssetsRes.facebook,
+                        ontap: () {
+
+                        }),
+                    SizedBox(
+                      height: height * 0.05,
+                    ),
+                    CommonCreateAccText(
+                      text1: StringRes.doNotHaveAc,
+                      text2: StringRes.createOne,
+                      onTap: () {},
+                    ),
+                    SizedBox(
+                      height: height * 0.055,
+                    ),
+                  ],
                 ),
-                const CommonTextField(
-                  hintText: StringRes.emailHint,
-                  title: StringRes.email,
-                  istitle: true,
-                ),
-                SizedBox(
-                  height: height * 0.03,
-                ),
-                const CommonTextField(
-                  hintText: StringRes.passHint,
-                  title: StringRes.password,
-                  istitle: true,
-                ),
-                SizedBox(
-                  height: height * 0.055,
-                ),
-                CommonButton(
-                  height: height,
-                  width: width,
-                  color: ColorRes.color8401FF,
-                  text: StringRes.signIn,
-                  isRightArrow: true,
-                  onTap: () {
-                    Get.to(() => DashBoardScreen());
-                  },
-                ),
-                SizedBox(
-                  height: height * 0.04,
-                ),
-                Row(children: const [
-                  Expanded(
-                      child: Divider(
-                    color: ColorRes.colorD8D8D8,
-                    thickness: 1,
-                    height: 1,
-                  )),
-                  Text(
-                    "    OR    ",
-                    style: TextStyle(fontSize: 14, color: ColorRes.colorB0B0B0),
-                  ),
-                  Expanded(child: Divider()),
-                ]),
-                SizedBox(
-                  height: height*0.02,
-                ),
-                _buildSignInWithContainer(
-                    height: height,
-                    width: width,
-                    text: StringRes.signInWithGoogle,
-                    image: AssetsRes.google,
-                    ontap: () {}),
-                SizedBox(
-                  height: height*0.01,
-                ),
-                _buildSignInWithContainer(
-                    height: height,
-                    width: width,
-                    text: StringRes.signInWithFacebook,
-                    image: AssetsRes.facebook,
-                    ontap: () {}),
-                SizedBox(
-                  height: height*0.05,
-                ),
-                CommonCreateAccText(
-                  text1: StringRes.doNotHaveAc,
-                  text2: StringRes.createOne,
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: height * 0.055,
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+          Obx(() => controller.loading.value
+              ? const Center(
+                  child: FullScreenLoader(enableBgColor: true),
+                )
+              : const SizedBox())
+        ],
       ),
     );
   }

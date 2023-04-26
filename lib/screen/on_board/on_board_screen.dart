@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/widget/common_button.dart';
 import 'package:sketch/screen/auth/create_account/ceate_account_screen.dart';
+import 'package:sketch/screen/auth/login/login_screen.dart';
 import 'package:sketch/screen/on_board/on_board_controller.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -166,7 +167,9 @@ class OnBoardScreen extends StatelessWidget {
                           width: width,
                           color: ColorRes.colorBlack,
                           text: StringRes.signIn,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(()=>LoginScreen());
+                          },
                         ),
                       ],
                     ),

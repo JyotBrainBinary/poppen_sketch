@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-        //controller: pageController,
+      //controller: pageController,
         scrollDirection: Axis.vertical,
         itemCount: videoUrl.length,
         itemBuilder: (context, index) {
@@ -31,6 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
             autoPlay: true,
           );
         });
+
+      // PageView.builder(
+      //   //controller: pageController,
+      //   scrollDirection: Axis.vertical,
+      //   itemCount: videoUrl.length,
+      //   itemBuilder: (context, index) {
+      //     return VideoPlayerWidget(
+      //       video: videoUrl[index],
+      //       autoPlay: true,
+      //     );
+      //   });
   }
 }
 

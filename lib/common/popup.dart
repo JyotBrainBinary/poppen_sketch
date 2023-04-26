@@ -7,7 +7,7 @@ void errorToast(String error, {String? title}) {
   Get.snackbar(
     title ?? StringRes.errorText,
     error,
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 1500),
     colorText: ColorRes.colorWhite,
     backgroundColor: ColorRes.colorRed,
   );
@@ -17,7 +17,7 @@ void flutterToast(String value, {String? title}) {
   Get.snackbar(
     title ?? StringRes.successText,
     value,
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 1500),
     colorText: ColorRes.colorWhite,
     backgroundColor: Colors.green,
   );

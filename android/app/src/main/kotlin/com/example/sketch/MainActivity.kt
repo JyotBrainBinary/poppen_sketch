@@ -1,4 +1,4 @@
-package com.example.sketch
+package com.whatspoppen.com
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -10,7 +10,7 @@ import 'package:video_player/video_player.dart';
 
 Widget onVideoUi(VideoPlayerController controller){
 
-  HomeController homeController = Get.put(HomeController());
+  final HomeController homeController = Get.find<HomeController>();
   return Padding(
     padding: const EdgeInsets.only(left: 20, right: 20),
     child: Column(

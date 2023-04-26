@@ -139,6 +139,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/api_call/business_list_api.dart';
+import 'package:sketch/model/business_list_model.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/home_screen/widget/onVideoUi.dart';
 import 'package:video_player/video_player.dart';
@@ -166,20 +168,20 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-   late VideoPlayerController videoPlayerController;
+  late VideoPlayerController videoPlayerController;
 
-
-//HomeController homeController = Get.put(HomeController());
+final HomeController homeController = Get.find<HomeController>();
 
   bool isPlay = false;
   bool isLoading = false;
   bool isPlayPauseTimerExceeded = false;
-
+  BusinessListModel businessListModel = BusinessListModel();
   dynamic timer;
 
   @override
   void initState() {
     super.initState();
+    // callBusinessListApi();
     if (widget.showPlayPause) {
       playPauseIconTimer();
     }
@@ -212,19 +214,21 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     });
   }
 
-  disposeVideo(){
-    videoPlayerController.dispose();
-    if (timer != null) {
-      timer.cancel();
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
     print('Dispose Video Contoller');
     disposeVideo();
   }
+
+  disposeVideo() {
+    videoPlayerController.dispose();
+    if (timer != null) {
+      timer.cancel();
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +293,4 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       ],
     );
   }
-
-
 }

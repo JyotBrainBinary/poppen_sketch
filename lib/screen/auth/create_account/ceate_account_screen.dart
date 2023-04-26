@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/screen/auth/create_account/create_account_controller.dart';
-import 'package:sketch/screen/auth/create_account/sign_up_with_mobile/signup_with_mobile.dart';
 import 'package:sketch/screen/auth/widget/auth_top_area.dart';
 import 'package:sketch/common/widget/common_button.dart';
 import 'package:sketch/common/widget/common_text_field.dart';
@@ -45,7 +43,7 @@ class CreateAccountScreen extends StatelessWidget {
                     SizedBox(
                       height: height * 0.03,
                     ),
-                     CommonTextField(
+                    CommonTextField(
                       controller: controller.lastNameController,
                       hintText: StringRes.smith,
                       title: StringRes.lastName,
@@ -54,7 +52,7 @@ class CreateAccountScreen extends StatelessWidget {
                     SizedBox(
                       height: height * 0.03,
                     ),
-                     CommonTextField(
+                    CommonTextField(
                       controller: controller.emailController,
                       hintText: StringRes.emailHint,
                       title: StringRes.email,
@@ -63,8 +61,8 @@ class CreateAccountScreen extends StatelessWidget {
                     SizedBox(
                       height: height * 0.03,
                     ),
-                     CommonTextField(
-                       controller: controller.passController,
+                    CommonTextField(
+                      controller: controller.passController,
                       hintText: StringRes.passHint,
                       title: StringRes.password,
                       istitle: true,
@@ -80,18 +78,7 @@ class CreateAccountScreen extends StatelessWidget {
                       isRightArrow: true,
                       onTap: () {
                         controller.validation();
-                        // if(controller.validation == true)
-                        //   {
-                        //
-                        //   }
-                        // else
-                        //   {
-                        //
-                        //   }
-                        // Get.to(() => SignUpWithMobile());
                       },
-
-                      // },
                     ),
                     SizedBox(
                       height: height * 0.055,

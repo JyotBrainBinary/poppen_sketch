@@ -68,10 +68,12 @@ class StringRes {
   static const firstNameValidation = "firstname can't be empty";
   static const lastNameValidation = "LastName can't be empty";
   static const emailValidation = "Email can't be empty";
+  static const invalidEmailValidation = "Invalid email";
   static const passwordValidation = "Password can't be empty";
   static const mobileNumberValidation = "Mobile number can't be empty";
   static const verificationCodeValidation = "Verification code can't be empty";
   static const categoryValidation = "Category can't be empty";
+  static const errText = "Something went wrong!";
 
 
 }
