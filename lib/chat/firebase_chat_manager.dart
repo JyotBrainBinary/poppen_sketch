@@ -12,6 +12,11 @@ import 'package:sketch/chat/user_card.dart';
 Future<String?> getPrefrence(String key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString(key);
+  
+}
+setPrefrence(String key, String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(key, value);
 }
 class ChatManager extends StatefulWidget {
   const ChatManager({Key? key}) : super(key: key);

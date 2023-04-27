@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch/chat/chat_fire_screen.dart';
 import 'package:sketch/chat/model/message_model.dart';
+import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/pref_key.dart';
 
 class ChatRoomservice {
   CollectionReference chatRoom =
@@ -41,8 +43,8 @@ class ChatRoomservice {
     int limit,
   ) {
     return chatRoom
-        .doc(roomId)
-        .collection(roomId!)
+        .doc(PrefService.getString(PrefKeys.uid))
+        .collection(PrefService.getString(PrefKeys.uid))
         .orderBy('sendTime', descending: true);
   }
 

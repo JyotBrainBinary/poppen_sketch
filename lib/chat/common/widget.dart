@@ -96,7 +96,7 @@ class InputBottomBar extends StatelessWidget {
                             ),*/
                             GestureDetector(
                               onTap: () {
-                                onSend!.call(message!);
+                                onSend?.call(message??MMessage() );
                               },
                               child: Container(
                                 height: 50,
@@ -126,6 +126,7 @@ class InputBottomBar extends StatelessWidget {
                 margin: EdgeInsets.only(left: 5, bottom: 5, right: 5),
                 child: Column(
                   children: [
+
                     Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: message!.mDataType == "photo" ? 7 : 16,

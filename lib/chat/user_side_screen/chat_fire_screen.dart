@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:media_picker/media_picker.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sketch/chat/String.dart';
@@ -22,18 +19,16 @@ import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
-import 'package:stacked/stacked.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 String? roomId;
 
 class ChatFireScreen extends StatefulWidget {
-  final String roomId;
-  final bool isManager;
-  final String fcmToken;
-  final String name;
+  final String? roomId;
+  final bool? isManager;
+  final String? fcmToken;
+  final String? name;
 
-  ChatFireScreen({required this.roomId, required this.isManager, required this.fcmToken, required this.name});
+  ChatFireScreen({this.roomId, this.isManager, this.fcmToken, this.name});
 
   @override
   State<ChatFireScreen> createState() => _ChatFireScreenState();
@@ -60,7 +55,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   DocumentSnapshot? roomDocument;
   DocumentSnapshot? doc;
   String? mobile;
-  List<String> tokenList = [];
+  List<String>? tokenList = [];
   String? fcmToken;
   String? anotherFcmToken;
 
@@ -90,11 +85,11 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   setInitiaCount() async {
-    if (widget.isManager) {
+    if (widget.isManager!) {
       await FirebaseFirestore.instance
           .collection("chatroom")
           .doc(widget.roomId)
-          .update({"${widget.roomId + "_newMessage"}": 0});
+          .update({"${widget.roomId! + "_newMessage"}": 0});
     } else {
       var mobileNo = await getPrefrence(MOBILE);
       await FirebaseFirestore.instance
@@ -196,7 +191,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     SendNotificationModel notificationModel = SendNotificationModel(
       isGroup: false,
       title: username,
-      body: notificationBody?? '',
+      body: notificationBody,
       fcmTokens: tokenList,
       roomId: roomId,
       id: "",
@@ -207,7 +202,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       "lastMessage": notificationBody,
       "lastMessageTime": messageTime,
       "${isManager == true ? roomId : "manager" "_newMessage"}": 0,
-    widget.isManager?"manager_newMessage":  "${mobileNo.toString() + "_newMessage"}": count
+    widget.isManager!?"manager_newMessage":  "${mobileNo.toString() + "_newMessage"}": count
     }, roomId!);
     if (listScrollController.positions.isNotEmpty) {
       listScrollController.animateTo(0.0,
@@ -215,13 +210,13 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     }
 
     if (isManager == false) {
-      tokenList = tokenList.toSet().toList();
+      tokenList = tokenList!.toSet().toList();
       for (int i = 0; i < fcmToken!.length; i++) {
         SendNotificationModel notificationModel1 = SendNotificationModel(
           isGroup: false,
           title: username,
           body: notificationBody,
-          fcmToken: tokenList[i],
+          fcmToken: tokenList![i],
           roomId: roomId,
           id: "",
         );
@@ -344,7 +339,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         element.docs.forEach((el) {
           Map map = el.data() as Map;
           if (map['isManager'] == "true") {
-            tokenList.add(map['fcmToken'].toString());
+            tokenList!.add(map['fcmToken'].toString());
           }
         });
       });
@@ -354,7 +349,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         username = widget.name;
       });
     }
-    tokenList = tokenList.toSet().toList();
+    tokenList = tokenList!.toSet().toList();
     setState(() {});
   }
 
@@ -475,16 +470,14 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                             isLive: true,
                             itemsPerPage: 10,
                             scrollController: listScrollController,
-                            itemBuilder: (context,documentsnapshot, index) {
+                            itemBuilder: ( context, documentsnapshot,index) {
                               if (!listMessage.contains(documentsnapshot)) {
                                 listMessage.add(documentsnapshot[index] as DocumentSnapshot<Object?>);
                               }
                               return MessageView(
                                 index,
                                 MessageModel.fromMap(
-                                  documentsnapshot[index].data() as Map<String,dynamic>
-
-                                  ,
+                                  documentsnapshot[index].data() as Map<String,dynamic>,
                                   documentsnapshot[index].id,
                                 ),
                                 selectedMessages,
@@ -492,7 +485,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                                 onLongPressMessage,
                                 false,
                                 false,
-                                mobile??'',
+                                mobile!,
                               );
                             },
                             // emptyDisplay: Center(
@@ -500,7 +493,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                             // ),
                             reverse: true,
                           )),
-                         SizedBox(height: 100,),
+                         
                           InputBottomBar(
                             msgController: controller,
                             onAttachment: onAttachmentTap,
@@ -710,36 +703,3 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     message = null;
   }
 }
-
-// getMessageCount() async {
-//   if (isManager == "true") {
-//     await FirebaseFirestore.instance.collection("chatroom").get().then((value) {
-//       for (int i = 0; i < value.docs.length; i++) {
-//         Map<String, dynamic> map = value.docs[i].data();
-//         if (map[map['id'] + "_newMessage"] >= 1) {
-//           totalmessageCount = 1;
-//           print(totalmessageCount);
-//           break;
-//         } else {
-//           totalmessageCount = 0;
-//         }
-//       }
-//     });
-//   } else {
-//     var mobileNo = await getPrefrence(MOBILE);
-
-//     await FirebaseFirestore.instance
-//         .collection("chatroom")
-//         .doc(mobileNo)
-//         .get()
-//         .then((value) {
-//       if (value.exists) {
-//         Map? map = value.data();
-//         if (map!['manager_newMessage'] >= 1)
-//           totalmessageCount = 1;
-//         else
-//           totalmessageCount = 0;
-//       }
-//     });
-//   }
-// }
