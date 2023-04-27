@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +11,9 @@ import 'package:sketch/common/widget/loaders.dart';
 import 'package:sketch/model/user_model.dart';
 import 'package:sketch/screen/auth/create_account/otp_verify/otp_verify_screen.dart';
 import 'package:sketch/screen/auth/create_account/what_intrested/what_intrested_screen.dart';
+import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/StringRes.dart';
+import 'package:sketch/utils/pref_key.dart';
 
 class SignUpWithMobileController extends GetxController {
   String countryCode = "61";
@@ -209,6 +213,8 @@ class SignUpWithMobileController extends GetxController {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       debugPrint(user.user!.uid);
+      await PrefService.setValue(PrefKeys.uid,
+          user.user!.uid.toString());
 
       UserModel userModel = UserModel(
         firstName: firstName,

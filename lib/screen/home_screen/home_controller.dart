@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
 import 'package:sketch/api_call/business_list_api.dart';
 import 'package:sketch/model/business_list_model.dart';
+import 'package:sketch/utils/color_res.dart';
 
-
-class HomeController extends GetxController{
-
-
+class HomeController extends GetxController {
+  RxBool isDrop = false.obs;
   RxBool isLoading = true.obs;
   var businessListModel = BusinessListModel().obs;
   @override
@@ -20,16 +19,28 @@ class HomeController extends GetxController{
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLt-T4NaOGQej1pSCdQOpa-WsCJXuu-7xiKw&usqp=CAU"
   ];
 
+  List dropList = [
+    [ColorRes.color8401FF, "Restaurant"],
+    [ColorRes.colorWhite, "Club"],
+    [ColorRes.colorRed, "Bar"],
+  ];
+
+  dropOnTap() {
+    isDrop.value = !isDrop.value;
+  }
+
+
+
   void callBusinessListApi() {
     try{
 
-        isLoading.value = true;
+      isLoading.value = true;
 
-      BusinessListApi.businessListApi(name: "business details 3").then((value) {
+      BusinessListApi.businessListApi(/*name: "business details 3"*/).then((value) {
         if (value != null ) {
 
-            businessListModel.value = value;
-            isLoading.value = false;
+          businessListModel.value = value;
+          isLoading.value = false;
 
           print("businessList  --------->  ${businessListModel.value.status}");
         }
@@ -42,6 +53,7 @@ class HomeController extends GetxController{
     }
 
   }
+
 
 
 }

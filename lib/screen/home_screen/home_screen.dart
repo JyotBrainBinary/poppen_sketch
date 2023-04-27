@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return VideoPlayerWidget(
             video: videoUrl[index],
-            autoPlay: true,
+            autoPlay: true, index: index,
           );
         });
 

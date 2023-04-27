@@ -13,8 +13,7 @@ class CreateAccountController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
 
   void validation() {
     if (firstNameController.text.isEmpty) {
@@ -95,20 +94,5 @@ class CreateAccountController extends GetxController {
   //   return result;
   // }
 
-  Future<String> logInUser({
-    required String email,
-    required String password,
-  }) async {
-    String result = 'Some error occurred';
-    try {
-      if (email.isNotEmpty || password.isNotEmpty) {
-        await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
-        result = 'success';
-      }
-    } catch (err) {
-      result = err.toString();
-    }
-    return result;
-  }
+
 }

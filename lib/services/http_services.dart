@@ -42,7 +42,7 @@ class HttpService {
           ? ""
           : PrefService.getString(PrefKeys.registerToken);
       header ??= {
-        "x-access-token": accessToken
+        "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjgyNTAyNzQ5LCJleHAiOjE2ODMxMDc1NDl9.d968LkR94eQ4Pe89AzKOKuwguH886tIArHJKa2al4iU" /*accessToken*/
         // "Content-Type": "application/json",
       };
       if (kDebugMode) {

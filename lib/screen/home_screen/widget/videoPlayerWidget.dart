@@ -152,6 +152,7 @@ class VideoPlayerWidget extends StatefulWidget {
   final bool showPlayPause;
   final bool showVideoIcon;
   final bool touchToSeePlayPause;
+  final int index;
 
   const VideoPlayerWidget(
       {Key? key,
@@ -160,7 +161,8 @@ class VideoPlayerWidget extends StatefulWidget {
       this.autoPlay = false,
       this.showPlayPause = true,
       this.showVideoIcon = false,
-      this.touchToSeePlayPause = true})
+      this.touchToSeePlayPause = true,
+        required this.index})
       : super(key: key);
 
   @override
@@ -289,7 +291,7 @@ final HomeController homeController = Get.find<HomeController>();
 
         /// ----- on video ui --------------
 
-        onVideoUi(videoPlayerController),
+        onVideoUi( controller: videoPlayerController, index:widget.index),
       ],
     );
   }
