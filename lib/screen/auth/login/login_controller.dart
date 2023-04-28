@@ -29,7 +29,8 @@ class LoginController extends GetxController {
       logInUser().then((value) {
         if(value == "done")
           {
-            callLoginApi();
+             Get.to(() => DashBoardScreen());
+            // callLoginApi();
           }
       });
 
@@ -115,6 +116,26 @@ intializeFirebase(String email, String uid,UserCredential user) async {
         } else {
         await PrefService.setValue(PrefKeys.isManager, "flase");
         }
+       DocumentSnapshot docs1 = await FirebaseFirestore.instance
+              .collection("users")
+              .doc(uid)
+              .get();
+
+       if (docs1.exists) {
+         Map data01 = docs1.data() as Map;
+         PrefService.setValue(PrefKeys.fullName, "${data01['firstName']} ${data01['lastName']}");
+       }       
+      var getManagesId = await FirebaseFirestore.instance.collection("chatroom").get();
+     for (var i = 0; i <  getManagesId.docs.length; i++) {
+       print(getManagesId.docs[i]['isManager']);
+       if (getManagesId.docs[i]['isManager'] == 'true') {
+       await  PrefService.setValue(PrefKeys.managerID, getManagesId.docs[i]['id']);
+        print(getManagesId.docs[i]['id']);
+
+         break;
+       } 
+     }
+
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {

@@ -20,7 +20,6 @@ class DashBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setPrefrence(MOBILE, PrefService.getString(PrefKeys.uid));
     return GetBuilder<DashBoardController>(
       id: "bottomBar",
       builder: (controller) {
@@ -31,7 +30,7 @@ class DashBoardScreen extends StatelessWidget {
               // if (CUR_USERID != null) {
                 // setState(() {});
 
-              var  isManager = "false";
+              var  isManager = PrefService.getString(PrefKeys.isManager);
 
                 if (isManager == "true") {
                  Navigator.push(context,
@@ -46,6 +45,7 @@ class DashBoardScreen extends StatelessWidget {
                         topRight: Radius.circular(10),
                       )),
                       builder: (builder) {
+                        // roomId =PrefService.getString(PrefKeys.uid);
                         return StatefulBuilder(
                           builder:
                               (BuildContext context, StateSetter setState) {
@@ -54,7 +54,7 @@ class DashBoardScreen extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 1.1,
                               child: ChatFireScreen(
                                 isManager: false,
-                                roomId: null,
+                                roomId: PrefService.getString(PrefKeys.uid),
                               ),
                             );
                           },

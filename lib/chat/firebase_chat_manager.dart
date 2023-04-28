@@ -9,15 +9,12 @@ import 'package:sketch/chat/String.dart';
 import 'package:sketch/chat/chat_room_service.dart';
 import 'package:sketch/chat/model/room_model.dart';
 import 'package:sketch/chat/user_card.dart';
-Future<String?> getPrefrence(String key) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getString(key);
+import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/pref_key.dart';
+
   
-}
-setPrefrence(String key, String value) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString(key, value);
-}
+
+
 class ChatManager extends StatefulWidget {
   const ChatManager({Key? key}) : super(key: key);
 
@@ -39,7 +36,7 @@ class _ChatManagerState extends State<ChatManager> {
     super.didChangeDependencies();
   }
   getMobile()async{
-    mobileNo = await getPrefrence(MOBILE);
+    mobileNo = PrefService.getString(PrefKeys.uid);
     setState(() {
 
     });

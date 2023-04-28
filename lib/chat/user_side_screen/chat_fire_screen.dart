@@ -71,6 +71,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   roomIdExist() async {
+    roomId =PrefService.getString(PrefKeys.uid);
     doc = await ChatRoomservice().isRoomAvailable(roomId!);
     print(roomId);
     if (doc!.exists) {
@@ -93,7 +94,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
           .doc(widget.roomId)
           .update({"${widget.roomId! + "_newMessage"}": 0});
     } else {
-      var mobileNo = await getPrefrence(MOBILE);
+      var mobileNo =  PrefService.getString(PrefKeys.uid);
       await FirebaseFirestore.instance
           .collection("chatroom")
           .doc(mobileNo)
@@ -122,7 +123,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   void sendMessage(String type, String content, MMessage message) async {
-    var mobileNo = await getPrefrence(MOBILE);
+    var mobileNo =  PrefService.getString(PrefKeys.uid);
     DateTime messageTime = DateTime.now();
     int count = 0;
 
@@ -163,12 +164,14 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     }
 
     roomDocument = await ChatRoomservice().getParticularRoom(roomId!);
+    print(PrefService.getString(PrefKeys.managerID));
     MessageModel messageModel = MessageModel(
         content: content,
         sender: mobile,
         sendTime: messageTime.millisecondsSinceEpoch,
         type: type,
-        receiver: isManager == false ? mobile : roomId,
+        senderName:PrefService.getString(PrefKeys.fullName) ,
+        receiver: isManager == false ? PrefService.getString(PrefKeys.managerID) : roomId,
         mMessage: message);
     String? notificationBody;
     switch (type) {
@@ -307,6 +310,9 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
   @override
   void initState() {
+    roomId =PrefService.getString
+    (PrefKeys.uid);
+    
     print(widget.roomId);
     // print(roomId);
     // checkVersion(context);
@@ -326,7 +332,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
   setData() async {
     isManager = widget.isManager;
-    mobile = await getPrefrence("mobile");
+    mobile =PrefService.getString(PrefKeys.uid);
     roomId = mobile;
     anotherFcmToken = widget.fcmToken;
 

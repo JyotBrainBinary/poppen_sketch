@@ -5,6 +5,7 @@ import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
+import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -23,7 +24,11 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.025,
               ),
-              Image.asset(AssetsRes.restaurantLogo, height: height * 0.15),
+              GestureDetector(
+                onTap: (){
+                  PrefService.clear();
+                },
+                child: Image.asset(AssetsRes.restaurantLogo, height: height * 0.15)),
               SizedBox(
                 height: Get.height * 0.015,
               ),

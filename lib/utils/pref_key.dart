@@ -7,4 +7,6 @@ class PrefKeys{
   static const resetPassword = 'Reset Password';
   static const registerToken = 'registerToken';
   static const isManager ='isManager';
+  static const fullName='fullName';
+  static const managerID='managerID';
 }

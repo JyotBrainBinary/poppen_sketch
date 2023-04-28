@@ -1,8 +1,5 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,20 +7,18 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:media_picker/media_picker.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sketch/chat/String.dart';
 import 'package:sketch/chat/chat_room_service.dart';
 import 'package:sketch/chat/common/common_widget.dart';
 import 'package:sketch/chat/common/widget.dart';
-import 'package:sketch/chat/firebase_chat_manager.dart';
 import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
-import 'package:stacked/stacked.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/pref_key.dart';
 
 String? roomId;
 
@@ -96,7 +91,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
           .doc(widget.roomId)
           .update({"${widget.roomId + "_newMessage"}": 0});
     } else {
-      var mobileNo = await getPrefrence(MOBILE);
+      var mobileNo =  PrefService.getString(PrefKeys.uid);
       await FirebaseFirestore.instance
           .collection("chatroom")
           .doc(mobileNo)
@@ -125,7 +120,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   void sendMessage(String type, String content, MMessage message) async {
-    var mobileNo = await getPrefrence(MOBILE);
+    var mobileNo = PrefService.getString(PrefKeys.uid);
     DateTime messageTime = DateTime.now();
     int count = 0;
 
@@ -329,7 +324,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
   setData() async {
     isManager = widget.isManager;
-    mobile = await getPrefrence("mobile");
+    mobile = PrefService.getString(PrefKeys.uid);
     roomId = mobile;
     anotherFcmToken = widget.fcmToken;
 
