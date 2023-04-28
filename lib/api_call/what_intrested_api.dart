@@ -10,7 +10,7 @@ class WhatIntrestedApi {
   static Future intrestedApi({required List intersted}) async {
     try {
       Map<String, dynamic> body = {
-        "intersted": intersted.toString(),
+        "intersted": "Restaurant,Club,Bar" /*intersted*/,
       };
       http.Response? response = await HttpService.postApi(
         url: EndPoints.intrest,

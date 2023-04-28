@@ -184,6 +184,7 @@ final HomeController homeController = Get.find<HomeController>();
   void initState() {
     super.initState();
     // callBusinessListApi();
+
     if (widget.showPlayPause) {
       playPauseIconTimer();
     }
@@ -198,18 +199,19 @@ final HomeController homeController = Get.find<HomeController>();
         setState(() {
           isLoading = false;
         });
-        videoPlayerController.setVolume(1);
+        videoPlayerController.setVolume(3);
         if (widget.autoPlay) {
+
           videoPlayerController.play();
         }
-      });
+      })..setLooping(true);
   }
 
   playPauseIconTimer() {
     setState(() {
       isPlayPauseTimerExceeded = false;
     });
-    timer = Timer(const Duration(seconds: 3), () {
+    timer = Timer(const Duration(seconds: 2), () {
       setState(() {
         isPlayPauseTimerExceeded = true;
       });
@@ -258,7 +260,7 @@ final HomeController homeController = Get.find<HomeController>();
         if ((widget.showPlayPause && !widget.touchToSeePlayPause) ||
             (!isPlayPauseTimerExceeded && widget.touchToSeePlayPause))
           Align(
-            alignment: Alignment(0, 0.3),
+            alignment: const Alignment(0, 0.1),
             child: IconButton(
               onPressed: () {
                 if (isPlay) {

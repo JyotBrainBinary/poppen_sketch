@@ -10,6 +10,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     callBusinessListApi();
+
+    print("===============");
     super.onInit();
   }
 

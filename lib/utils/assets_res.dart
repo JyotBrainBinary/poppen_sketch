@@ -32,6 +32,7 @@ static String feedIcon = "${icons}feedIcon.png";
 static String location = "${icons}location.png";
 static String phone = "${icons}phone.png";
 static String timer = "${icons}timer.png";
+static String dotsImg = "${icons}dots.png";
 
 
 

@@ -1,20 +1,20 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
-import 'package:video_player/video_player.dart';
 
-class HomeCenterArea extends StatelessWidget {
-  HomeCenterArea({
+class HomeCenterAreaImage extends StatelessWidget {
+  HomeCenterAreaImage({
     super.key,
-    required this.videoController,
+
     required this.index,
   });
-  final VideoPlayerController videoController;
+
   final int index;
   final controller = Get.find<HomeController>();
 
@@ -25,24 +25,24 @@ class HomeCenterArea extends StatelessWidget {
   Widget build(BuildContext context) {
     final item = controller.businessListModel.value.data![index];
     final catagoryList = item.category!.split(",").toList();
-    print("item------ ${item.toString()}");
-    print("catagoryList: ---------$catagoryList");
+    debugPrint("item------ ${item.toString()}");
+    debugPrint("catagoryList: ---------$catagoryList");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         InkWell(
-          onTap: () async {
-        await videoController.pause() ;
-            Get.to(() => ProfileScreen());
-          },
+          onTap: ()  {
 
-child:
+            Get.to(() =>  ProfileScreen());
+          },
+          child:
+
 
           Container(
             height: height*0.1,
-          width: height*0.1,
-            padding: EdgeInsets.only(bottom: 5),
-            decoration: BoxDecoration(shape: BoxShape.circle),
+            width: height*0.1,
+            padding: const EdgeInsets.only(bottom: 5),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
               child: Image.network(
