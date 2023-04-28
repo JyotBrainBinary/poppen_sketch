@@ -35,8 +35,18 @@ class HomeCenterArea extends StatelessWidget {
         await videoController.pause() ;
             Get.to(() => ProfileScreen());
           },
+<<<<<<< HEAD
+          // child:
+          //  Image.network(
+          //   item.logoUrl.toString(),
+          //   // errorBuilder: (context, error, stackTrace) {
+              
+          //   // },
+          //   height: Get.height * 0.1,
+          // ),
+=======
+          child:
 
-child:
 
           Container(
             height: height*0.1,
@@ -60,6 +70,7 @@ child:
               ),
             ),
           ),
+>>>>>>> origin/smit
         ),
         const SizedBox(height: 5),
         Container(
