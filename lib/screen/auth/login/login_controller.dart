@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sketch/api_call/login_api.dart';
+import 'package:sketch/chat/chat_room_service.dart';
+import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/common/popup.dart';
 import 'package:sketch/screen/dashbord_screen/dashbord.dart';
 import 'package:sketch/services/pref_service.dart';
@@ -64,11 +66,13 @@ class LoginController extends GetxController {
     try {
       loading.value = true;
 
-        await _auth.signInWithEmailAndPassword(
+      UserCredential user=  await _auth.signInWithEmailAndPassword(
             email: emailController.text, password: passController.text);
           await PrefService.setValue(PrefKeys.uid,
             _auth.currentUser!.uid.toString());
         result = 'done';
+
+intializeFirebase(emailController.text,_auth.currentUser!.uid.toString(),user);
 
     } catch (err) {
       loading.value = false;
@@ -79,3 +83,44 @@ class LoginController extends GetxController {
 
 
 }
+intializeFirebase(String email, String uid,UserCredential user) async {
+    DocumentSnapshot doc;
+    String? fcmToken = await MessageService().getFcmToken();
+    try {
+
+      print(user.user?.uid);
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      print(auth.currentUser);
+
+
+      if (user.user?.uid != null) {
+        doc = await ChatRoomservice().isRoomAvailable(uid);
+        if (doc.exists) {
+          DocumentSnapshot docs = await FirebaseFirestore.instance
+              .collection("chatroom")
+              .doc(uid)
+              .get();
+          Map data = doc.data() as Map;
+          if (data["isManager"].toString() == "true") {
+            await FirebaseFirestore.instance.collection("chatroom").doc(uid).update({"fcmToken":fcmToken});
+           await PrefService.setValue(PrefKeys.isManager, "true");
+
+
+            // isManager = "true";
+          } else {
+            await FirebaseFirestore.instance.collection("chatroom").doc(uid).update({"fcmToken":fcmToken});
+           await PrefService.setValue(PrefKeys.isManager, "flase");
+
+          }
+        } else {
+        await PrefService.setValue(PrefKeys.isManager, "flase");
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        UserCredential user = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: "123456");
+        print(user.user?.uid);
+      }
+    }
+  }

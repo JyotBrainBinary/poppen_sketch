@@ -5,4 +5,5 @@ class PrefKeys{
   static const database ='database';
   static const resetPassword = 'Reset Password';
   static const registerToken = 'registerToken';
+  static const isManager ='isManager';
 }

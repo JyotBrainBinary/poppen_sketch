@@ -43,8 +43,8 @@ class ChatRoomservice {
     int limit,
   ) {
     return chatRoom
-        .doc(PrefService.getString(PrefKeys.uid))
-        .collection(PrefService.getString(PrefKeys.uid))
+        .doc(chatId)
+        .collection(chatId)
         .orderBy('sendTime', descending: true);
   }
 

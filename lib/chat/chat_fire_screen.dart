@@ -500,7 +500,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                             // ),
                             reverse: true,
                           )),
-                         SizedBox(height: 100,),
+
                           InputBottomBar(
                             msgController: controller,
                             onAttachment: onAttachmentTap,

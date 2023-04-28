@@ -31,38 +31,38 @@ class DashBoardScreen extends StatelessWidget {
               // if (CUR_USERID != null) {
                 // setState(() {});
 
-                // isManager = await getPrefrence("isManager");
+              var  isManager = "false";
 
-                // if (isManager == "true") {
+                if (isManager == "true") {
                  Navigator.push(context,
                      MaterialPageRoute(builder: (_) => ChatManager()));
-                // } else {
-                //   showModalBottomSheet(
-                //       isScrollControlled: true,
-                //       context: context,
-                //       shape: const RoundedRectangleBorder(
-                //           borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(10),
-                //         topRight: Radius.circular(10),
-                //       )),
-                //       builder: (builder) {
-                //         return StatefulBuilder(
-                //           builder:
-                //               (BuildContext context, StateSetter setState) {
-                //             setState = setState;
-                //             return Container(
-                //               height: MediaQuery.of(context).size.height / 1.1,
-                //               child: ChatFireScreen(
-                //                 isManager: false,
-                //                 roomId: null,
-                //               ),
-                //             );
-                //           },
-                //         );
-                //       }).then((value) {
-                //     // init();
-                //   });
-                // }
+                } else {
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      )),
+                      builder: (builder) {
+                        return StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) {
+                            setState = setState;
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 1.1,
+                              child: ChatFireScreen(
+                                isManager: false,
+                                roomId: null,
+                              ),
+                            );
+                          },
+                        );
+                      }).then((value) {
+                    // init();
+                  });
+                }
               // } else {
                 // Navigator.pushReplacement(
                 //     context,

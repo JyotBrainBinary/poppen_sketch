@@ -19,6 +19,8 @@ import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
+import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/pref_key.dart';
 
 String? roomId;
 
@@ -465,7 +467,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                               child: PaginateFirestore(
                             padding: EdgeInsets.all(10.0),
                             query: ChatRoomservice()
-                                .getMessages(roomId!, chatLimit),
+                                .getMessages(PrefService.getString(PrefKeys.uid), chatLimit),
                             itemBuilderType: PaginateBuilderType.listView,
                             isLive: true,
                             itemsPerPage: 10,
