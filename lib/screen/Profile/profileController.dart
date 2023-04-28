@@ -20,7 +20,7 @@ class ProfileController extends GetxController {
   Future<void> onInit() async{
 String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
     print("ID:  ===============  $id");
-    callViewBusinessApi(id:id);
+    // callViewBusinessApi(id:id);
     super.onInit();
   }
 

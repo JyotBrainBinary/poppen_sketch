@@ -9,4 +9,5 @@ class PrefKeys{
   static const isManager ='isManager';
   static const fullName='fullName';
   static const managerID='managerID';
+  static const managerName='managerName';
 }

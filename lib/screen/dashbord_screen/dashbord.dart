@@ -24,62 +24,67 @@ class DashBoardScreen extends StatelessWidget {
       id: "bottomBar",
       builder: (controller) {
         return Scaffold(
-          floatingActionButton: GestureDetector(
-            onTap: () async {
-              // CUR_USERID = (await getPrefrence(ID))!;
-              // if (CUR_USERID != null) {
-                // setState(() {});
+          // floatingActionButton: GestureDetector(
+          //   onTap: () async {
+          //     // CUR_USERID = (await getPrefrence(ID))!;
+          //     // if (CUR_USERID != null) {
+          //       // setState(() {});
 
-              var  isManager = PrefService.getString(PrefKeys.isManager);
+          //     var  isManager = PrefService.getString(PrefKeys.isManager);
 
-                if (isManager == "true") {
-                 Navigator.push(context,
-                     MaterialPageRoute(builder: (_) => ChatManager()));
-                } else {
-                  showModalBottomSheet(
-                      isScrollControlled: true,
-                      context: context,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      )),
-                      builder: (builder) {
-                        // roomId =PrefService.getString(PrefKeys.uid);
-                        return StatefulBuilder(
-                          builder:
-                              (BuildContext context, StateSetter setState) {
-                            setState = setState;
-                            return Container(
-                              height: MediaQuery.of(context).size.height / 1.1,
-                              child: ChatFireScreen(
-                                isManager: false,
-                                roomId: PrefService.getString(PrefKeys.uid),
-                              ),
-                            );
-                          },
-                        );
-                      }).then((value) {
-                    // init();
-                  });
-                }
-              // } else {
-                // Navigator.pushReplacement(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => Login(),
-                //     ));
-              // }
-            },
-            child: Container(
-              height: 100,
-              width: 100,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xff341069),
-              ),
-            ),
-          ),
+          //       if (isManager == "true") {
+          //        Navigator.push(context,
+          //            MaterialPageRoute(builder: (_) => ChatManager()));
+          //       } else {
+          //          Navigator.push(context,
+          //            MaterialPageRoute(builder: (_) => ChatFireScreen(
+          //                       isManager: false,
+          //                       roomId: PrefService.getString(PrefKeys.uid),
+          //                     ),));
+          //         // showModalBottomSheet(
+          //         //     isScrollControlled: true,
+          //         //     context: context,
+          //         //     shape: const RoundedRectangleBorder(
+          //         //         borderRadius: BorderRadius.only(
+          //         //       topLeft: Radius.circular(10),
+          //         //       topRight: Radius.circular(10),
+          //         //     )),
+          //         //     builder: (builder) {
+          //         //       // roomId =PrefService.getString(PrefKeys.uid);
+          //         //       return StatefulBuilder(
+          //         //         builder:
+          //         //             (BuildContext context, StateSetter setState) {
+          //         //           setState = setState;
+          //         //           return Container(
+          //         //             height: MediaQuery.of(context).size.height / 1.1,
+          //         //             child: ChatFireScreen(
+          //         //               isManager: false,
+          //         //               roomId: PrefService.getString(PrefKeys.uid),
+          //         //             ),
+          //         //           );
+          //         //         },
+          //         //       );
+          //         //     }).then((value) {
+          //         //   // init();
+          //         // });
+          //       }
+          //     // } else {
+          //       // Navigator.pushReplacement(
+          //       //     context,
+          //       //     MaterialPageRoute(
+          //       //       builder: (context) => Login(),
+          //       //     ));
+          //     // }
+          //   },
+          //   child: Container(
+          //     height: 100,
+          //     width: 100,
+          //     decoration: const BoxDecoration(
+          //       shape: BoxShape.circle,
+          //       color: Color(0xff341069),
+          //     ),
+          //   ),
+          // ),
           backgroundColor: controller.selectedIndex == 0
               ? Colors.black
               : ColorRes.colorWhite,

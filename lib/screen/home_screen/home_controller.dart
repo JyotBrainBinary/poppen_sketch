@@ -9,7 +9,7 @@ class HomeController extends GetxController {
   var businessListModel = BusinessListModel().obs;
   @override
   void onInit() {
-    callBusinessListApi();
+    // callBusinessListApi();
 
     print("===============");
     super.onInit();
