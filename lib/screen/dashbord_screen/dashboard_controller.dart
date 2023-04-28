@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/screen/Favourites/favourites_screen.dart';
+import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_screen.dart';
 
 class DashBoardController extends GetxController {
@@ -11,7 +12,7 @@ class DashBoardController extends GetxController {
     const Text('Search'),
     FavouritesScreen(),
     const Text('Notification'),
-    const Text('Profile'),
+      ProfileScreen(),
   ];
 
   void onItemTapped(int index) {

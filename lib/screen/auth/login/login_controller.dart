@@ -70,8 +70,6 @@ class LoginController extends GetxController {
             _auth.currentUser!.uid.toString());
         result = 'done';
 
-
-
     } catch (err) {
       loading.value = false;
       errorToast(StringRes.errText);

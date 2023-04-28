@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final businessListModel = businessListModelFromJson(jsonString);
+//     final favouriteListModel = favouriteListModelFromJson(jsonString);
 
 import 'dart:convert';
 
-BusinessListModel businessListModelFromJson(String str) => BusinessListModel.fromJson(json.decode(str));
+FavouriteListModel favouriteListModelFromJson(String str) => FavouriteListModel.fromJson(json.decode(str));
 
-String businessListModelToJson(BusinessListModel data) => json.encode(data.toJson());
+String favouriteListModelToJson(FavouriteListModel data) => json.encode(data.toJson());
 
-class BusinessListModel {
-  BusinessListModel({
+class FavouriteListModel {
+  FavouriteListModel({
     this.status,
     this.message,
     this.data,
@@ -19,7 +19,7 @@ class BusinessListModel {
   String? message;
   List<Datum>? data;
 
-  factory BusinessListModel.fromJson(Map<String, dynamic> json) => BusinessListModel(
+  factory FavouriteListModel.fromJson(Map<String, dynamic> json) => FavouriteListModel(
     status: json["status"],
     message: json["message"],
     data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
@@ -34,7 +34,6 @@ class BusinessListModel {
 
 class Datum {
   Datum({
-    this.id,
     this.name,
     this.bio,
     this.website,
@@ -50,12 +49,10 @@ class Datum {
     this.coverResizeUrl,
     this.idItemGallery,
     this.socialMedia,
-    this.isFavourite,
     this.createdAt,
     this.updatedAt,
   });
 
-  int? id;
   String? name;
   String? bio;
   String? website;
@@ -71,12 +68,10 @@ class Datum {
   String? coverResizeUrl;
   String? idItemGallery;
   String? socialMedia;
-  bool? isFavourite;
   DateTime? createdAt;
   DateTime? updatedAt;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
     name: json["name"],
     bio: json["bio"],
     website: json["website"],
@@ -92,13 +87,11 @@ class Datum {
     coverResizeUrl: json["cover_resize_url"],
     idItemGallery: json["id_item_gallery"],
     socialMedia: json["social_media"],
-    isFavourite: json["isFavourite"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
     "name": name,
     "bio": bio,
     "website": website,
@@ -114,7 +107,6 @@ class Datum {
     "cover_resize_url": coverResizeUrl,
     "id_item_gallery": idItemGallery,
     "social_media": socialMedia,
-    "isFavourite": isFavourite,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
   };
