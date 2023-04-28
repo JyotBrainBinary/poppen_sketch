@@ -69,24 +69,24 @@ class HomeTopArea extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
               width: 20,
-              child: Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: ColorRes.colorBlack.withOpacity(0.2),
-                        blurRadius: 13.0,
-                        spreadRadius: 0.01,
-                        // offset: const Offset(1.0, 5.5),
-                      )
-                    ],
-                    image: DecorationImage(
-                      image: AssetImage(AssetsRes.search),
-                      scale: 4.5,
-                    )),
-              ),
+              // child: Container(
+              //   decoration: BoxDecoration(
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: ColorRes.colorBlack.withOpacity(0.2),
+              //           blurRadius: 13.0,
+              //           spreadRadius: 0.01,
+              //           // offset: const Offset(1.0, 5.5),
+              //         )
+              //       ],
+              //       image: DecorationImage(
+              //         image: AssetImage(AssetsRes.search),
+              //         scale: 4.5,
+              //       )),
+              // ),
             ),
           ],
         ),

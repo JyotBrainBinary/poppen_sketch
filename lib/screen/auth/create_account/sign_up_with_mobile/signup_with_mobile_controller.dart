@@ -68,34 +68,7 @@ class SignUpWithMobileController extends GetxController {
     update(["id"]);
   }
 
-  // Future<void> verifyPhoneNumber({required String phone}) async {
-  //   try{
-  //     Loader().showLoader();
-  //     String number ="+$countryCode$phone";
-  //     debugPrint("number -----------$number");
-  //     await auth.verifyPhoneNumber(
-  //       phoneNumber: number,
-  //       verificationCompleted: (PhoneAuthCredential credential) {},
-  //       verificationFailed: (FirebaseAuthException e) {
-  //         Loader().hideLoader();
-  //         errorToast(e.message ?? "");
-  //       },
-  //       codeSent: (String verificationId, int? resendToken) {
-  //         receivedID = verificationId;
-  //         Loader().hideLoader();
-  //         Get.to(OtpVerifyScreen());
-  //       },
-  //
-  //       codeAutoRetrievalTimeout: (String verificationId) {},
-  //     );
-  //   }
-  //   on FirebaseAuthException catch (_, e)
-  //   {
-  //     Loader().hideLoader();
-  //     errorToast(e.toString());
-  //   }
-  //
-  // }
+
 
   void verifyUserPhoneNumber({required String phone}) {
     try {

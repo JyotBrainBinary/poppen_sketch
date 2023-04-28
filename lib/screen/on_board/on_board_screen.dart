@@ -30,7 +30,7 @@ class OnBoardScreen extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  color: Colors.blue,
+                  color: Colors.black,
                   height: height * 0.63,
                   width: width,
                   child: Column(

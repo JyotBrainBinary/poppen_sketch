@@ -99,7 +99,9 @@ class OtpVerifyScreen extends StatelessWidget {
                         CommonCreateAccText(
                           text1: StringRes.didNotRecive,
                           text2: StringRes.plsResend,
-                          onTap: () {},
+                          onTap: () {
+                            controller.validateForm();
+                          },
                         ),
                         SizedBox(
                           height: height * 0.03,

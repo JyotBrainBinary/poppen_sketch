@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:sketch/common/widget/common_small_button.dart';
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
+import 'package:sketch/screen/Profile/widget/details_screen.dart';
+import 'package:sketch/screen/Profile/widget/feed_screen.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -138,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: Get.height * 0.03),
+              SizedBox(height: Get.height * 0.02),
 
               /// ------ Post --------------
               post(),
@@ -149,8 +151,8 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  ProfileController profileController = Get.put(ProfileController());
   Widget post() {
-    ProfileController profileController = Get.put(ProfileController());
     return GetBuilder<ProfileController>(
         id: "tab",
         builder: (profileController) {
@@ -165,85 +167,20 @@ class ProfileScreen extends StatelessWidget {
 
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      profileController.curr = 0;
-                      profileController.pageController.jumpToPage(0);
-                      profileController.update(["tab"]);
-                    },
-                    child: Container(
-                      width: Get.width / 3,
-                      alignment: Alignment.center,
-                      child: Image.asset(AssetsRes.feedIcon,
-                          height: 30,
-                          color: (profileController.curr != 0)
-                              ? ColorRes.colorD7D7D9
-                              : ColorRes.color161823),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      profileController.curr = 1;
-                      profileController.pageController.jumpToPage(1);
-                      profileController.update(["tab"]);
-                    },
-                    child: Container(
-                      width: Get.width / 3,
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 20,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: (profileController.curr != 1)
-                                  ? ColorRes.colorD7D7D9
-                                  : ColorRes.color161823,
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            StringRes.details,
-                            style: medium(
-                                color: (profileController.curr != 1)
-                                    ? ColorRes.colorD7D7D9
-                                    : ColorRes.color161823),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      profileController.curr = 2;
-                      profileController.pageController.jumpToPage(2);
-                      profileController.update(["tab"]);
-                    },
-                    child: Container(
-                      width: Get.width / 3,
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(AssetsRes.favourites,
-                              height: 20,
-                              color: (profileController.curr != 2)
-                                  ? ColorRes.colorD7D7D9
-                                  : ColorRes.colorEFC744),
-                          const SizedBox(width: 10),
-                          Text(
-                            StringRes.reviews,
-                            style: medium(
-                                color: (profileController.curr != 2)
-                                    ? ColorRes.colorD7D7D9
-                                    : ColorRes.color161823),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  _buildTab(
+                      onTap: () {
+                        print("-------- ${profileController.isGalleryTab}");
+                        profileController.changeTab();
+
+                      },
+                      icon: AssetsRes.feedIcon,
+                      isGallery: profileController.isGalleryTab),
+                  _buildTab(
+                      onTap: () {
+                        profileController.changeTab();
+                      },
+                      icon: AssetsRes.info,
+                      isGallery: profileController.isGalleryTab),
                 ],
               ),
               const SizedBox(height: 5),
@@ -260,7 +197,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Container(
                     height: 2.3,
-                    width: Get.width * 0.3,
+                    width: Get.width * 0.2,
                     color: ColorRes.color161823,
                   ),
                 ],
@@ -269,23 +206,34 @@ class ProfileScreen extends StatelessWidget {
               /// ----- pageView ---------------
               SizedBox(
                 height: Get.height * 0.6,
-                child: PageView(
-                  children: profileController.pageViewList,
-                  scrollDirection: Axis.horizontal,
-                  // reverse: true,
-                  physics: BouncingScrollPhysics(),
-                  controller: profileController.pageController,
-
-                  onPageChanged: (num) {
-                    profileController.curr = num;
-                    profileController.update(["tab"]);
-                  },
-                ),
+                child: profileController.isGalleryTab
+                    ? FeedScreen()
+                    : const DetailScreen(),
               ),
             ],
           );
         });
   }
+
+  Widget _buildTab(
+      {required VoidCallback onTap,
+      String? text,
+      required String icon,
+      required bool isGallery}) {
+    return GestureDetector(
+      onTap: onTap,
+        // profileController.curr = 0;
+        // profileController.pageController.jumpToPage(0);
+        // profileController.update(["tab"]);
+
+      child: Container(
+        width: Get.width / 2,
+        color: Colors.transparent,
+        alignment: Alignment.center,
+        child: Image.asset(AssetsRes.feedIcon,
+            height: 30,
+            color: isGallery ? ColorRes.colorD7D7D9 : ColorRes.color161823),
+      ),
+    );
+  }
 }
-
-

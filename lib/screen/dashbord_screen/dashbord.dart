@@ -99,7 +99,7 @@ class DashBoardScreen extends StatelessWidget {
             ),
           ),
           bottomNavigationBar:
-              bottomNavigationBar(context, controller: controller),
+              bottomNavigationBar(context),
         );
       },
     );

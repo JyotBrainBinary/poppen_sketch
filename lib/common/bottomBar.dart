@@ -10,7 +10,8 @@ import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
 
 Widget bottomNavigationBar(BuildContext context,
-    {required DashBoardController controller}) {
+    ) {
+  final controller = Get.find<DashBoardController>();
   return Container(
     width: Get.width,
     height: Get.height * 0.15,

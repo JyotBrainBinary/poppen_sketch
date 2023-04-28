@@ -23,7 +23,7 @@ class FavouritesController extends GetxController {
         if (value != null) {
           favouriteListModel = value;
           isLoading.value = false;
-          print("object value :     ${favouriteListModel.data![0].category}");
+
           update(["id"]);
         }
       });

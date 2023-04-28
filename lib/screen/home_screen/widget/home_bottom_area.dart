@@ -92,11 +92,11 @@ class HomeBottomArea extends StatelessWidget {
             SizedBox(
               width: Get.width * 0.32,
               child: Text(
-                homeController.businessListModel.value.data![index].address
+                homeController.businessListModel.value.data![index].address!.split(",").first
                     .toString(),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: ColorRes.colorWhite),
+                style: const TextStyle(color: ColorRes.colorWhite),
               ),
             ),
           ],

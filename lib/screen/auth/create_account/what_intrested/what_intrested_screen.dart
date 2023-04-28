@@ -19,7 +19,7 @@ class WhatIntrestedScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorRes.colorWhite,
       body: Stack(
-        children:[
+        children: [
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * 0.04),
@@ -53,16 +53,19 @@ class WhatIntrestedScreen extends StatelessWidget {
                               controller.selectCategory(item: item);
                             },
                             child: Container(
-                              padding:
-                              EdgeInsets.symmetric(horizontal: width * 0.025),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: width * 0.025),
                               decoration: BoxDecoration(
-                                color: controller.selectedIntrestList.contains(item)
+                                color: controller.selectedIntrestList
+                                        .contains(item)
                                     ? ColorRes.colorBlack
                                     : Colors.transparent,
                                 border: Border.all(
-                                    color:  controller.selectedIntrestList.contains(item)
+                                    color: controller.selectedIntrestList
+                                            .contains(item)
                                         ? Colors.transparent
-                                        : ColorRes.colorEBEBEB, width: 1),
+                                        : ColorRes.colorEBEBEB,
+                                    width: 1),
                                 borderRadius: BorderRadius.circular(26),
                               ),
                               child: Row(
@@ -75,8 +78,8 @@ class WhatIntrestedScreen extends StatelessWidget {
                                     color: item == "Restaurants"
                                         ? ColorRes.color8401FF
                                         : item == "Bars"
-                                        ? Colors.red
-                                        : ColorRes.colorBlack,
+                                            ? Colors.red
+                                            : ColorRes.colorBlack,
                                   ),
                                   SizedBox(
                                     width: width * 0.015,
@@ -85,7 +88,7 @@ class WhatIntrestedScreen extends StatelessWidget {
                                     controller.intrestedList[index],
                                     style: TextStyle(
                                         color: controller.selectedIntrestList
-                                            .contains(item)
+                                                .contains(item)
                                             ? ColorRes.colorWhite
                                             : ColorRes.colorBlack,
                                         fontSize: 12,
@@ -108,7 +111,6 @@ class WhatIntrestedScreen extends StatelessWidget {
                         isRightArrow: true,
                         onTap: () {
                           controller.validateIntrest();
-
                         },
                       ),
                       Spacer(),
@@ -116,9 +118,11 @@ class WhatIntrestedScreen extends StatelessWidget {
                         height: height * 0.05,
                       ),
                       CommonCreateAccText(
-                        text1: StringRes.doNotHaveAc,
-                        text2: StringRes.createOne,
-                        onTap: () {},
+                        text1: StringRes.alreadyHaveAc,
+                        text2: StringRes.signIn,
+                        onTap: () {
+                          Get.off(() => LoginScreen());
+                        },
                       ),
                       SizedBox(
                         height: height * 0.055,
@@ -131,11 +135,10 @@ class WhatIntrestedScreen extends StatelessWidget {
           ),
           Obx(() => controller.loading.value
               ? const Center(
-            child: FullScreenLoader(enableBgColor: true),
-          )
+                  child: FullScreenLoader(enableBgColor: true),
+                )
               : const SizedBox())
         ],
-
       ),
     );
   }

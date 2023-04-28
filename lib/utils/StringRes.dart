@@ -18,11 +18,12 @@ class StringRes {
   static const mobileNum= "Mobile Number";
   static const continueText = "CONTINUE";
   static const doNotHaveAc =  "DON’T HAVE AN ACCOUNT? ";
+  static const alreadyHaveAc =  "ALREADY HAVE AN ACCOUNT? ";
   static const createOne = "CREATE ONE";
   static const continueSetup = "Continue Setup";
   static const verifyMobile = "Verify Mobile";
   static const sentOtpDesc = "We sent a verification code to your mobile,\nplease verify:";
-  static const didNotRecive = "I didn’t receive a code!";
+  static const didNotRecive = "I didn’t receive a code! ";
   static const plsResend = "Please resend";
   static const signInWithGoogle = "SIGN IN WITH GOOGLE";
   static const signInWithFacebook = "SIGN IN WITH FACEBOOK";

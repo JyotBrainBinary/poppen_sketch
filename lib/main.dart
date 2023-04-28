@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:(PrefService.getBool(PrefKeys.login) == true) ? DashBoardScreen() : OnBoardScreen() ,
+      home:(PrefService.getBool(PrefKeys.login) == true) ? DashBoardScreen() : DashBoardScreen() ,
     );
   }
 }

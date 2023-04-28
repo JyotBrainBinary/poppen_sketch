@@ -1,25 +1,44 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sketch/api_call/view_business_api.dart';
+import 'package:sketch/model/view_business_model.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
 import 'package:sketch/screen/Profile/widget/reviews_screen.dart';
+import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/assets_res.dart';
+import 'package:sketch/utils/pref_key.dart';
 
-class ProfileController extends GetxController{
-
-
-  PageController pageController =PageController();
-
+class ProfileController extends GetxController {
+  // PageController pageController = PageController();
+  RxBool isLoading = true.obs;
+  var viewBusinessModel = ViewBusinessModel().obs;
   int curr = 0;
+  bool isGalleryTab = true;
 
-  List<Widget> pageViewList = <Widget>[
-    FeedScreen(),
-    DetailScreen(),
-    ReviewsScreen(),
-  ];
+  @override
+  Future<void> onInit() async{
+String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
+    print("ID:  ===============  $id");
+    callViewBusinessApi(id:id);
+    super.onInit();
+  }
+
+  // List<Widget> pageViewList = <Widget>[
+  //   FeedScreen(),
+  //   DetailScreen(),
+  //   // ReviewsScreen(),
+  //
+  // ];
+
+  void changeTab(){
+    isGalleryTab = !isGalleryTab;
+    update(["tab"]);
+  }
+
 
   List feedImage = [
-   AssetsRes.image1,
+    AssetsRes.image1,
     AssetsRes.image2,
     AssetsRes.image3,
     AssetsRes.image4,
@@ -50,4 +69,21 @@ class ProfileController extends GetxController{
     "12 - 10PM"
   ];
 
+  void callViewBusinessApi({required String id}) {
+    try {
+      isLoading.value = true;
+
+      ViewBusinessApi.viewBusinessApiCall(id: id).then((value) {
+        if (value != null) {
+          viewBusinessModel.value = value;
+          isLoading.value = false;
+
+          print("viewBusinessList  --------->  ${viewBusinessModel.value.status}");
+        }
+      });
+    } catch (e) {
+      print("error: =======>> $e");
+      rethrow;
+    }
+  }
 }
