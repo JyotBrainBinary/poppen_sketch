@@ -1,12 +1,33 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:sketch/common/popup.dart';
+import 'package:sketch/model/intrest_list_model.dart';
 import 'package:sketch/services/http_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/end_points.dart';
 
-class WhatIntrestedApi {
+class IntrestApi {
+  static Future<IntrestListModel?> getInterestList() async {
+    try {
+      String url = EndPoints.intrestList;
+
+      http.Response? response = await HttpService.getApi(url: url);
+
+      if (response != null && response.statusCode == 200 ) {
+        return intrestListModelFromJson(response.body);
+      }
+      else{
+        return null;
+      }
+    } catch (e) {
+      errorToast(e.toString());
+
+      return null;
+    }
+
+  }
+
   static Future intrestedApi({required List intersted}) async {
     try {
       Map<String, dynamic> body = {

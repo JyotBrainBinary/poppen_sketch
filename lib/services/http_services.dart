@@ -13,8 +13,7 @@ class HttpService {
       String accessToken = PrefService.getString(PrefKeys.registerToken);
       if (header == null && accessToken.isNotEmpty) {
         header = {
-          "Content-Type": "application/json",
-          "x-access-token": accessToken,
+          "x-access-token": accessToken
         };
       }
       if (kDebugMode) {

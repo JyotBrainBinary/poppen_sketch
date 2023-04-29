@@ -17,6 +17,7 @@ class EndPoints {
   static const addFavourite = "$user/business/favourite/add";
   static const removeFavourite = "$user/business/favourite/remove";
   static const favouriteList = "$user/business/favourite/list";
+  static const intrestList = "$user/category/list";
 
   ////////////////////////// ADMIN  ///////////////////////////////
   static const viewBusiness = "$admin/business/view";

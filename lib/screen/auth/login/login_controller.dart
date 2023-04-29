@@ -17,7 +17,7 @@ class LoginController extends GetxController {
   final TextEditingController passController = TextEditingController();
   RxBool loading = false.obs;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void validateForm() {
     if (emailController.text.isEmpty) {
@@ -28,11 +28,13 @@ class LoginController extends GetxController {
       errorToast(StringRes.passwordValidation);
     } else {
       logInUser().then((value) {
-        if (value == "done") {
-          Get.to(() => DashBoardScreen());
-          // callLoginApi();
-        }
+        if(value == "done")
+          {
+             // Get.to(() => DashBoardScreen());
+            callLoginApi();
+          }
       });
+
     }
   }
 
@@ -56,6 +58,7 @@ class LoginController extends GetxController {
       errorToast(e.toString());
     }
   }
+
 
   Future<String> logInUser({
     String? email,

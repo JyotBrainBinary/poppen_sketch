@@ -37,69 +37,110 @@ class WhatIntrestedScreen extends StatelessWidget {
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: controller.intrestedList.length,
-                        physics: BouncingScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: width * 0.012,
-                            childAspectRatio: 2.5),
-                        itemBuilder: (context, index) {
-                          final item = controller.intrestedList[index];
+
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.center,
+                        children: controller.intrestedList.map((e) {
                           return GestureDetector(
                             onTap: () {
-                              controller.selectCategory(item: item);
+                              controller.selectCategory(item: e);
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.025),
+                                  horizontal: width * 0.025, vertical: height * 0.006),
+                              margin: EdgeInsets.symmetric(horizontal: width * 0.005),
                               decoration: BoxDecoration(
-                                color: controller.selectedIntrestList
-                                        .contains(item)
-                                    ? ColorRes.colorBlack
-                                    : Colors.transparent,
+                                color:
+                                // controller.selectedCategory.contains(e)
+                                //     ? ColorRes.greyBackgroundTabColor
+                                //     :
+                                ColorRes.colorRed,
+                                borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
-                                    color: controller.selectedIntrestList
-                                            .contains(item)
-                                        ? Colors.transparent
-                                        : ColorRes.colorEBEBEB,
-                                    width: 1),
-                                borderRadius: BorderRadius.circular(26),
+                                    color: ColorRes.colorBlack, width: 1.2),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: width * 0.04,
-                                    width: width * 0.04,
-                                    color: item == "Restaurants"
-                                        ? ColorRes.color8401FF
-                                        : item == "Bars"
-                                            ? Colors.red
-                                            : ColorRes.colorBlack,
-                                  ),
-                                  SizedBox(
-                                    width: width * 0.015,
-                                  ),
-                                  Text(
-                                    controller.intrestedList[index],
-                                    style: TextStyle(
-                                        color: controller.selectedIntrestList
-                                                .contains(item)
-                                            ? ColorRes.colorWhite
-                                            : ColorRes.colorBlack,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
+                              child: Text(
+                                e,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: ColorRes.colorBlack.withOpacity(.8),
+                                    fontSize: width * 0.043),
                               ),
                             ),
                           );
-                        },
+                        }).toList(),
                       ),
+
+
+
+
+
+                      // GridView.builder(
+                      //   shrinkWrap: true,
+                      //   itemCount: controller.intrestedList.length,
+                      //   physics: BouncingScrollPhysics(),
+                      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //       crossAxisCount: 3,
+                      //       mainAxisSpacing: 10,
+                      //       crossAxisSpacing: width * 0.012,
+                      //       childAspectRatio: 2.5),
+                      //   itemBuilder: (context, index) {
+                      //     final item = controller.intrestedList[index];
+                      //     return GestureDetector(
+                      //       onTap: () {
+                      //         controller.selectCategory(item: item);
+                      //       },
+                      //       child: Container(
+                      //         padding: EdgeInsets.symmetric(
+                      //             horizontal: width * 0.025),
+                      //         decoration: BoxDecoration(
+                      //           color: controller.selectedIntrestList
+                      //                   .contains(item)
+                      //               ? ColorRes.colorBlack
+                      //               : Colors.transparent,
+                      //           border: Border.all(
+                      //               color: controller.selectedIntrestList
+                      //                       .contains(item)
+                      //                   ? Colors.transparent
+                      //                   : ColorRes.colorEBEBEB,
+                      //               width: 1),
+                      //           borderRadius: BorderRadius.circular(26),
+                      //         ),
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           crossAxisAlignment: CrossAxisAlignment.center,
+                      //           children: [
+                      //             Container(
+                      //               height: width * 0.04,
+                      //               width: width * 0.04,
+                      //               color: item == "Restaurants"
+                      //                   ? ColorRes.color8401FF
+                      //                   : item == "Bars"
+                      //                       ? Colors.red
+                      //                       : ColorRes.colorBlack,
+                      //             ),
+                      //             SizedBox(
+                      //               width: width * 0.015,
+                      //             ),
+                      //             Text(
+                      //               controller.intrestedList[index],
+                      //               style: TextStyle(
+                      //                   color: controller.selectedIntrestList
+                      //                           .contains(item)
+                      //                       ? ColorRes.colorWhite
+                      //                       : ColorRes.colorBlack,
+                      //                   fontSize: 12,
+                      //                   fontWeight: FontWeight.w500),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                       SizedBox(
                         height: height * 0.05,
                       ),

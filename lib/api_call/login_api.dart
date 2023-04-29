@@ -25,6 +25,8 @@ class LoginApi {
         await PrefService.setValue(PrefKeys.login, true);
         await PrefService.setValue(PrefKeys.registerToken,
             jsonDecode(response.body)["token"].toString());
+        await PrefService.setValue(PrefKeys.id,
+            jsonDecode(response.body)["id"].toString());
 
         print("body----------${response.body}");
 

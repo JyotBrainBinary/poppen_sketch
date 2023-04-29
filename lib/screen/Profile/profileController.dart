@@ -16,13 +16,13 @@ class ProfileController extends GetxController {
   int curr = 0;
   bool isGalleryTab = true;
 
-  @override
-  Future<void> onInit() async{
-String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
-    print("ID:  ===============  $id");
-    // callViewBusinessApi(id:id);
-    super.onInit();
-  }
+//   @override
+//   Future<void> onInit() async{
+// String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
+//     print("ID:  ===============  $id");
+//     // callViewBusinessApi(id:id);
+//     super.onInit();
+//   }
 
   // List<Widget> pageViewList = <Widget>[
   //   FeedScreen(),
@@ -31,7 +31,7 @@ String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
   //
   // ];
 
-  void changeTab(){
+  void changeTab() {
     isGalleryTab = !isGalleryTab;
     update(["tab"]);
   }
@@ -78,9 +78,13 @@ String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
           viewBusinessModel.value = value;
           isLoading.value = false;
 
-          print("viewBusinessList  --------->  ${viewBusinessModel.value.status}");
+          update(["id"]);
+// update(["tab"]);
+          print(
+              "viewBusinessList  --------->  ${viewBusinessModel.value.status}");
         }
       });
+      // update(["id"]);
     } catch (e) {
       print("error: =======>> $e");
       rethrow;

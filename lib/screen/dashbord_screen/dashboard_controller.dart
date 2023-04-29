@@ -21,7 +21,7 @@ class DashBoardController extends GetxController {
             isManager: false,
             roomId: PrefService.getString(PrefKeys.uid),
           ),
-    ProfileScreen(),
+    const Text('Profile'),
   ];
 
   void onItemTapped(int index) {

@@ -60,7 +60,7 @@ class Data {
   String? address;
   double? latitude;
   double? longitude;
-  String? openingHours;
+  List<String>? openingHours;
   String? phoneNumber;
   String? category;
   String? coverUrl;
@@ -78,7 +78,7 @@ class Data {
     address: json["address"],
     latitude: json["latitude"]?.toDouble(),
     longitude: json["longitude"]?.toDouble(),
-    openingHours: json["opening_hours"],
+    openingHours: json["opening_hours"] == null ? [] : List<String>.from(json["opening_hours"]!.map((x) => x)),
     phoneNumber: json["phone_number"],
     category: json["category"],
     coverUrl: json["cover_url"],
@@ -97,7 +97,7 @@ class Data {
     "address": address,
     "latitude": latitude,
     "longitude": longitude,
-    "opening_hours": openingHours,
+    "opening_hours": openingHours == null ? [] : List<dynamic>.from(openingHours!.map((x) => x)),
     "phone_number": phoneNumber,
     "category": category,
     "cover_url": coverUrl,

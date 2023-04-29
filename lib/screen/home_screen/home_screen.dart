@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/home_screen/widget/onVideoUi.dart';
 import 'package:sketch/screen/home_screen/widget/videoPlayerWidget.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.put(HomeController());
-
+  final ProfileController profileController = Get.put(ProfileController());
   List videoUrl = [
     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',

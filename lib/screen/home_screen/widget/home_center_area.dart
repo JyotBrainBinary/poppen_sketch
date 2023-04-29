@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -17,6 +18,7 @@ class HomeCenterArea extends StatelessWidget {
   final VideoPlayerController videoController;
   final int index;
   final controller = Get.find<HomeController>();
+  final profileController = Get.find<ProfileController>();
 
 
   double height = Get.height;
@@ -32,36 +34,44 @@ class HomeCenterArea extends StatelessWidget {
       children: [
         InkWell(
           onTap: () async {
-        await videoController.pause() ;
-            Get.to(() => ProfileScreen());
+            await videoController.pause();
+             profileController.callViewBusinessApi(id: item.id.toString());
+             profileController.isLoading.value = true;
+            Get.to(() => ProfileScreen(),
+            );
           },
-
-          child:
-
-
-          Container(
-            height: height*0.1,
-          width: height*0.1,
+          child: Container(
+            height: height * 0.1,
+            width: height * 0.1,
             padding: EdgeInsets.only(bottom: 5),
             decoration: BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
               child: Image.network(
                 item.logoUrl.toString(),
+                height: height * 0.1,
+                width: height * 0.1,
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Image.asset(
+                    AssetsRes.restaurantLogo,
+                    height: height * 0.1,
+                    width: height * 0.1,
+                  );
+                },
                 errorBuilder: (context, error, stackTrace) {
                   return Image.asset(
                     AssetsRes.restaurantLogo,
+                    height: height * 0.1,
+                    width: height * 0.1,
                     fit: BoxFit.cover,
-                    height: Get.height * 0.1,
-                    // width: width*0.10,
                   );
                 },
-                fit: BoxFit.cover,
-                // height: Get.height * 0.1,
               ),
             ),
           ),
-
         ),
         const SizedBox(height: 5),
         Container(

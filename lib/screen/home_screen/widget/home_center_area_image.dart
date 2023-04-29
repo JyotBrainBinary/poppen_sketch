@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -11,13 +12,12 @@ import 'package:sketch/utils/color_res.dart';
 class HomeCenterAreaImage extends StatelessWidget {
   HomeCenterAreaImage({
     super.key,
-
     required this.index,
   });
 
   final int index;
   final controller = Get.find<HomeController>();
-
+  final profileController = Get.find<ProfileController>();
 
   double height = Get.height;
   double width = Get.width;
@@ -31,33 +31,58 @@ class HomeCenterAreaImage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         InkWell(
-          onTap: ()  {
+          onTap: () {
+            profileController.callViewBusinessApi(id: item.id.toString());
+            profileController.isLoading.value = true;
 
-            Get.to(() =>  ProfileScreen());
+            Get.to(() => ProfileScreen());
           },
-          child:
-
-
-          Container(
-            height: height*0.1,
-            width: height*0.1,
+          child: Container(
+            height: height * 0.1,
+            width: height * 0.1,
             padding: const EdgeInsets.only(bottom: 5),
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
-              child: Image.network(
-                item.logoUrl.toString(),
-                errorBuilder: (context, error, stackTrace) {
-                  return Image.asset(
-                    AssetsRes.restaurantLogo,
-                    fit: BoxFit.cover,
-                    height: Get.height * 0.1,
-                    // width: width*0.10,
-                  );
-                },
-                fit: BoxFit.cover,
-                // height: Get.height * 0.1,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(99),
+                child: Image.network(
+                  item.logoUrl.toString(),
+                  height: height * 0.1,
+                  width: height * 0.1,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Image.asset(
+                      AssetsRes.restaurantLogo,
+                      height: height * 0.1,
+                      width: height * 0.1,
+                    );
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      AssetsRes.restaurantLogo,
+                      height: height * 0.1,
+                      width: height * 0.1,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
               ),
+
+              // Image.network(
+              //   item.logoUrl.toString(),
+              //   height: height * 0.09,
+              //   width: height * 0.09,
+              //   fit: BoxFit.cover,
+              //   errorBuilder: (context, error, stackTrace) {
+              //     return Image.asset(
+              //       AssetsRes.restaurantLogo,
+              //       height: height * 0.09,
+              //     );
+              //   },
+              // ),
             ),
           ),
         ),

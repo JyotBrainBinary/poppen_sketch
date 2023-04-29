@@ -44,7 +44,7 @@ class CommonAppBar extends StatelessWidget {
                 alignment: index == 4 ? Alignment.center : Alignment.centerLeft,
                 child: SizedBox(
                   child: Text(
-                    index == 4 ? "@RQREPUBLIQ" : "Favourites",
+                    index == 4 ? "Profile" : "Favourites",
                     textAlign: TextAlign.center,
                     style: regular(
                         color: ColorRes.color161823,
