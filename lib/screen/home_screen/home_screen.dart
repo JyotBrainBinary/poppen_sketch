@@ -28,46 +28,55 @@ class _HomeScreenState extends State<HomeScreen> {
     return Obx(
       () => controller.businessListModel.value.data == null
           ? const SizedBox(
-        child: Center(child: CircularProgressIndicator(color: ColorRes.color8401FF,),),
-      )
-          : PageView.builder(
-              //controller: pageController,
-              scrollDirection: Axis.vertical,
-              itemCount: controller.businessListModel.value.data!.length,
-              itemBuilder: (context, index) {
-                return Obx(
-                  () => controller
-                          .businessListModel.value.data![index].coverResizeUrl
-                          .toString()
-                          .contains("mp4")
-                      ? VideoPlayerWidget(
-                          video: controller.businessListModel.value.data![index]
-                              .coverResizeUrl
-                              .toString(),
-                          autoPlay: true,
-                          index: index,
-                        )
-                      : Stack(
-                          children: [
-                            Image.network(
-                              controller.businessListModel.value.data![index]
-                                  .coverResizeUrl
-                                  .toString(),
-                              height: Get.height,
-                              width: Get.width,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(AssetsRes.homeImage,
-                                    height: Get.height,
-                                    width: Get.width,
-                                    fit: BoxFit.cover);
-                              },
-                            ),
-                            onImageUi(index: index),
-                          ],
-                        ),
-                );
-              }),
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: ColorRes.color8401FF,
+                ),
+              ),
+            )
+          : GestureDetector(
+        onTap: (){
+          controller.isDrop.value = false;
+        },
+            child: PageView.builder(
+                //controller: pageController,
+                scrollDirection: Axis.vertical,
+                itemCount: controller.businessListModel.value.data!.length,
+                itemBuilder: (context, index) {
+                  return Obx(
+                    () => controller
+                            .businessListModel.value.data![index].coverResizeUrl
+                            .toString()
+                            .contains("mp4")
+                        ? VideoPlayerWidget(
+                            video: controller.businessListModel.value.data![index]
+                                .coverResizeUrl
+                                .toString(),
+                            autoPlay: true,
+                            index: index,
+                          )
+                        : Stack(
+                            children: [
+                              Image.network(
+                                controller.businessListModel.value.data![index]
+                                    .coverResizeUrl
+                                    .toString(),
+                                height: Get.height,
+                                width: Get.width,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(AssetsRes.homeImage,
+                                      height: Get.height,
+                                      width: Get.width,
+                                      fit: BoxFit.cover);
+                                },
+                              ),
+                              onImageUi(index: index),
+                            ],
+                          ),
+                  );
+                }),
+          ),
     );
 
     // PageView.builder(

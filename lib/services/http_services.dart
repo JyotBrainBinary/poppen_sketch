@@ -7,15 +7,18 @@ import 'package:sketch/utils/pref_key.dart';
 class HttpService {
   static Future<http.Response?> getApi({
     required String url,
-    Map<String, String>? header,
+    // Map<String, String>? header,
   }) async {
     try {
       String accessToken = PrefService.getString(PrefKeys.registerToken);
-      if (header == null && accessToken.isNotEmpty) {
-        header = {
-          "x-access-token": accessToken
-        };
-      }
+      Map<String, String> header = {
+        "x-access-token": accessToken
+      };
+      // if (header == null && accessToken.isNotEmpty) {
+      //   header = {
+      //     "x-access-token": accessToken
+      //   };
+      // }
       if (kDebugMode) {
         print("Url ===> $url");
         print("Header ===> $header");

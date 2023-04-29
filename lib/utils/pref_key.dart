@@ -1,5 +1,6 @@
 class PrefKeys{
   static const login ='login';
+  static const isOnlyRegister ='isOnlyRegister';
   static const code ='code';
   static const uid ='uid';
   static const id ='id';

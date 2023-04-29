@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/widget/common_appbar.dart';
 import 'package:sketch/common/widget/common_small_button.dart';
-import 'package:sketch/common/widget/loaders.dart';
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
@@ -245,7 +244,7 @@ class ProfileScreen extends StatelessWidget {
                         profileController.changeTab();
                       },
                       icon: AssetsRes.feedIcon,
-                      isGallery: profileController.isGalleryTab),
+                      isGallery: !profileController.isGalleryTab),
                   _buildTab(
                       onTap: () {
                         profileController.changeTab();
@@ -256,11 +255,9 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Stack(
-                alignment: (profileController.curr == 2)
-                    ? Alignment.centerRight
-                    : (profileController.curr == 1)
-                        ? Alignment.center
-                        : Alignment.centerLeft,
+                alignment: profileController.isGalleryTab
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
                 children: [
                   Container(
                     height: 1,
@@ -268,7 +265,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Container(
                     height: 2.3,
-                    width: Get.width * 0.2,
+                    width: Get.width * 0.5,
                     color: ColorRes.color161823,
                   ),
                 ],
@@ -301,8 +298,10 @@ class ProfileScreen extends StatelessWidget {
         width: Get.width / 2,
         color: Colors.transparent,
         alignment: Alignment.center,
-        child: Image.asset(AssetsRes.feedIcon,
-            height: 30,
+        child: Image.asset(icon,
+            height: Get.height * 0.035,
+            width: Get.height * 0.035,
+            // fit: BoxFit.cover,
             color: isGallery ? ColorRes.colorD7D7D9 : ColorRes.color161823),
       ),
     );

@@ -83,20 +83,17 @@ class HomeBottomArea extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              height: Get.height * 0.03,
-              width: Get.height * 0.03,
-              color: Colors.white,
-            ),
-            SizedBox(width: Get.width * 0.02),
+           Icon(Icons.location_pin,color: Colors.white,weight: Get.width*0.04,),
+            SizedBox(width: Get.width * 0.01),
             SizedBox(
               width: Get.width * 0.32,
               child: Text(
-                homeController.businessListModel.value.data![index].address!.split(",").first
+                homeController.businessListModel.value.data![index].address!.split(",").last
                     .toString(),
                 maxLines: 2,
+
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: ColorRes.colorWhite),
+                style: const TextStyle(color: ColorRes.colorWhite,height: 2.7),
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/common/popup.dart';
 import 'package:sketch/common/widget/loaders.dart';
 import 'package:sketch/screen/auth/create_account/what_intrested/what_intrested_controller.dart';
 import 'package:sketch/screen/auth/login/login_screen.dart';
@@ -37,110 +38,98 @@ class WhatIntrestedScreen extends StatelessWidget {
                       SizedBox(
                         height: height * 0.02,
                       ),
+                      controller.intrestListModel.value == null ||
+                              controller.intrestListModel.value.data == null
+                          ? const SizedBox()
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              itemCount: controller
+                                  .intrestListModel.value.data!.length,
+                              physics: const BouncingScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: width * 0.012,
+                                childAspectRatio: 2.5,
+                              ),
+                              itemBuilder: (context, index) {
+                                final item = controller
+                                    .intrestListModel.value.data![index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    controller.selectCategory(item: item);
 
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        alignment: WrapAlignment.center,
-                        children: controller.intrestedList.map((e) {
-                          return GestureDetector(
-                            onTap: () {
-                              controller.selectCategory(item: e);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.025, vertical: height * 0.006),
-                              margin: EdgeInsets.symmetric(horizontal: width * 0.005),
-                              decoration: BoxDecoration(
-                                color:
-                                // controller.selectedCategory.contains(e)
-                                //     ? ColorRes.greyBackgroundTabColor
-                                //     :
-                                ColorRes.colorRed,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: ColorRes.colorBlack, width: 1.2),
-                              ),
-                              child: Text(
-                                e,
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: TextStyle(
-                                    color: ColorRes.colorBlack.withOpacity(.8),
-                                    fontSize: width * 0.043),
-                              ),
+                                    // print(
+                                    // "object:  )))))))))))  ${controller.selectedIntrestList[0].id}");
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width * 0.02),
+                                    decoration: BoxDecoration(
+                                      color: controller.selectedIntrestList
+                                              .contains(item)
+                                          ? ColorRes.colorBlack
+                                          : Colors.transparent,
+                                      border: Border.all(
+                                          color: controller.selectedIntrestList
+                                                  .contains(item)
+                                              ? Colors.transparent
+                                              : ColorRes.colorEBEBEB,
+                                          width: 1),
+                                      borderRadius: BorderRadius.circular(26),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            height: width * 0.03,
+                                            width: width * 0.03,
+                                            color: ColorRes.color8401FF),
+                                        SizedBox(
+                                          width: width * 0.015,
+                                        ),
+                                        item.name.toString().length > 10
+                                            ? SizedBox(
+                                                width: width * 0.58 / 3,
+                                                child: Text(
+                                                  item.name.toString(),
+                                                  maxLines: 2,
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      color: controller
+                                                              .selectedIntrestList
+                                                              .contains(item)
+                                                          ? ColorRes.colorWhite
+                                                          : ColorRes.colorBlack,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              )
+                                            : Text(
+                                                item.name.toString(),
+                                                style: TextStyle(
+                                                    color: controller
+                                                            .selectedIntrestList
+                                                            .contains(item)
+                                                        ? ColorRes.colorWhite
+                                                        : ColorRes.colorBlack,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        }).toList(),
-                      ),
-
-
-
-
-
-                      // GridView.builder(
-                      //   shrinkWrap: true,
-                      //   itemCount: controller.intrestedList.length,
-                      //   physics: BouncingScrollPhysics(),
-                      //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      //       crossAxisCount: 3,
-                      //       mainAxisSpacing: 10,
-                      //       crossAxisSpacing: width * 0.012,
-                      //       childAspectRatio: 2.5),
-                      //   itemBuilder: (context, index) {
-                      //     final item = controller.intrestedList[index];
-                      //     return GestureDetector(
-                      //       onTap: () {
-                      //         controller.selectCategory(item: item);
-                      //       },
-                      //       child: Container(
-                      //         padding: EdgeInsets.symmetric(
-                      //             horizontal: width * 0.025),
-                      //         decoration: BoxDecoration(
-                      //           color: controller.selectedIntrestList
-                      //                   .contains(item)
-                      //               ? ColorRes.colorBlack
-                      //               : Colors.transparent,
-                      //           border: Border.all(
-                      //               color: controller.selectedIntrestList
-                      //                       .contains(item)
-                      //                   ? Colors.transparent
-                      //                   : ColorRes.colorEBEBEB,
-                      //               width: 1),
-                      //           borderRadius: BorderRadius.circular(26),
-                      //         ),
-                      //         child: Row(
-                      //           mainAxisAlignment: MainAxisAlignment.center,
-                      //           crossAxisAlignment: CrossAxisAlignment.center,
-                      //           children: [
-                      //             Container(
-                      //               height: width * 0.04,
-                      //               width: width * 0.04,
-                      //               color: item == "Restaurants"
-                      //                   ? ColorRes.color8401FF
-                      //                   : item == "Bars"
-                      //                       ? Colors.red
-                      //                       : ColorRes.colorBlack,
-                      //             ),
-                      //             SizedBox(
-                      //               width: width * 0.015,
-                      //             ),
-                      //             Text(
-                      //               controller.intrestedList[index],
-                      //               style: TextStyle(
-                      //                   color: controller.selectedIntrestList
-                      //                           .contains(item)
-                      //                       ? ColorRes.colorWhite
-                      //                       : ColorRes.colorBlack,
-                      //                   fontSize: 12,
-                      //                   fontWeight: FontWeight.w500),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     );
-                      //   },
-                      // ),
                       SizedBox(
                         height: height * 0.05,
                       ),
@@ -151,10 +140,12 @@ class WhatIntrestedScreen extends StatelessWidget {
                         text: StringRes.startDiscovering,
                         isRightArrow: true,
                         onTap: () {
-                          controller.validateIntrest();
+                          controller.selectedIntrestList.isEmpty
+                              ? errorToast("Select Your Intrest")
+                              : controller.validateIntrest();
                         },
                       ),
-                      Spacer(),
+                      const Spacer(),
                       SizedBox(
                         height: height * 0.05,
                       ),

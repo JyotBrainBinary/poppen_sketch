@@ -17,7 +17,7 @@ class FeedScreen extends StatelessWidget {
         children: [
            const SizedBox(height: 10),
          SizedBox(
-           height: Get.height*0.71,
+           height: Get.height*0.69,
            child: GridView.builder(
            shrinkWrap: true,
            physics: const NeverScrollableScrollPhysics(),
@@ -25,7 +25,7 @@ class FeedScreen extends StatelessWidget {
            itemCount: profileController.viewBusinessModel.value.data!.galleryList!.length,
            itemBuilder: (context, index) {
              return  Container(
-               height: 250,
+               height: 220,
                decoration:  BoxDecoration(
                  color: ColorRes.colorBlack,
                  image: DecorationImage(

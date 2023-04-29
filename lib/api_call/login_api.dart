@@ -28,7 +28,7 @@ class LoginApi {
         await PrefService.setValue(PrefKeys.id,
             jsonDecode(response.body)["id"].toString());
 
-        print("body----------${response.body}");
+        print("body3----------${response.body}");
 
         return loginModelFromJson(response.body);
       } else {

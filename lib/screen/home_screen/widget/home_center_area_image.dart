@@ -146,7 +146,8 @@ class HomeCenterAreaImage extends StatelessWidget {
                         width: width * 0.02,
                       ),
                       Text(
-                        catagoryList[index],
+                        controller.categoryNameList[
+                        int.parse(catagoryList[index].toString())-1],
                         style: regular(fontSize: 12),
                       ),
                     ],

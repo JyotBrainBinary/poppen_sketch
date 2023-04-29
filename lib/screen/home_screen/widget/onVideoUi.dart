@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/model/intrest_list_model.dart';
 import 'package:sketch/screen/Profile/profileScreen.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -17,6 +18,7 @@ import 'home_top_area.dart';
 Widget onVideoUi(
     {required VideoPlayerController controller, required int index}) {
   final HomeController homeController = Get.find<HomeController>();
+
   double height = Get.height;
   double width = Get.width;
   return Padding(
@@ -33,7 +35,7 @@ Widget onVideoUi(
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: Get.height * 0.03),
+                    SizedBox(height: Get.height * 0.04),
 
                     /// ----------- top 1 ---------
                     HomeTopArea(),
@@ -56,60 +58,62 @@ Widget onVideoUi(
         ),
         Obx(() => homeController.isDrop.value == true
             ? Column(
-                children: [
-                  Center(
-                    child: Container(
-                      height: 100,
-                      width: 200,
-                      padding: const EdgeInsets.all(10),
-                      margin: EdgeInsets.only(top: height * 0.09),
-                      decoration: BoxDecoration(
-                          color: ColorRes.colorWhite,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                              color: ColorRes.colorBlack.withOpacity(0.6))),
-                      child: ListView.builder(
-                        itemCount: homeController.dropList.length,
-                        itemBuilder: (context, index) {
-                          final item = homeController.dropList[index];
-                          return GestureDetector(
-                            onTap: () {
-                              homeController.dropOnTap();
-                            },
-                            child: Container(
-                              height: Get.height * 0.04,
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: ColorRes.color161823.withOpacity(0.3),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: Get.height * 0.02,
-                                    width: Get.width * 0.035,
-                                    color: item[0],
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    item[1],
-                                    style: regular(fontSize: 12),
-                                  ),
-                                ],
-                              ),
+          children: [
+            Center(
+              child: Container(
+                height: 100,
+                width: 180,
+                padding: const EdgeInsets.all(0),
+                margin: EdgeInsets.only(top: height * 0.07),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(.8),
+                  borderRadius: BorderRadius.circular(20),
+                  // border: Border.all(
+                  //     color: Colors.transparent.withOpacity(0.6)),
+                ),
+                child: ListView.builder(
+                  itemCount: homeController.intrestListData.value.data!.length,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final item = homeController.intrestListData.value.data![index];
+                    return GestureDetector(
+                      onTap: () {
+                        homeController.dropItemTap(name: item.name.toString());
+                      },
+                      child: Container(
+                        height: Get.height * 0.04,
+                        alignment: Alignment.center,
+                        padding:
+                        const EdgeInsets.only(left: 10, right: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // color: ColorRes.color161823.withOpacity(0.5),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: Get.height * 0.02,
+                              width: Get.width * 0.035,
+                              color: ColorRes.color8401FF,
                             ),
-                          );
-                        },
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              item.name.toString(),
+                              style: regular(fontSize: 12),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              )
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        )
             : const SizedBox()),
         Obx(() => homeController.isLoading.value ||
                 homeController.businessListModel.value.data!.isEmpty
@@ -142,6 +146,7 @@ Widget onVideoUi(
 Widget onImageUi(
     { required int index}) {
   final HomeController homeController = Get.find<HomeController>();
+
   double height = Get.height;
   double width = Get.width;
   return Padding(
@@ -185,21 +190,23 @@ Widget onImageUi(
             Center(
               child: Container(
                 height: 100,
-                width: 200,
-                padding: const EdgeInsets.all(10),
-                margin: EdgeInsets.only(top: height * 0.09),
+                width: 180,
+                padding: const EdgeInsets.all(0),
+                margin: EdgeInsets.only(top: height * 0.07),
                 decoration: BoxDecoration(
-                    color: ColorRes.colorWhite,
+                    color: Colors.grey.withOpacity(.8),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                        color: ColorRes.colorBlack.withOpacity(0.6))),
+                    // border: Border.all(
+                    //     color: Colors.transparent.withOpacity(0.6)),
+                ),
                 child: ListView.builder(
-                  itemCount: homeController.dropList.length,
+                  itemCount: homeController.intrestListData.value.data!.length,
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    final item = homeController.dropList[index];
+                    final item = homeController.intrestListData.value.data![index];
                     return GestureDetector(
                       onTap: () {
-                        homeController.dropOnTap();
+                        homeController.dropItemTap(name: item.name.toString());
                       },
                       child: Container(
                         height: Get.height * 0.04,
@@ -208,21 +215,21 @@ Widget onImageUi(
                         const EdgeInsets.only(left: 10, right: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: ColorRes.color161823.withOpacity(0.3),
+                          // color: ColorRes.color161823.withOpacity(0.5),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               height: Get.height * 0.02,
                               width: Get.width * 0.035,
-                              color: item[0],
+                              color: ColorRes.color8401FF,
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              item[1],
+                              item.name.toString(),
                               style: regular(fontSize: 12),
                             ),
                           ],

@@ -36,13 +36,13 @@ class RegisterApi {
       // )
       );
       if (response != null && response.statusCode == 200) {
-        await PrefService.setValue(PrefKeys.login, true);
+        await PrefService.setValue(PrefKeys.isOnlyRegister, true);
         await PrefService.setValue(PrefKeys.registerToken,
             jsonDecode(response.body)["token"].toString());
         await PrefService.setValue(PrefKeys.id,
             jsonDecode(response.body)["id"].toString());
 
-        print("body----------${response.body}");
+        print("body0----------${response.body}");
         flutterToast("Account created successfully");
         return createAccountModelFromJson(response.body);
       } else {

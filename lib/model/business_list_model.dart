@@ -64,12 +64,12 @@ class Datum {
   String? address;
   double? latitude;
   double? longitude;
-  String? openingHours;
+  List<String>? openingHours;
   String? phoneNumber;
   String? category;
   String? coverUrl;
   String? coverResizeUrl;
-  String? idItemGallery;
+  List<int>? idItemGallery;
   String? socialMedia;
   bool? isFavourite;
   DateTime? createdAt;
@@ -85,12 +85,12 @@ class Datum {
     address: json["address"],
     latitude: json["latitude"]?.toDouble(),
     longitude: json["longitude"]?.toDouble(),
-    openingHours: json["opening_hours"],
+    openingHours: json["opening_hours"] == null ? [] : List<String>.from(json["opening_hours"]!.map((x) => x)),
     phoneNumber: json["phone_number"],
     category: json["category"],
     coverUrl: json["cover_url"],
     coverResizeUrl: json["cover_resize_url"],
-    idItemGallery: json["id_item_gallery"],
+    idItemGallery: json["id_item_gallery"] == null ? [] : List<int>.from(json["id_item_gallery"]!.map((x) => x)),
     socialMedia: json["social_media"],
     isFavourite: json["isFavourite"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
@@ -107,12 +107,12 @@ class Datum {
     "address": address,
     "latitude": latitude,
     "longitude": longitude,
-    "opening_hours": openingHours,
+    "opening_hours": openingHours == null ? [] : List<dynamic>.from(openingHours!.map((x) => x)),
     "phone_number": phoneNumber,
     "category": category,
     "cover_url": coverUrl,
     "cover_resize_url": coverResizeUrl,
-    "id_item_gallery": idItemGallery,
+    "id_item_gallery": idItemGallery == null ? [] : List<dynamic>.from(idItemGallery!.map((x) => x)),
     "social_media": socialMedia,
     "isFavourite": isFavourite,
     "createdAt": createdAt?.toIso8601String(),

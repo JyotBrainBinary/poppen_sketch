@@ -20,7 +20,6 @@ class HomeCenterArea extends StatelessWidget {
   final controller = Get.find<HomeController>();
   final profileController = Get.find<ProfileController>();
 
-
   double height = Get.height;
   double width = Get.width;
   @override
@@ -35,9 +34,10 @@ class HomeCenterArea extends StatelessWidget {
         InkWell(
           onTap: () async {
             await videoController.pause();
-             profileController.callViewBusinessApi(id: item.id.toString());
-             profileController.isLoading.value = true;
-            Get.to(() => ProfileScreen(),
+            profileController.callViewBusinessApi(id: item.id.toString());
+            profileController.isLoading.value = true;
+            Get.to(
+              () => ProfileScreen(),
             );
           },
           child: Container(
@@ -114,6 +114,10 @@ class HomeCenterArea extends StatelessWidget {
                 );
               },
               itemBuilder: (context, index) {
+
+                // print("data:=========   ${ controller.categoryNameList[
+                // int.parse(catagoryList[index].toString())]}");
+
                 return Container(
                   padding: EdgeInsets.symmetric(
                       horizontal: width * 0.025, vertical: height * 0.001),
@@ -133,7 +137,8 @@ class HomeCenterArea extends StatelessWidget {
                         width: width * 0.02,
                       ),
                       Text(
-                        catagoryList[index],
+                        controller.categoryNameList[
+                            int.parse(catagoryList[index].toString())],
                         style: regular(fontSize: 12),
                       ),
                     ],

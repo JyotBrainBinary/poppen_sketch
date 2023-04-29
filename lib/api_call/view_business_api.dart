@@ -20,7 +20,7 @@ class ViewBusinessApi{
         // )
       );
       if (response != null && response.statusCode == 200) {
-        debugPrint("body----------${response.body}");
+        debugPrint("body2----------${response.body}");
 
         return viewBusinessModelFromJson(response.body);
       } else {

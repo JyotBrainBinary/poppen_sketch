@@ -15,6 +15,7 @@ class IntrestApi {
       http.Response? response = await HttpService.getApi(url: url);
 
       if (response != null && response.statusCode == 200 ) {
+        print("body5----------${response.body}");
         return intrestListModelFromJson(response.body);
       }
       else{
@@ -28,11 +29,12 @@ class IntrestApi {
 
   }
 
-  static Future intrestedApi({required List intersted}) async {
+  static Future intrestedApi({required String id}) async {
     try {
       Map<String, dynamic> body = {
-        "intersted": "Restaurant,Club,Bar" /*intersted*/,
+        "intersted":"$id"/*intersted*/,
       };
+
       http.Response? response = await HttpService.postApi(
         url: EndPoints.intrest,
         body: body,
@@ -44,7 +46,7 @@ class IntrestApi {
         // await PrefService.setValue(PrefKeys.registerToken,
         //     jsonDecode(response.body)["token"].toString());
         if (jsonDecode(response.body)["status"] == true) {
-          print("body----------${response.body}");
+          print("body4----------${response.body}");
           // flutterToast(jsonDecode(response.body)["message"]);
           return true;
         } else {

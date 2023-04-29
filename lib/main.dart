@@ -6,7 +6,9 @@ import 'package:sketch/screen/on_board/on_board_screen.dart';
 import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/pref_key.dart';
 
-Future<void> main() async{
+import 'screen/auth/create_account/what_intrested/what_intrested_screen.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init();
   await Firebase.initializeApp();
@@ -24,11 +26,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:(PrefService.getBool(PrefKeys.login) == true) ? DashBoardScreen() : OnBoardScreen() ,
+      home: (PrefService.getBool(PrefKeys.login) == true)
+          ? DashBoardScreen()
+          : (PrefService.getBool(PrefKeys.isOnlyRegister) == true)
+              ? WhatIntrestedScreen()
+              : OnBoardScreen(),
     );
   }
 }
-
 
 // class DropdownScreen extends StatefulWidget {
 //   @override
