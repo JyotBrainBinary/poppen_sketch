@@ -77,7 +77,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       isLoading = false;
       chatId = roomId;
     }
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {});
     });
 
@@ -206,7 +206,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     }, roomId!);
     if (listScrollController.positions.isNotEmpty) {
       listScrollController.animateTo(0.0,
-          duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+          duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
     }
 
     if (isManager == false) {
@@ -367,13 +367,13 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
         ),
-        backgroundColor: Color(0xFF200738),
-        title: Text(
+        backgroundColor: const Color(0xFF200738),
+        title: const Text(
           "Odeva Support",
           style: TextStyle(color: Colors.white),
         ),
@@ -384,7 +384,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
               const number = '+44 7570298692'; //set the number here
               await FlutterPhoneDirectCaller.callNumber(number);
             },
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.only(right: 15),
               child: Icon(
                 Icons.call,
@@ -395,7 +395,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         ],
       ),
       body: (isLoading == true
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : doc!.exists == false
@@ -406,7 +406,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                       absorbing: isAttachment,
                       child: Column(
                         children: [
-                          Expanded(
+                          const Expanded(
                             child: Center(
                               child: Text("Send a message"),
                             ),
@@ -425,30 +425,30 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                           SafeArea(
                               child: AnimatedOpacity(
                             opacity: isAttachment ? 1 : 0,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             child: isAttachment
                                 ? AttachmentView(
                                     onDocumentTap: onDocumentTap,
                                     onVideoTap: onVideoTap,
                                     onGalleryTap: onGalleryTap,
                                     onAudioTap: onAudioTap)
-                                : SizedBox(),
+                                : const SizedBox(),
                           )),
                           uploadingMedia
                               ? Container(
                                   height: MediaQuery.of(context).size.height,
                                   width: MediaQuery.of(context).size.width,
-                                  color: Color(0xFF696969).withOpacity(0.3),
+                                  color: const Color(0xFF696969).withOpacity(0.3),
                                   child: Column(
                                     children: [
                                       Platform.isIOS
-                                          ? CupertinoActivityIndicator()
-                                          : CircularProgressIndicator(),
-                                      Text("Uploading media")
+                                          ? const CupertinoActivityIndicator()
+                                          : const CircularProgressIndicator(),
+                                      const Text("Uploading media")
                                     ],
                                   ),
                                 )
-                              : SizedBox()
+                              : const SizedBox()
                         ],
                       ),
                     )
@@ -463,7 +463,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                         children: [
                           Expanded(
                               child: PaginateFirestore(
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             query: ChatRoomservice()
                                 .getMessages(roomId!, chatLimit),
                             itemBuilderType: PaginateBuilderType.listView,
@@ -513,31 +513,31 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                     SafeArea(
                       child: AnimatedOpacity(
                         opacity: isAttachment ? 1 : 0,
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         child: isAttachment
                             ? AttachmentView(
                                 onDocumentTap: onDocumentTap,
                                 onVideoTap: onVideoTap,
                                 onGalleryTap: onGalleryTap,
                                 onAudioTap: onAudioTap)
-                            : SizedBox(),
+                            : const SizedBox(),
                       ),
                     ),
                     uploadingMedia
                         ? Container(
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            color: Color(0xFF696969).withOpacity(0.3),
+                            color: const Color(0xFF696969).withOpacity(0.3),
                             child: Column(
                               children: [
                                 Platform.isIOS
-                                    ? CupertinoActivityIndicator()
-                                    : CircularProgressIndicator(),
-                                Text("Uploading media")
+                                    ? const CupertinoActivityIndicator()
+                                    : const CircularProgressIndicator(),
+                                const Text("Uploading media")
                               ],
                             ),
                           )
-                        : SizedBox()
+                        : const SizedBox()
                   ],
                 )),
     ); /*Scaffold(

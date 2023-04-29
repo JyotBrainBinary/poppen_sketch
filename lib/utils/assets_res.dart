@@ -11,6 +11,7 @@ static String restaurantLogo = "${images}restaurantLogo.png";
 static String appLogo = "${images}app_logo.png";
 static String google = "${images}google.png";
 static String facebook = "${images}facebook.png";
+static String chatBack = "${images}chat_back.png";
 
 
   ///-------------- icons -----------
@@ -34,6 +35,9 @@ static String phone = "${icons}phone.png";
 static String timer = "${icons}timer.png";
 static String dotsImg = "${icons}dots.png";
 static String info = "${icons}info.png";
+static String mic = "${icons}mic.png";
+static String smile = "${icons}smile.png";
+// static String info = "${icons}info.png";
 
 
 

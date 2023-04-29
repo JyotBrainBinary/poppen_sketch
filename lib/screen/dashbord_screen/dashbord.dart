@@ -91,7 +91,7 @@ class DashBoardScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                controller.selectedIndex != 0
+                controller.selectedIndex == 0
                     ?  CommonAppBar(index: controller.selectedIndex,)
                     : const SizedBox(),
                 Expanded(

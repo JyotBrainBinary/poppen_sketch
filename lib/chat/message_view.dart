@@ -65,16 +65,16 @@ class MessageView extends StatelessWidget {
               ? Positioned.fill(
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                       minHeight: 30,
                     ),
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: const EdgeInsets.only(bottom: 10),
                     decoration: BoxDecoration(
                       borderRadius: sender
-                          ? BorderRadius.only(
+                          ? const BorderRadius.only(
                               topRight: Radius.circular(12),
                               bottomRight: Radius.circular(12))
-                          : BorderRadius.only(
+                          : const BorderRadius.only(
                               topLeft: Radius.circular(12),
                               bottomLeft: Radius.circular(12)),
                       color: Colors.green.withOpacity(0.3),
