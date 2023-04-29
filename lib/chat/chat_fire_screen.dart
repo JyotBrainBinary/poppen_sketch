@@ -18,23 +18,25 @@ import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
 import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/assets_res.dart';
+import 'package:sketch/utils/color_res.dart';
 import 'package:sketch/utils/pref_key.dart';
 
 String? roomId;
 
-class ChatFireScreen extends StatefulWidget {
+class ChatManegerFireScreen extends StatefulWidget {
   final String roomId;
   final bool isManager;
   final String fcmToken;
   final String name;
 
-  ChatFireScreen({required this.roomId, required this.isManager, required this.fcmToken, required this.name});
+  ChatManegerFireScreen({required this.roomId, required this.isManager, required this.fcmToken, required this.name});
 
   @override
-  State<ChatFireScreen> createState() => _ChatFireScreenState();
+  State<ChatManegerFireScreen> createState() => _ChatManegerFireScreenState();
 }
 
-class _ChatFireScreenState extends State<ChatFireScreen> {
+class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
   bool isAttachment = false;
   bool isTyping = false;
   bool uploadingMedia = false;
@@ -362,36 +364,42 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:
+        AppBar(
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
           },
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+          child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 19),
+              height: 17.64,
+              child: Image.asset(
+                AssetsRes.backButton,
+                fit: BoxFit.fitHeight,
+              )),
         ),
-        backgroundColor: const Color(0xFF200738),
-        title: const Text(
-          "Odeva Support",
-          style: TextStyle(color: Colors.white),
+        backgroundColor: ColorRes.colorWhite,
+        title: Text(
+         widget.name,
+          style: const TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
+        elevation: 1,
         actions: [
-          InkWell(
-            onTap: () async {
-              // launch('tel://9409075553');
-              const number = '+44 7570298692'; //set the number here
-              await FlutterPhoneDirectCaller.callNumber(number);
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-            ),
-          )
+          // InkWell(
+          //   onTap: () async {
+          //     // launch('tel://9409075553');
+          //     // const number = '+44 7570298692'; //set the number here
+          //     // await FlutterPhoneDirectCaller.callNumber(number);
+          //   },
+          //   child: Container(
+          //       padding: const EdgeInsets.symmetric(vertical: 18),
+          //       margin: const EdgeInsets.only(right: 16),
+          //       child: Image.asset(
+          //         AssetsRes.call,
+          //         fit: BoxFit.fitHeight,
+          //       )),
+          // )
         ],
       ),
       body: (isLoading == true

@@ -61,24 +61,24 @@ class InputBottomBar extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                // onSend?.call(message ?? MMessage());
-                              },
-                              child: SizedBox(
-                                height: 24.5,
-                                width: 24.5,
-                                // padding:
-                                //     const EdgeInsets.only(left: 13, right: 11),
-                                // decoration: BoxDecoration(
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     // onSend?.call(message ?? MMessage());
+                            //   },
+                            //   child: SizedBox(
+                            //     height: 24.5,
+                            //     width: 24.5,
+                            //     // padding:
+                            //     //     const EdgeInsets.only(left: 13, right: 11),
+                            //     // decoration: BoxDecoration(
                                  
-                                //   borderRadius: BorderRadius.circular(50),
-                                // ),
-                                child: 
-                                Image.asset(AssetsRes.smile)
+                            //     //   borderRadius: BorderRadius.circular(50),
+                            //     // ),
+                            //     child: 
+                            //     Image.asset(AssetsRes.smile)
                                 
-                              ),
-                            ),
+                            //   ),
+                            // ),
                             Expanded(
                               child: TextField(
                                 style: const TextStyle(color: Colors.black),
@@ -153,8 +153,8 @@ class InputBottomBar extends StatelessWidget {
                                 //   borderRadius: BorderRadius.circular(50),
                                 // ),
                                 child: 
-                                Image.asset(AssetsRes.mic)
-                                
+                                // Image.asset(AssetsRes.mic)
+                                Icon(Icons.send)
                               ),
                             ),],
                 ),

@@ -20,6 +20,8 @@ import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
 import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/assets_res.dart';
+import 'package:sketch/utils/color_res.dart';
 import 'package:sketch/utils/pref_key.dart';
 
 String? roomId;
@@ -71,7 +73,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   roomIdExist() async {
-    roomId =PrefService.getString(PrefKeys.uid);
+    roomId = PrefService.getString(PrefKeys.uid);
     doc = await ChatRoomservice().isRoomAvailable(roomId!);
     print(roomId);
     if (doc!.exists) {
@@ -94,7 +96,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
           .doc(widget.roomId)
           .update({"${widget.roomId! + "_newMessage"}": 0});
     } else {
-      var mobileNo =  PrefService.getString(PrefKeys.uid);
+      var mobileNo = PrefService.getString(PrefKeys.uid);
       await FirebaseFirestore.instance
           .collection("chatroom")
           .doc(mobileNo)
@@ -123,7 +125,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   }
 
   void sendMessage(String type, String content, MMessage message) async {
-    var mobileNo =  PrefService.getString(PrefKeys.uid);
+    var mobileNo = PrefService.getString(PrefKeys.uid);
     DateTime messageTime = DateTime.now();
     int count = 0;
 
@@ -140,7 +142,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         "fcmToken": fcmToken
       });
     }
-    if (widget.isManager==false) {
+    if (widget.isManager == false) {
       await FirebaseFirestore.instance
           .collection("chatroom")
           .doc(mobileNo.toString())
@@ -170,8 +172,10 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         sender: mobile,
         sendTime: messageTime.millisecondsSinceEpoch,
         type: type,
-        senderName:PrefService.getString(PrefKeys.fullName) ,
-        receiver: isManager == false ? PrefService.getString(PrefKeys.managerID) : roomId,
+        senderName: PrefService.getString(PrefKeys.fullName),
+        receiver: isManager == false
+            ? PrefService.getString(PrefKeys.managerID)
+            : roomId,
         mMessage: message);
     String? notificationBody;
     switch (type) {
@@ -207,7 +211,9 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       "lastMessage": notificationBody,
       "lastMessageTime": messageTime,
       "${isManager == true ? roomId : "manager" "_newMessage"}": 0,
-    widget.isManager!?"manager_newMessage":  "${mobileNo.toString() + "_newMessage"}": count
+      widget.isManager!
+          ? "manager_newMessage"
+          : "${mobileNo.toString() + "_newMessage"}": count
     }, roomId!);
     if (listScrollController.positions.isNotEmpty) {
       listScrollController.animateTo(0.0,
@@ -310,14 +316,12 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
   @override
   void initState() {
-    roomId =PrefService.getString
-    (PrefKeys.uid);
-    
+    roomId = PrefService.getString(PrefKeys.uid);
+
     print(widget.roomId);
     // print(roomId);
     // checkVersion(context);
     callData();
-
 
     setInitiaCount();
     // getMessageCount();
@@ -332,7 +336,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
   setData() async {
     isManager = widget.isManager;
-    mobile =PrefService.getString(PrefKeys.uid);
+    mobile = PrefService.getString(PrefKeys.uid);
     roomId = mobile;
     anotherFcmToken = widget.fcmToken;
 
@@ -375,31 +379,36 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
+          child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 19),
+              height: 17.64,
+              child: Image.asset(
+                AssetsRes.backButton,
+                fit: BoxFit.fitHeight,
+              )),
         ),
-        backgroundColor: const Color(0xFF200738),
+        backgroundColor: ColorRes.colorWhite,
         title: Text(
           PrefService.getString(PrefKeys.managerName),
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
+        elevation: 1,
         actions: [
-          InkWell(
-            onTap: () async {
-              // launch('tel://9409075553');
-              const number = '+44 7570298692'; //set the number here
-              await FlutterPhoneDirectCaller.callNumber(number);
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-            ),
-          )
+          // InkWell(
+          //   onTap: () async {
+          //     // launch('tel://9409075553');
+          //     const number = '+44 7570298692'; //set the number here
+          //     await FlutterPhoneDirectCaller.callNumber(number);
+          //   },
+          //   child: Container(
+          //       padding: const EdgeInsets.symmetric(vertical: 18),
+          //       margin: const EdgeInsets.only(right: 16),
+          //       child: Image.asset(
+          //         AssetsRes.call,
+          //         fit: BoxFit.fitHeight,
+          //       )),
+          // )
         ],
       ),
       body: (isLoading == true
@@ -446,7 +455,8 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                               ? Container(
                                   height: MediaQuery.of(context).size.height,
                                   width: MediaQuery.of(context).size.width,
-                                  color: const Color(0xFF696969).withOpacity(0.3),
+                                  color:
+                                      const Color(0xFF696969).withOpacity(0.3),
                                   child: Column(
                                     children: [
                                       Platform.isIOS
@@ -472,20 +482,22 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                           Expanded(
                               child: PaginateFirestore(
                             padding: const EdgeInsets.all(10.0),
-                            query: ChatRoomservice()
-                                .getMessages(PrefService.getString(PrefKeys.uid), chatLimit),
+                            query: ChatRoomservice().getMessages(
+                                PrefService.getString(PrefKeys.uid), chatLimit),
                             itemBuilderType: PaginateBuilderType.listView,
                             isLive: true,
                             itemsPerPage: 10,
                             scrollController: listScrollController,
-                            itemBuilder: ( context, documentsnapshot,index) {
+                            itemBuilder: (context, documentsnapshot, index) {
                               if (!listMessage.contains(documentsnapshot)) {
-                                listMessage.add(documentsnapshot[index] as DocumentSnapshot<Object?>);
+                                listMessage.add(documentsnapshot[index]
+                                    as DocumentSnapshot<Object?>);
                               }
                               return MessageView(
                                 index,
                                 MessageModel.fromMap(
-                                  documentsnapshot[index].data() as Map<String,dynamic>,
+                                  documentsnapshot[index].data()
+                                      as Map<String, dynamic>,
                                   documentsnapshot[index].id,
                                 ),
                                 selectedMessages,
@@ -501,7 +513,6 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                             // ),
                             reverse: true,
                           )),
-                         
                           InputBottomBar(
                             msgController: controller,
                             onAttachment: onAttachmentTap,

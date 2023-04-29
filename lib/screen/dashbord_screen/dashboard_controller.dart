@@ -21,7 +21,9 @@ class DashBoardController extends GetxController {
             isManager: false,
             roomId: PrefService.getString(PrefKeys.uid),
           ),
-    const Text('Profile'),
+    GestureDetector(onTap: (){
+      PrefService.clear();
+    }, child: const Text('Profile')),
   ];
 
   void onItemTapped(int index) {

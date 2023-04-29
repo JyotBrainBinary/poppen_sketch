@@ -23,16 +23,17 @@ class UserCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_) => ChatFireScreen(
+                builder: (_) => ChatManegerFireScreen(
                       isManager: true,
                       roomId:isAllow?mmessage!.id??'' :user!.id??'',
                       fcmToken:isAllow?mmessage!.fcmToken?? '': user!.fcmToken?? '',
                       name:isAllow?(mmessage!.name==null?mmessage!.id??'':mmessage!.name??''): (user!.name == null ? user!.id??'' : user!.name??''),
                     )));
         // onTap.call(user.userModel, user.id);
+
       },
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: Row(
@@ -63,14 +64,14 @@ class UserCard extends StatelessWidget {
                        isAllow?(mmessage!.name==null?mmessage?.id?? '':mmessage?.name??''): (user?.name == null ? user?.id??'' : user?.name??''),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       typing??false
-                          ? Text(
+                          ? const Text(
                               "typing...",
                               style: TextStyle(
                                 color: Colors.green,
@@ -102,12 +103,12 @@ class UserCard extends StatelessWidget {
                           width: 20,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: Color(0xFF200738),
+                            color: const Color(0xFF200738),
                             borderRadius: BorderRadius.circular(60),
                           ),
                           child: Text(
                             newBadge.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

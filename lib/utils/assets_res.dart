@@ -37,7 +37,11 @@ static String dotsImg = "${icons}dots.png";
 static String info = "${icons}Info.png";
 static String mic = "${icons}mic.png";
 static String smile = "${icons}smile.png";
-// static String info = "${icons}info.png";
+static String call = "${icons}call.png";
+static String msg = "${icons}msg.png";
+static String bell = "${icons}bell.png";
+static String right = "${icons}right.png";
+static String left = "${icons}left.png";
 
 
 

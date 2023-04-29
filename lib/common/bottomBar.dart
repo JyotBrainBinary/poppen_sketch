@@ -14,7 +14,7 @@ Widget bottomNavigationBar(BuildContext context,
   final controller = Get.find<DashBoardController>();
   return Container(
     width: Get.width,
-    height: Get.height * 0.15,
+    height: Get.height * 0.11,
     decoration: BoxDecoration(
       color: ColorRes.color161823,
       boxShadow: [
@@ -132,7 +132,7 @@ Widget bottomNavigationBar(BuildContext context,
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  StringRes.notifications,
+                  "    ${StringRes.chats}    ",
                   style: regular(
                     color: (controller.selectedIndex == 3)
                         ? ColorRes.colorWhite

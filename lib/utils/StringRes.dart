@@ -38,6 +38,7 @@ class StringRes {
   static const bars= "Bars";
   static const dateIdeas= "Date Ideas";
   static const startDiscovering= "START DISCOVERING";
+  static const chats ="Chats";
 
 
   ///  bottomBar
