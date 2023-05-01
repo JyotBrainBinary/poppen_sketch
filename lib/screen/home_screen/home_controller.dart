@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   var businessListModel = BusinessListModel().obs;
   var intrestListData = IntrestListModel().obs;
   String selectedIntrestValue = "";
+  // final homeController = Get.put(HomeController());
   @override
   void onInit() {
     callBusinessListApi();
@@ -43,8 +44,9 @@ class HomeController extends GetxController {
     isDrop.value = !isDrop.value;
   }
 
-  dropItemTap({required String name}) {
+  dropItemTap({required String name,required String category}) {
     selectedIntrestValue = name;
+   callBusinessListApi(category: category);
     isDrop.value = false;
     update(["id"]);
   }
@@ -83,11 +85,11 @@ class HomeController extends GetxController {
     }
   }
 
-  void callBusinessListApi() {
+  void callBusinessListApi({ String? category, String? name}) {
     try {
       isLoading.value = true;
 
-      BusinessListApi.businessListApi(/*name: "business details 3"*/)
+      BusinessListApi.businessListApi(category: category,name: name)
           .then((value) {
         if (value != null) {
           businessListModel.value = value;

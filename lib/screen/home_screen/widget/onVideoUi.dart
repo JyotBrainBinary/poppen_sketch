@@ -51,69 +51,76 @@ Widget onVideoUi(
                     const Spacer(),
 
                     /// ----------- bottom -----------
-                    HomeBottomArea(index: index,),
+                    HomeBottomArea(
+                      index: index,
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
         ),
         Obx(() => homeController.isDrop.value == true
             ? Column(
-          children: [
-            Center(
-              child: Container(
-                height: 100,
-                width: 180,
-                padding: const EdgeInsets.all(0),
-                margin: EdgeInsets.only(top: height * 0.07),
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(.8),
-                  borderRadius: BorderRadius.circular(20),
-                  // border: Border.all(
-                  //     color: Colors.transparent.withOpacity(0.6)),
-                ),
-                child: ListView.builder(
-                  itemCount: homeController.intrestListData.value.data!.length,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final item = homeController.intrestListData.value.data![index];
-                    return GestureDetector(
-                      onTap: () {
-                        homeController.dropItemTap(name: item.name.toString());
-                      },
-                      child: Container(
-                        height: Get.height * 0.04,
-                        alignment: Alignment.center,
-                        padding:
-                        const EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // color: ColorRes.color161823.withOpacity(0.5),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: Get.height * 0.02,
-                              width: Get.width * 0.035,
-                              color: ColorRes.color8401FF,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              item.name.toString(),
-                              style: regular(fontSize: 12),
-                            ),
-                          ],
-                        ),
+                children: [
+                  Center(
+                    child: Container(
+                      height: 100,
+                      width: 180,
+                      padding: const EdgeInsets.all(0),
+                      margin: EdgeInsets.only(top: height * 0.07),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(.8),
+                        borderRadius: BorderRadius.circular(20),
+                        // border: Border.all(
+                        //     color: Colors.transparent.withOpacity(0.6)),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        )
+                      child: ListView.builder(
+                        itemCount:
+                            homeController.intrestListData.value.data!.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final item =
+                              homeController.intrestListData.value.data![index];
+                          return GestureDetector(
+                            onTap: () {
+                              homeController.dropItemTap(
+                                  name: item.name.toString(),
+                                  category: item.id.toString().padLeft(2, '0'));
+                            },
+                            child: Container(
+                              height: Get.height * 0.04,
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // color: ColorRes.color161823.withOpacity(0.5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: Get.height * 0.02,
+                                    width: Get.width * 0.035,
+                                    color: ColorRes.color8401FF,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    item.name.toString(),
+                                    style: regular(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : const SizedBox()),
         Obx(() => homeController.isLoading.value ||
                 homeController.businessListModel.value.data!.isEmpty
@@ -132,19 +139,7 @@ Widget onVideoUi(
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-Widget onImageUi(
-    { required int index}) {
+Widget onImageUi({required int index}) {
   final HomeController homeController = Get.find<HomeController>();
 
   double height = Get.height;
@@ -154,106 +149,112 @@ Widget onImageUi(
     child: Stack(
       children: [
         Obx(
-              () => homeController.businessListModel.value.data == null
+          () => homeController.businessListModel.value.data == null
               ? const Center(
-            child: CircularProgressIndicator(
-              color: ColorRes.color8401FF,
-            ),
-          )
+                  child: CircularProgressIndicator(
+                    color: ColorRes.color8401FF,
+                  ),
+                )
               : Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: Get.height * 0.03),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: Get.height * 0.03),
 
-              /// ----------- top 1 ---------
-              HomeTopArea(),
+                    /// ----------- top 1 ---------
+                    HomeTopArea(),
 
-              SizedBox(height: Get.height * 0.02),
+                    SizedBox(height: Get.height * 0.02),
 
-              /// ----------- top 2 ------------
-              HomeCenterAreaImage(
-                // videoController: controller,
-                index: index
-              ),
+                    /// ----------- top 2 ------------
+                    HomeCenterAreaImage(
+                        // videoController: controller,
+                        index: index),
 
-              const Spacer(),
+                    const Spacer(),
 
-              /// ----------- bottom -----------
-              HomeBottomArea(index: index,),
-              const SizedBox(height: 20),
-            ],
-          ),
+                    /// ----------- bottom -----------
+                    HomeBottomArea(
+                      index: index,
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
         ),
         Obx(() => homeController.isDrop.value == true
             ? Column(
-          children: [
-            Center(
-              child: Container(
-                height: 100,
-                width: 180,
-                padding: const EdgeInsets.all(0),
-                margin: EdgeInsets.only(top: height * 0.07),
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(.8),
-                    borderRadius: BorderRadius.circular(20),
-                    // border: Border.all(
-                    //     color: Colors.transparent.withOpacity(0.6)),
-                ),
-                child: ListView.builder(
-                  itemCount: homeController.intrestListData.value.data!.length,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final item = homeController.intrestListData.value.data![index];
-                    return GestureDetector(
-                      onTap: () {
-                        homeController.dropItemTap(name: item.name.toString());
-                      },
-                      child: Container(
-                        height: Get.height * 0.04,
-                        alignment: Alignment.center,
-                        padding:
-                        const EdgeInsets.only(left: 10, right: 10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // color: ColorRes.color161823.withOpacity(0.5),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: Get.height * 0.02,
-                              width: Get.width * 0.035,
-                              color: ColorRes.color8401FF,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              item.name.toString(),
-                              style: regular(fontSize: 12),
-                            ),
-                          ],
-                        ),
+                children: [
+                  Center(
+                    child: Container(
+                      height: 100,
+                      width: 180,
+                      padding: const EdgeInsets.all(0),
+                      margin: EdgeInsets.only(top: height * 0.07),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(.8),
+                        borderRadius: BorderRadius.circular(20),
+                        // border: Border.all(
+                        //     color: Colors.transparent.withOpacity(0.6)),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        )
+                      child: ListView.builder(
+                        itemCount:
+                            homeController.intrestListData.value.data!.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final item =
+                              homeController.intrestListData.value.data![index];
+                          return GestureDetector(
+                            onTap: () {
+                              homeController.dropItemTap(
+                                  name: item.name.toString(),
+                                  category: item.id.toString().padLeft(2, '0'));
+                            },
+                            child: Container(
+                              height: Get.height * 0.04,
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // color: ColorRes.color161823.withOpacity(0.5),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    height: Get.height * 0.02,
+                                    width: Get.width * 0.035,
+                                    color: ColorRes.color8401FF,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    item.name.toString(),
+                                    style: regular(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              )
             : const SizedBox()),
         Obx(() => homeController.isLoading.value ||
-            homeController.businessListModel.value.data!.isEmpty
+                homeController.businessListModel.value.data!.isEmpty
             ? Container(
-          width: width,
-          color: Colors.black,
-          child: Center(
-            child: CircularProgressIndicator(
-              color: ColorRes.color8401FF,
-            ),
-          ),
-        )
+                width: width,
+                color: Colors.black,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: ColorRes.color8401FF,
+                  ),
+                ),
+              )
             : const SizedBox())
       ],
     ),

@@ -76,7 +76,7 @@ class WhatIntrestedController extends GetxController {
     selectedIntrestList.forEach((element) {
       idList.add(element.id.toString());
     });
-    String id = idList.join(",");
+    String id = idList.map((id) => id.toString().padLeft(2, '0')).join(',');
     print("-=-=-==-==   $id");
 
     try {

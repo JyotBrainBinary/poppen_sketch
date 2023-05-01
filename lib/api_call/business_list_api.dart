@@ -7,12 +7,12 @@ import 'package:http/http.dart' as http;
 import 'package:sketch/utils/end_points.dart';
 
 class BusinessListApi {
-  static Future businessListApi({ String? name}) async {
+  static Future businessListApi({ String? name,String? category}) async {
     try {
-      Map<String, dynamic> body = {"name": name};
+      Map<String, dynamic> body =name != null ? {"name": name} : category != null ? {"category": category}: {};
       http.Response? response = await HttpService.postApi(
         url: EndPoints.businessList,
-        body:name!= null ? body : null,
+        body:name!= null || category != null? body : null,
         // header: {"x-access-token": accesToken}
         // )
       );

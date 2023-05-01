@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:sketch/api_call/view_business_api.dart';
+import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/view_business_model.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
 import 'package:sketch/screen/Profile/widget/reviews_screen.dart';
 import 'package:sketch/services/pref_service.dart';
+import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/pref_key.dart';
 
@@ -83,10 +85,16 @@ class ProfileController extends GetxController {
           print(
               "viewBusinessList  --------->  ${viewBusinessModel.value.status}");
         }
+        else{
+          isLoading.value = false;
+          // errorToast(StringRes.errText);
+        }
       });
       // update(["id"]);
     } catch (e) {
       print("error: =======>> $e");
+      isLoading.value = false;
+      errorToast(StringRes.errText);
       rethrow;
     }
   }
