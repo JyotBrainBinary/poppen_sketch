@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
+import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -24,16 +25,40 @@ class FeedScreen extends StatelessWidget {
            // scrollDirection: Axis.vertical,
            itemCount: profileController.viewBusinessModel.value.data!.galleryList!.length,
            itemBuilder: (context, index) {
-             return  Container(
-               height: 220,
-               decoration:  BoxDecoration(
-                 color: ColorRes.colorBlack,
-                 image: DecorationImage(
-                   image: AssetImage(profileController.feedImage[index]),
-                   fit: BoxFit.cover
-                 ),
-               ),
+             final item = profileController.viewBusinessModel.value.data!.galleryList![index];
+             return Image.network(
+               item.toString(),
+               height: Get.height * 0.2,
+               width: Get.height * 0.2,
+               fit: BoxFit.cover,
+               loadingBuilder: (BuildContext context, Widget child,
+                   ImageChunkEvent? loadingProgress) {
+                 if (loadingProgress == null) return child;
+                 return Image.asset(
+                   AssetsRes.restaurantLogo,
+                   height: Get.height * 0.2,
+                   width: Get.height * 0.2,
+                 );
+               },
+               errorBuilder: (context, error, stackTrace) {
+                 return Image.asset(
+                   AssetsRes.restaurantLogo,
+                   height: Get.height * 0.2,
+                   width: Get.height * 0.2,
+                   fit: BoxFit.cover,
+                 );
+               },
              );
+             //   Container(
+             //   height: 220,
+             //   decoration:  BoxDecoration(
+             //     color: ColorRes.colorBlack,
+             //     image: DecorationImage(
+             //       image: AssetImage(profileController.feedImage[index]),
+             //       fit: BoxFit.cover
+             //     ),
+             //   ),
+             // );
            },
            gridDelegate:
            const SliverGridDelegateWithFixedCrossAxisCount(

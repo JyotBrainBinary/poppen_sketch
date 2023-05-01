@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:media_picker/media_picker.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
@@ -19,6 +20,8 @@ import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
+import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
+import 'package:sketch/screen/dashbord_screen/dashbord.dart';
 import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -48,6 +51,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   MMessage? message;
   bool? isManager;
   bool isReply = false;
+  final dashController = Get.find<DashBoardController>();
 
   final ImagePicker picker = ImagePicker();
   FocusNode focusNode = FocusNode();
@@ -377,7 +381,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+          isManager == false ? dashController.onItemTapped(0):  Navigator.pop(context);
           },
           child: Container(
               padding: const EdgeInsets.symmetric(vertical: 19),

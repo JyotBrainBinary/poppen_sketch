@@ -47,7 +47,7 @@ class LoginController extends GetxController {
         if (value != null) {
           loading.value = false;
           flutterToast("Login Successfully.");
-          Get.to(() => DashBoardScreen());
+          Get.offAll(() => DashBoardScreen());
         } else {
           loading.value = false;
           errorToast(StringRes.errText);

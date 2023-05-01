@@ -148,7 +148,7 @@ class SignUpWithMobileController extends GetxController {
               if (value != null) {
                 print("val of register: -=-=-=-=- $value");
                 isLoading.value = false;
-                Get.to(() => WhatIntrestedScreen());
+                Get.offAll(() => WhatIntrestedScreen());
               }
             });
           }

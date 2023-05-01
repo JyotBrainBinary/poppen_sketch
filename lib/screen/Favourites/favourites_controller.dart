@@ -13,7 +13,7 @@ class FavouritesController extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
-    // callFavouriteListApi();
+    callFavouriteListApi();
     super.onInit();
   }
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sketch/common/widget/common_appbar.dart';
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Favourites/favourites_controller.dart';
+import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
@@ -21,6 +22,7 @@ class FavouriteBox extends StatelessWidget {
   final double height;
   final controller = Get.find<FavouritesController>();
   final homeController = Get.find<HomeController>();
+  final dashBoardController = Get.find<DashBoardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +236,13 @@ class FavouriteBox extends StatelessWidget {
                               ),
                               CommonSmallButton(
                                 image: AssetsRes.message,
-                                ontap: () {},
+                                ontap: () {
+                                  // homeController.update(["id"]);
+                                  dashBoardController.onItemTapped(3);
+                                  // dashBoardController.update(["bottomBar"]);
+                                  print("-------${dashBoardController.selectedIndex}");
+
+                                },
                                 text: StringRes.message,
                               ),
                             ],

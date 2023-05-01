@@ -87,7 +87,7 @@ class WhatIntrestedController extends GetxController {
           loading.value = false;
           // flutterToast("Intersted added successfully");
 
-          Get.to(() => DashBoardScreen());
+          Get.offAll(() => DashBoardScreen());
         } else {
           loading.value = false;
           errorToast(StringRes.errText);

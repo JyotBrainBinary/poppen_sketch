@@ -44,45 +44,29 @@ class HomeCenterAreaImage extends StatelessWidget {
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(99),
-                child: Image.network(
-                  item.logoUrl.toString(),
-                  height: height * 0.1,
-                  width: height * 0.1,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Image.asset(
-                      AssetsRes.restaurantLogo,
-                      height: height * 0.1,
-                      width: height * 0.1,
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      AssetsRes.restaurantLogo,
-                      height: height * 0.1,
-                      width: height * 0.1,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
+              child: Image.network(
+                item.logoUrl.toString(),
+                height: height * 0.1,
+                width: height * 0.1,
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Image.asset(
+                    AssetsRes.restaurantLogo,
+                    height: height * 0.1,
+                    width: height * 0.1,
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    AssetsRes.restaurantLogo,
+                    height: height * 0.1,
+                    width: height * 0.1,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
-
-              // Image.network(
-              //   item.logoUrl.toString(),
-              //   height: height * 0.09,
-              //   width: height * 0.09,
-              //   fit: BoxFit.cover,
-              //   errorBuilder: (context, error, stackTrace) {
-              //     return Image.asset(
-              //       AssetsRes.restaurantLogo,
-              //       height: height * 0.09,
-              //     );
-              //   },
-              // ),
             ),
           ),
         ),

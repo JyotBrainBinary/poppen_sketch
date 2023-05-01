@@ -20,7 +20,7 @@ class CommonSmallButton extends StatelessWidget {
     return GestureDetector(
       onTap: ontap,
       child: Container(
-        width: (width * 0.9) / 2,
+        width: (width * 0.9)/2,
         height: height * 0.07,
         padding: EdgeInsets.symmetric(
             horizontal: width * 0.02, vertical: height * 0.01),

@@ -6,6 +6,8 @@ import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
+import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
+import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -15,6 +17,8 @@ class ProfileScreen extends StatelessWidget {
   double height = Get.height;
   double width = Get.width;
   final ProfileController controller = Get.put(ProfileController());
+  final dashBoardController = Get.find<DashBoardController>();
+  final homeController = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     // var item;
@@ -120,13 +124,12 @@ class ProfileScreen extends StatelessWidget {
                                 height: height * 0.043,
                                 child: ListView.separated(
                                   shrinkWrap: true,
-                                  itemCount:
-                                      3 /*item.category
-                              .toString()
-                              .split(",")
-                              .toList()
-                              .length*/
-                                  ,
+                                  itemCount: controller
+                                      .viewBusinessModel.value.data!.category
+                                      .toString()
+                                      .split(",")
+                                      .toList()
+                                      .length,
                                   scrollDirection: Axis.horizontal,
                                   separatorBuilder: (context, index) {
                                     return SizedBox(
@@ -134,11 +137,11 @@ class ProfileScreen extends StatelessWidget {
                                     );
                                   },
                                   itemBuilder: (context, index2) {
-                                    // var data = item.category
-                                    //     .toString()
-                                    //     .split(",")
-                                    //     .toList()[index2];
-
+                                    var data = controller
+                                        .viewBusinessModel.value.data!.category
+                                        .toString()
+                                        .split(",")
+                                        .toList()[index2];
                                     return Container(
                                       // width: width * 0.25,
                                       padding: EdgeInsets.symmetric(
@@ -161,8 +164,9 @@ class ProfileScreen extends StatelessWidget {
                                           SizedBox(
                                             width: width * 0.02,
                                           ),
-                                          const Text(
-                                            "data",
+                                          Text(
+                                            homeController.categoryNameList[
+                                                int.parse(data) - 1],
                                             style: TextStyle(
                                                 color: ColorRes.colorWhite,
                                                 fontWeight: FontWeight.w500,
@@ -191,7 +195,12 @@ class ProfileScreen extends StatelessWidget {
                                     ),
                                     CommonSmallButton(
                                       image: AssetsRes.message,
-                                      ontap: () {},
+                                      ontap: () {
+                                        // print("object");
+                                        // dashBoardController.onItemTapped(3);
+                                        // dashBoardController.update(["bottomBar"]);
+                                        // controller.update(["id"]);
+                                      },
                                       text: StringRes.message,
                                     ),
                                   ],
@@ -250,6 +259,7 @@ class ProfileScreen extends StatelessWidget {
                         profileController.changeTab();
                       },
                       icon: AssetsRes.info,
+
                       isGallery: profileController.isGalleryTab),
                 ],
               ),
