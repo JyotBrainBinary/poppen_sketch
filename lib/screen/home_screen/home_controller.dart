@@ -14,24 +14,28 @@ class HomeController extends GetxController {
   var businessListModel = BusinessListModel().obs;
   var intrestListData = IntrestListModel().obs;
   String selectedIntrestValue = "";
+
+
   @override
   void onInit() {
-    callBusinessListApi();
+
+    ///api
+    /*callBusinessListApi();
     getIntrestList().then((value) {
       selectedIntrestValue = intrestListData.value.data![0].name.toString();
     });
-
+*/
     print("===============");
     update(["id"]);
     super.onInit();
   }
 
   List categoryNameList = [];
-  // List visitsPeopleImage = [
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpAyuyKd40qgvtzB31luFHUbBH3Ye0fP5sB_kXZ67rfGJe9W1aRw5obRi1cLDfGcNmBo&usqp=CAU",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQguw9Cbx9amQNR6YUviWi9TKJATC-6JVk4diTd15TJ1n4IeGET0jiiKPRZGXWNFGUhOAs&usqp=CAU",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLt-T4NaOGQej1pSCdQOpa-WsCJXuu-7xiKw&usqp=CAU"
-  // ];
+  List visitsPeopleImage = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpAyuyKd40qgvtzB31luFHUbBH3Ye0fP5sB_kXZ67rfGJe9W1aRw5obRi1cLDfGcNmBo&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQguw9Cbx9amQNR6YUviWi9TKJATC-6JVk4diTd15TJ1n4IeGET0jiiKPRZGXWNFGUhOAs&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLt-T4NaOGQej1pSCdQOpa-WsCJXuu-7xiKw&usqp=CAU"
+  ];
 
   // List dropList = [
   //   [ColorRes.color8401FF, "Restaurant"],

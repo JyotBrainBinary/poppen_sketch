@@ -16,6 +16,9 @@ class HomeTopArea extends StatelessWidget {
 
   final HomeController homeController = Get.find<HomeController>();
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -36,6 +39,50 @@ class HomeTopArea extends StatelessWidget {
                     width: Get.width*0.05,
                   ),
                 ),
+
+               /// static data
+
+               /* GestureDetector(
+                  onTap: () {
+                    homeController.dropOnTap();
+                  },
+                  child: Container(
+                    height: Get.height * 0.04,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: ColorRes.color161823.withOpacity(0.3),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          AssetsRes.message,
+                          height: Get.height * 0.02,
+                          width: Get.height * 0.02,
+                          fit: BoxFit.cover,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "dropDown",
+                          style: regular(fontSize: 12),
+                        ),
+                        const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: ColorRes.colorWhite,
+                          size: 20,
+                        )
+                      ],
+                    ),
+                  ),
+                ),*/
+
+
+               ///api data
                 homeController.intrestListData.value.data == null
                     ? const SizedBox()
                     : GestureDetector(
