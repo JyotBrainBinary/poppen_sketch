@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/widget/textStyle.dart';
-import 'package:sketch/model/intrest_list_model.dart';
-import 'package:sketch/screen/auth/create_account/what_intrested/what_intrested_controller.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/on_board/on_board_screen.dart';
 import 'package:sketch/services/pref_service.dart';

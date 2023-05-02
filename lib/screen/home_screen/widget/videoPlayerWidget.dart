@@ -139,7 +139,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sketch/api_call/business_list_api.dart';
+import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/business_list_model.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/screen/home_screen/widget/onVideoUi.dart';
@@ -162,7 +162,7 @@ class VideoPlayerWidget extends StatefulWidget {
       this.showPlayPause = true,
       this.showVideoIcon = false,
       this.touchToSeePlayPause = true,
-        required this.index})
+      required this.index})
       : super(key: key);
 
   @override
@@ -172,7 +172,7 @@ class VideoPlayerWidget extends StatefulWidget {
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController videoPlayerController;
 
-final HomeController homeController = Get.find<HomeController>();
+  final HomeController homeController = Get.find<HomeController>();
 
   bool isPlay = false;
   bool isLoading = false;
@@ -201,10 +201,20 @@ final HomeController homeController = Get.find<HomeController>();
         });
         videoPlayerController.setVolume(3);
         if (widget.autoPlay) {
-
           videoPlayerController.play();
         }
-      })..setLooping(true);
+      });
+    videoPlayerController.addListener(() {
+      if (videoPlayerController.value.hasError) {
+        setState(() {
+          isLoading = false;
+        });
+        errorToast("Video Playing Error...");
+        print(videoPlayerController.value.errorDescription);
+      }
+      // if (videoPlayerController.value.isInitialized) {}
+      // if (videoPlayerController.value.isBuffering) {}
+    });
   }
 
   playPauseIconTimer() {
@@ -221,7 +231,7 @@ final HomeController homeController = Get.find<HomeController>();
   @override
   void dispose() {
     super.dispose();
-    print('Dispose Video Contoller');
+    debugPrint('Dispose Video Contoller');
     disposeVideo();
   }
 
@@ -231,8 +241,6 @@ final HomeController homeController = Get.find<HomeController>();
       timer.cancel();
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -293,7 +301,7 @@ final HomeController homeController = Get.find<HomeController>();
 
         /// ----- on video ui --------------
 
-        onVideoUi( controller: videoPlayerController, index:widget.index),
+        onVideoUi(controller: videoPlayerController, index: widget.index),
       ],
     );
   }
