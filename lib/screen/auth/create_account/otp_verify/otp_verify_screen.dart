@@ -5,7 +5,6 @@ import 'package:sketch/common/popup.dart';
 import 'package:sketch/common/widget/common_button.dart';
 import 'package:sketch/common/widget/loaders.dart';
 import 'package:sketch/screen/auth/create_account/sign_up_with_mobile/signup_with_mobile_controller.dart';
-import 'package:sketch/screen/auth/create_account/what_intrested/what_intrested_screen.dart';
 import 'package:sketch/screen/auth/widget/auth_top_area.dart';
 import 'package:sketch/screen/auth/widget/common_createacc_text.dart';
 import 'package:sketch/utils/StringRes.dart';
@@ -100,7 +99,7 @@ class OtpVerifyScreen extends StatelessWidget {
                           text1: StringRes.didNotRecive,
                           text2: StringRes.plsResend,
                           onTap: () {
-                            controller.validateForm();
+                            controller.verifyUserPhoneNumber(phone: controller.mobileController.text);
                           },
                         ),
                         SizedBox(

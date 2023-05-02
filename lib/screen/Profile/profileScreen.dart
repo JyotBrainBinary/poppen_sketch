@@ -101,21 +101,29 @@ class ProfileScreen extends StatelessWidget {
                               SizedBox(
                                 height: Get.height * 0.025,
                               ),
-                              Text(
-                                "🍽 Middle Eastern and Mediterranean Cuisine",
-                                style: regular(
-                                    fontSize: 12, color: ColorRes.color6C6C6C),
+                              SizedBox(
+                                width: width * 0.9,
+                                child: Text(
+                                  controller.viewBusinessModel.value.data!.bio
+                                      .toString(),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: regular(
+                                      fontSize: 12,
+                                      color: ColorRes.color6C6C6C),
+                                ),
                               ),
-                              Text(
-                                "🍸 World Class Bar",
-                                style: regular(
-                                    fontSize: 12, color: ColorRes.color6C6C6C),
-                              ),
-                              Text(
-                                "📍 Heart of Brighton-Le-Sands",
-                                style: regular(
-                                    fontSize: 12, color: ColorRes.color6C6C6C),
-                              ),
+                              // Text(
+                              //   "🍸 World Class Bar",
+                              //   style: regular(
+                              //       fontSize: 12, color: ColorRes.color6C6C6C),
+                              // ),
+                              // Text(
+                              //   "📍 Heart of Brighton-Le-Sands",
+                              //   style: regular(
+                              //       fontSize: 12, color: ColorRes.color6C6C6C),
+                              // ),
 
                               /// ---------- containers ------
 
@@ -248,13 +256,13 @@ class ProfileScreen extends StatelessWidget {
               Row(
                 children: [
                   _buildTab(
-                      onTap: () {
-                        print("-------- ${profileController.isGalleryTab}");
-                        profileController.changeTab();
-                      },
-                      icon: AssetsRes.feedIcon,
-                      isGallery: !profileController.isGalleryTab,
-                      isText: false,
+                    onTap: () {
+                      print("-------- ${profileController.isGalleryTab}");
+                      profileController.changeTab();
+                    },
+                    icon: AssetsRes.feedIcon,
+                    isGallery: !profileController.isGalleryTab,
+                    isText: false,
                     text: "",
                   ),
                   _buildTab(
@@ -264,7 +272,7 @@ class ProfileScreen extends StatelessWidget {
                       icon: AssetsRes.info,
                       isGallery: profileController.isGalleryTab,
                       isText: true,
-                  text: StringRes.details),
+                      text: StringRes.details),
                 ],
               ),
               const SizedBox(height: 5),

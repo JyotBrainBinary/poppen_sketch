@@ -6,6 +6,7 @@ import 'package:sketch/screen/home_screen/widget/onVideoUi.dart';
 import 'package:sketch/screen/home_screen/widget/videoPlayerWidget.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
+import 'package:video_player/video_player.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -91,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //   });
   }
 }
+
 
 /*class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});

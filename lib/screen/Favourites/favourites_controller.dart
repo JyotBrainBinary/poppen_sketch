@@ -1,18 +1,32 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sketch/api_call/favourite_api_call.dart';
 import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/favourite_list_model.dart';
 
 import 'package:sketch/utils/assets_res.dart';
+// import 'package:video_thumbnail/video_thumbnail.dart';
 
 class FavouritesController extends GetxController {
   RxBool isLoading = false.obs;
   FavouriteListModel favouriteListModel = FavouriteListModel();
-
+  final List<String> itemsList = [
+    'https://picsum.photos/id/1015/400/400',
+    'https://picsum.photos/id/1020/400/400',
+    'https://picsum.photos/id/1024/400/400',
+    'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    'https://picsum.photos/id/1035/400/400',
+    'https://picsum.photos/id/1040/400/400',
+    'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+  ];
   @override
   void onInit() {
     // TODO: implement onInit
-
+    // generateThumbnail().then((value) {
+    //   print("====================${value}");
+    // });
     // callFavouriteListApi();
     super.onInit();
   }
@@ -32,6 +46,22 @@ class FavouritesController extends GetxController {
       errorToast(e.toString());
     }
   }
+
+
+  // Future<File> generateThumbnail() async {
+  //   final String? _path = await VideoThumbnail.thumbnailFile(
+  //     video: 'https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+  //     thumbnailPath: (await getTemporaryDirectory()).path, /// path_provider
+  //     imageFormat: ImageFormat.PNG,
+  //     maxHeight: 50,
+  //     quality: 50,
+  //   );
+  //   print("--------- ${_path}");
+  //   return File(_path!);
+  //
+  // }
+
+
 
   List favouriteList = [
     {

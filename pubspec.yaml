@@ -48,6 +48,9 @@ dependencies:
   # ------ video -----
   video_player: ^2.6.1
   chewie: ^1.4.0
+#  video_thumbnail:
+
+  path_provider: ^2.0.14
 
   #-------Firebase------
   firebase_core: ^1.24.0

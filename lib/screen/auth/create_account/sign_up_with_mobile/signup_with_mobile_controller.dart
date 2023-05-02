@@ -24,6 +24,7 @@ class SignUpWithMobileController extends GetxController {
   String receivedID = "";
   RxBool isLoading = false.obs;
   FirebaseAuth auth = FirebaseAuth.instance;
+  RxString number = "".obs;
 
   void validateForm() {
     if (mobileController.text.isEmpty) {
@@ -68,9 +69,7 @@ class SignUpWithMobileController extends GetxController {
     update(["id"]);
   }
 
-
-
-  void verifyUserPhoneNumber({required String phone}) {
+  void verifyUserPhoneNumber({required String phone, bool? isResendOtp}) {
     try {
       isLoading.value = true;
       String number = "+$countryCode$phone";
@@ -91,17 +90,20 @@ class SignUpWithMobileController extends GetxController {
             errorToast(title: "Verification failed", StringRes.errText);
           }
         },
+
         codeSent: (String verificationId, int? resendToken) {
           receivedID = verificationId;
           isLoading.value = false;
           flutterToast("Otp Sent Successfully");
-          Get.to(OtpVerifyScreen(), arguments: {
-            "firstName": Get.arguments["firstName"],
-            "lastName": Get.arguments["lastName"],
-            "email": Get.arguments["email"],
-            "password": Get.arguments["password"],
-            "phone": number
-          });
+          isResendOtp == true
+              ? null
+              : Get.to(OtpVerifyScreen(), arguments: {
+                  "firstName": Get.arguments["firstName"],
+                  "lastName": Get.arguments["lastName"],
+                  "email": Get.arguments["email"],
+                  "password": Get.arguments["password"],
+                  "phone": number
+                });
           debugPrint("verificationId:--------$verificationId");
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
@@ -186,8 +188,7 @@ class SignUpWithMobileController extends GetxController {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       debugPrint(user.user!.uid);
-      await PrefService.setValue(PrefKeys.uid,
-          user.user!.uid.toString());
+      await PrefService.setValue(PrefKeys.uid, user.user!.uid.toString());
 
       UserModel userModel = UserModel(
         firstName: firstName,

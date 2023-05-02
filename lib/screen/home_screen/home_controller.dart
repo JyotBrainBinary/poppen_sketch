@@ -98,6 +98,7 @@ class HomeController extends GetxController {
           print("businessList  --------->  ${businessListModel.value.status}");
         }
       });
+
     } catch (e) {
       print("error: =======>> $e");
       rethrow;
