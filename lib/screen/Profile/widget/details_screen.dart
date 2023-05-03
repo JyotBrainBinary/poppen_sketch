@@ -7,14 +7,23 @@ import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  DetailScreen({Key? key}) : super(key: key);
 
+  ProfileController profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
-    ProfileController profileController = Get.find<ProfileController>();
+    List<String> days = [];
+    List<String> time = [];
+
+    for (String openingHour
+        in profileController.viewBusinessModel.value.data!.openingHours!) {
+      final parts = openingHour.split(' ');
+      days.add(parts[0]);
+      time.add('${parts[1]} ${parts[2]} ${parts[3]} ');
+    }
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -35,7 +44,7 @@ class DetailScreen extends StatelessWidget {
                 height: 50,
                 width: Get.width,
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: ColorRes.colorE9E9E9)),
@@ -66,7 +75,7 @@ class DetailScreen extends StatelessWidget {
                 height: 50,
                 width: Get.width,
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: ColorRes.colorE9E9E9)),
@@ -89,41 +98,21 @@ class DetailScreen extends StatelessWidget {
               Container(
                 width: Get.width,
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(color: ColorRes.colorE9E9E9)),
                 child: Row(
                   children: [
-                    // Column(
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: List.generate(
-                    //     profileController.weekList.length,
-                    //     (index) => Column(
-                    //       children: [
-                    //         Text(
-                    //           profileController.weekList[index],
-                    //           style: regular(color: ColorRes.color161823),
-                    //         ),
-                    //         SizedBox(
-                    //           height: 10,
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(width: Get.width * 0.2),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(
-                        profileController.viewBusinessModel.value.data!
-                            .openingHours!.length,
+                        profileController
+                            .viewBusinessModel.value.data!.openingHours!.length,
                         (index) => Column(
                           children: [
                             Text(
-                              profileController.viewBusinessModel.value.data!
-                                  .openingHours![index]
-                                  .toString(),
+                              days[index],
                               style: regular(color: ColorRes.color161823),
                             ),
                             SizedBox(
@@ -132,6 +121,25 @@ class DetailScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+                    ),
+                    SizedBox(width: Get.width * 0.2),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                          profileController.viewBusinessModel.value.data!
+                              .openingHours!.length, (index) {
+                        return Column(
+                          children: [
+                            Text(
+                              time[index].toString(),
+                              style: regular(color: ColorRes.color161823),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        );
+                      }),
                     ),
                   ],
                 ),

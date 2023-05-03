@@ -4,7 +4,7 @@ class EndPoints {
 
   ///---------------------------------------------- Base url ----------------------------------------------
   //static const baseUrl = 'https://rainbow-api-staging.herokuapp.com/api';
-  static const baseUrl = 'http://54.164.58.8:2929/api';
+  static const baseUrl = 'http://3.92.199.40:2929/api';
   static const user = "$baseUrl/user";
   static const admin = "$baseUrl/admin";
 

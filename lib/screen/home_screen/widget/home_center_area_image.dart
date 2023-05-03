@@ -31,7 +31,7 @@ class HomeCenterAreaImage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-
+        SizedBox(height: height*0.015,),
         ///---- api data ----
         InkWell(
           onTap: () {
@@ -41,31 +41,31 @@ class HomeCenterAreaImage extends StatelessWidget {
             Get.to(() => ProfileScreen());
           },
           child: Container(
-            height: height * 0.1,
-            width: height * 0.1,
+            height: height * 0.085,
+            width: height * 0.085,
             padding: const EdgeInsets.only(bottom: 5),
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
               child: Image.network(
                 item.logoUrl.toString(),
-                height: height * 0.1,
-                width: height * 0.1,
+                height: height * 0.085,
+                width: height * 0.085,
                 fit: BoxFit.cover,
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Image.asset(
                     AssetsRes.restaurantLogo,
-                    height: height * 0.1,
-                    width: height * 0.1,
+                    height: height * 0.085,
+                    width: height * 0.085,
                   );
                 },
                 errorBuilder: (context, error, stackTrace) {
                   return Image.asset(
                     AssetsRes.restaurantLogo,
-                    height: height * 0.1,
-                    width: height * 0.1,
+                    height: height * 0.085,
+                    width: height * 0.085,
                     fit: BoxFit.cover,
                   );
                 },
@@ -73,10 +73,10 @@ class HomeCenterAreaImage extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 5),
+        SizedBox(height: height*0.01,),
         Container(
           padding: EdgeInsets.symmetric(
-              horizontal: width * 0.03, vertical: height * 0.008),
+              horizontal: width * 0.03, vertical: height * 0.006),
           // height: Get.height * 0.045,
 
           // alignment: Alignment.center,
@@ -94,7 +94,7 @@ class HomeCenterAreaImage extends StatelessWidget {
           ),
           child: Text(
             item.name.toString(),
-            style: regular(color: ColorRes.colorBlack),
+            style: regular(color: ColorRes.colorBlack,fontWeight: FontWeight.w500),
           ),
         ),
         const SizedBox(height: 10),
@@ -135,7 +135,7 @@ class HomeCenterAreaImage extends StatelessWidget {
                       Text(
                         controller.categoryNameList[
                         int.parse(catagoryList[index].toString())-1],
-                        style: regular(fontSize: 12),
+                        style: regular(fontSize: 12,fontWeight: FontWeight.w600,color: ColorRes.colorWhite),
                       ),
                     ],
                   ),

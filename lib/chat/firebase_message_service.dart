@@ -2,13 +2,14 @@ import 'dart:convert';
 
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:sketch/chat/model/send_notification_model.dart';
 
 class MessageService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   static const String serverToken =
-      'AAAAAAcXNYE:APA91bF29Tc5rKfq6bQZ3EonQwS4m-JO75h3HRuhnMqsghYGOEypbgK2Kr2lk4OjzvyFP6lnWUIMBRmwnhBAca4pFqgnDM-JGNw7lrWNhsqwW0l69VeeHX-fuMqC6jZMTgBPn0GyICA0';
+      'AAAAMmVYcZw:APA91bF5OTX58JeeEOEDuj4NIonZANQBmICM2ia6hyGUNLzCTcCv0CC4FoV8Di0c7qs-a8jokyVO4F5tcXlrGjSq77-KbV7vnyrhQxaHHoWXJYsTxD9TWE8klIQn6WjPKtbYzk_MUgqD';
 
   Future<String?> getFcmToken() async {
     return await messaging.getToken();
@@ -25,7 +26,7 @@ class MessageService {
       body: jsonEncode(notification.toMap()),
     );
 
-    print(response.statusCode);
-    print(response.body);
+    debugPrint("code: ----------- ${response.statusCode}");
+    debugPrint("body: +++++++++++ ${response.body}");
   }
 }

@@ -44,9 +44,9 @@ class HomeController extends GetxController {
     isDrop.value = !isDrop.value;
   }
 
-  dropItemTap({required String name,required String category}) {
+  dropItemTap({required String name, required String category}) {
     selectedIntrestValue = name;
-   callBusinessListApi(category: category);
+    callBusinessListApi(category: category);
     isDrop.value = false;
     update(["id"]);
   }
@@ -85,11 +85,11 @@ class HomeController extends GetxController {
     }
   }
 
-  void callBusinessListApi({ String? category, String? name}) {
+  void callBusinessListApi({String? category, String? name}) {
     try {
       isLoading.value = true;
-
-      BusinessListApi.businessListApi(category: category,name: name)
+      businessListModel.value = BusinessListModel();
+      BusinessListApi.businessListApi(category: category, name: name)
           .then((value) {
         if (value != null) {
           businessListModel.value = value;
@@ -98,7 +98,6 @@ class HomeController extends GetxController {
           print("businessList  --------->  ${businessListModel.value.status}");
         }
       });
-
     } catch (e) {
       print("error: =======>> $e");
       rethrow;

@@ -70,6 +70,10 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     setState(() {});
   }
 
+
+
+
+
   roomIdExist() async {
     doc = await ChatRoomservice().isRoomAvailable(roomId!);
     print(roomId);
@@ -86,6 +90,10 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     setState(() {});
   }
 
+
+
+
+
   setInitiaCount() async {
     if (widget.isManager) {
       await FirebaseFirestore.instance
@@ -101,6 +109,10 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     }
   }
 
+
+
+
+
   void onCameraTap() async {
     isAttachment = false;
     final imagePath = await picker.getImage(source: ImageSource.camera);
@@ -111,6 +123,11 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     setState(() {});
   }
 
+
+
+
+
+
   void onSend(MMessage message) async {
     if (controller.text.isNotEmpty) {
       sendMessage("text", controller.text.trim(), message);
@@ -120,6 +137,11 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     }
     setState(() {});
   }
+
+
+
+
+
 
   void sendMessage(String type, String content, MMessage message) async {
     var mobileNo = PrefService.getString(PrefKeys.uid);
@@ -230,6 +252,12 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     controller.clear();
     setState(() {});
   }
+
+
+
+
+
+
 
   getTokenList() async {
     if (isManager == true) {

@@ -27,12 +27,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
-      /*(PrefService.getBool(PrefKeys.login) == true)
+      home:
+      (PrefService.getBool(PrefKeys.login) == true)
           ? DashBoardScreen()
           : (PrefService.getBool(PrefKeys.isOnlyRegister) == true)
               ? WhatIntrestedScreen()
-              : OnBoardScreen()*/
+              : OnBoardScreen()
     );
   }
 }

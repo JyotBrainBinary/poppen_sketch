@@ -50,6 +50,7 @@ class Datum {
     this.coverResizeUrl,
     this.idItemGallery,
     this.socialMedia,
+    this.favouriteCount,
     this.isFavourite,
     this.createdAt,
     this.updatedAt,
@@ -71,6 +72,7 @@ class Datum {
   String? coverResizeUrl;
   List<int>? idItemGallery;
   String? socialMedia;
+  int? favouriteCount;
   bool? isFavourite;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -92,6 +94,7 @@ class Datum {
     coverResizeUrl: json["cover_resize_url"],
     idItemGallery: json["id_item_gallery"] == null ? [] : List<int>.from(json["id_item_gallery"]!.map((x) => x)),
     socialMedia: json["social_media"],
+    favouriteCount: json["favourite_count"],
     isFavourite: json["isFavourite"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -114,6 +117,7 @@ class Datum {
     "cover_resize_url": coverResizeUrl,
     "id_item_gallery": idItemGallery == null ? [] : List<dynamic>.from(idItemGallery!.map((x) => x)),
     "social_media": socialMedia,
+    "favourite_count": favouriteCount,
     "isFavourite": isFavourite,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),

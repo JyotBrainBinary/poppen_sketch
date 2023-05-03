@@ -7,6 +7,7 @@ import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/favourite_list_model.dart';
 
 import 'package:sketch/utils/assets_res.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:video_thumbnail/video_thumbnail.dart';
 
 class FavouritesController extends GetxController {
@@ -27,7 +28,7 @@ class FavouritesController extends GetxController {
     // generateThumbnail().then((value) {
     //   print("====================${value}");
     // });
-    // callFavouriteListApi();
+    callFavouriteListApi();
     super.onInit();
   }
 
@@ -44,6 +45,22 @@ class FavouritesController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       errorToast(e.toString());
+    }
+  }
+
+
+
+
+  Future<void> openMap({required String lat,required String long}) async {
+    final String googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$lat,$long';
+
+    if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
+      await launchUrl(Uri.parse(googleMapsUrl),
+      mode: LaunchMode.externalApplication);
+    } else {
+      print("----------- fail --------");
+      throw 'Could not open the map.';
     }
   }
 

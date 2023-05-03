@@ -1,15 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sketch/api_call/view_business_api.dart';
 import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/view_business_model.dart';
-import 'package:sketch/screen/Profile/widget/details_screen.dart';
-import 'package:sketch/screen/Profile/widget/feed_screen.dart';
-import 'package:sketch/screen/Profile/widget/reviews_screen.dart';
-import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
-import 'package:sketch/utils/pref_key.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class ProfileController extends GetxController {
   // PageController pageController = PageController();
@@ -18,6 +15,32 @@ class ProfileController extends GetxController {
   int curr = 0;
   bool isGalleryTab = true;
 
+  @override
+  Future<void> onInit() async {
+    await generateThumb().then((value) {
+      debugPrint("===========: $value");
+    });
+    super.onInit();
+  }
+
+  Future<String?> generateThumb() async {
+    try {
+      final fileName = await VideoThumbnail.thumbnailFile(
+        video:
+            "https://poppen-storage.s3.amazonaws.com/eb7302d72ac243289fa21b700_1920_1080.mp4",
+        thumbnailPath: (await getTemporaryDirectory()).path,
+        imageFormat: ImageFormat.WEBP,
+        maxHeight:
+            64, // specify the height of the thumbnail, let the width auto-scaled to keep the source aspect ratio
+        quality: 75,
+      );
+      debugPrint("----------: $fileName");
+      return fileName;
+    } catch (e) {
+      debugPrint("----------: $e");
+    }
+    return null;
+  }
 //   @override
 //   Future<void> onInit() async{
 // String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
@@ -37,7 +60,6 @@ class ProfileController extends GetxController {
     isGalleryTab = !isGalleryTab;
     update(["tab"]);
   }
-
 
   List feedImage = [
     AssetsRes.image1,
@@ -84,8 +106,7 @@ class ProfileController extends GetxController {
 // update(["tab"]);
           print(
               "viewBusinessList  --------->  ${viewBusinessModel.value.status}");
-        }
-        else{
+        } else {
           isLoading.value = false;
           // errorToast(StringRes.errText);
         }

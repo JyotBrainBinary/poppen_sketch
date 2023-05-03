@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sketch/common/widget/common_appbar.dart';
 import 'package:sketch/common/widget/common_small_button.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/screen/Favourites/favourites_controller.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
@@ -19,6 +20,7 @@ class ProfileScreen extends StatelessWidget {
   final ProfileController controller = Get.put(ProfileController());
   final dashBoardController = Get.find<DashBoardController>();
   final homeController = Get.find<HomeController>();
+  final favController = Get.find<FavouritesController>();
   @override
   Widget build(BuildContext context) {
     // var item;
@@ -175,7 +177,7 @@ class ProfileScreen extends StatelessWidget {
                                           Text(
                                             homeController.categoryNameList[
                                                 int.parse(data) - 1],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: ColorRes.colorWhite,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12),
@@ -195,7 +197,15 @@ class ProfileScreen extends StatelessWidget {
                                   children: [
                                     CommonSmallButton(
                                       image: AssetsRes.direction,
-                                      ontap: () {},
+                                      ontap: () {
+                                        favController.openMap(
+                                            lat: controller.viewBusinessModel
+                                                .value.data!.latitude
+                                                .toString(),
+                                            long: controller.viewBusinessModel
+                                                .value.data!.longitude
+                                                .toString());
+                                      },
                                       text: StringRes.directions,
                                     ),
                                     SizedBox(
@@ -256,23 +266,21 @@ class ProfileScreen extends StatelessWidget {
               Row(
                 children: [
                   _buildTab(
-                    onTap: () {
-                      print("-------- ${profileController.isGalleryTab}");
-                      profileController.changeTab();
-                    },
-                    icon: AssetsRes.feedIcon,
-                    isGallery: !profileController.isGalleryTab,
-                    isText: false,
-                    text: "",
-                  ),
-                  _buildTab(
                       onTap: () {
+                        print("-------- ${profileController.isGalleryTab}");
                         profileController.changeTab();
                       },
-                      icon: AssetsRes.info,
-                      isGallery: profileController.isGalleryTab,
-                      isText: true,
-                      text: StringRes.details),
+                      icon: AssetsRes.feedIcon,
+                      isGallery: !profileController.isGalleryTab,
+                      isText: false),
+                  _buildTab(
+                    onTap: () {
+                      profileController.changeTab();
+                    },
+                    icon: AssetsRes.info,
+                    isGallery: profileController.isGalleryTab,
+                    isText: true,
+                  ),
                 ],
               ),
               const SizedBox(height: 5),
@@ -298,7 +306,7 @@ class ProfileScreen extends StatelessWidget {
                 // height: Get.height * 0.6,
                 child: profileController.isGalleryTab
                     ? FeedScreen()
-                    : const DetailScreen(),
+                    :  DetailScreen(),
               ),
             ],
           );
@@ -307,33 +315,40 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildTab(
       {required VoidCallback onTap,
-      String? text,
       required String icon,
       required bool isText,
       required bool isGallery}) {
     return GestureDetector(
       onTap: onTap,
-      // profileController.curr = 0;
-      // profileController.pageController.jumpToPage(0);
-      // profileController.update(["tab"]);
-
       child: Container(
         width: Get.width / 2,
         color: Colors.transparent,
         alignment: Alignment.center,
-        child: Row(
-          children: [
-            Image.asset(icon,
+        child: isText == true
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(icon,
+                      height: Get.height * 0.035,
+                      width: Get.height * 0.035,
+                      // fit: BoxFit.cover,
+                      color: isGallery
+                          ? ColorRes.colorD7D7D9
+                          : ColorRes.color161823),
+                  SizedBox(
+                    width: Get.width * 0.02,
+                  ),
+                  const Text(
+                    StringRes.details,
+                    style: TextStyle(color: ColorRes.colorD8D8D8, fontSize: 12),
+                  ),
+                ],
+              )
+            : Image.asset(icon,
                 height: Get.height * 0.035,
                 width: Get.height * 0.035,
                 // fit: BoxFit.cover,
                 color: isGallery ? ColorRes.colorD7D7D9 : ColorRes.color161823),
-            Text(
-              StringRes.details,
-              style: TextStyle(color: ColorRes.colorD8D8D8, fontSize: 12),
-            ),
-          ],
-        ),
       ),
     );
   }
