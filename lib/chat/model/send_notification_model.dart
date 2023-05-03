@@ -25,6 +25,9 @@ class SendNotificationModel{
       "isGroup" : isGroup,
       "click_action": "FLUTTER_NOTIFICATION_CLICK",
       "sound": "default",
+      "fcmToken":fcmToken,
+      "fcmTokens":fcmTokens,
+
     },
     "priority" : "high",
     "notification" : {

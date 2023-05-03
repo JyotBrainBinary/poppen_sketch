@@ -28,7 +28,7 @@ class FavouritesController extends GetxController {
     // generateThumbnail().then((value) {
     //   print("====================${value}");
     // });
-    callFavouriteListApi();
+    // callFavouriteListApi();
     super.onInit();
   }
 

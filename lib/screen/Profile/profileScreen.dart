@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/chat/user_side_screen/chat_fire_screen.dart';
 import 'package:sketch/common/widget/common_appbar.dart';
 import 'package:sketch/common/widget/common_small_button.dart';
 import 'package:sketch/common/widget/textStyle.dart';
@@ -9,9 +10,11 @@ import 'package:sketch/screen/Profile/widget/details_screen.dart';
 import 'package:sketch/screen/Profile/widget/feed_screen.dart';
 import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
+import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
+import 'package:sketch/utils/pref_key.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -214,7 +217,14 @@ class ProfileScreen extends StatelessWidget {
                                     CommonSmallButton(
                                       image: AssetsRes.message,
                                       ontap: () {
-                                        // print("object");
+                                        Get.to(() => ChatFireScreen(
+                                              isManager: false,
+                                              roomId: PrefService.getString(
+                                                  PrefKeys.uid),
+                                            ));
+                                        // Container navigationBar =dashBoardController.glbKey.currentWidget as Container;
+                                        // // navigationBar.onTap!(3);
+                                        // // print("object");
                                         // dashBoardController.onItemTapped(3);
                                         // dashBoardController.update(["bottomBar"]);
                                         // controller.update(["id"]);
@@ -306,7 +316,7 @@ class ProfileScreen extends StatelessWidget {
                 // height: Get.height * 0.6,
                 child: profileController.isGalleryTab
                     ? FeedScreen()
-                    :  DetailScreen(),
+                    : DetailScreen(),
               ),
             ],
           );

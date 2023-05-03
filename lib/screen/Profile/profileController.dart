@@ -14,33 +14,8 @@ class ProfileController extends GetxController {
   var viewBusinessModel = ViewBusinessModel().obs;
   int curr = 0;
   bool isGalleryTab = true;
+  List galleryList = [];
 
-  @override
-  Future<void> onInit() async {
-    await generateThumb().then((value) {
-      debugPrint("===========: $value");
-    });
-    super.onInit();
-  }
-
-  Future<String?> generateThumb() async {
-    try {
-      final fileName = await VideoThumbnail.thumbnailFile(
-        video:
-            "https://poppen-storage.s3.amazonaws.com/eb7302d72ac243289fa21b700_1920_1080.mp4",
-        thumbnailPath: (await getTemporaryDirectory()).path,
-        imageFormat: ImageFormat.WEBP,
-        maxHeight:
-            64, // specify the height of the thumbnail, let the width auto-scaled to keep the source aspect ratio
-        quality: 75,
-      );
-      debugPrint("----------: $fileName");
-      return fileName;
-    } catch (e) {
-      debugPrint("----------: $e");
-    }
-    return null;
-  }
 //   @override
 //   Future<void> onInit() async{
 // String id = PrefService.getString(PrefKeys.registerToken).tr.toString();
@@ -97,11 +72,11 @@ class ProfileController extends GetxController {
     try {
       isLoading.value = true;
 
-      ViewBusinessApi.viewBusinessApiCall(id: id).then((value) {
+      ViewBusinessApi.viewBusinessApiCall(id: id).then((value) async {
         if (value != null) {
           viewBusinessModel.value = value;
           isLoading.value = false;
-
+          await generateThumb();
           update(["id"]);
 // update(["tab"]);
           print(
@@ -118,5 +93,32 @@ class ProfileController extends GetxController {
       errorToast(StringRes.errText);
       rethrow;
     }
+  }
+
+  Future generateThumb() async {
+    try {
+      viewBusinessModel.value.data!.galleryList!.forEach((element) async {
+        if (element.endsWith(".mp4")) {
+          final fileName = await VideoThumbnail.thumbnailFile(
+            video: element,
+            thumbnailPath: (await getTemporaryDirectory()).path,
+            imageFormat: ImageFormat.WEBP,
+            maxHeight:
+                64, // specify the height of the thumbnail, let the width auto-scaled to keep the source aspect ratio
+            quality: 75,
+          );
+          debugPrint("=========: $fileName");
+          galleryList.add(fileName);
+        } else {
+          galleryList.add(element);
+        }
+      });
+
+      debugPrint("thumb list----------: $galleryList");
+      // return galleryList;
+    } catch (e) {
+      debugPrint("----------: $e");
+    }
+    // return null;
   }
 }

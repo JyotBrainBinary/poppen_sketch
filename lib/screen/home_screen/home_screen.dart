@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.bottomLeft,
           child: Container(
             height: Get.height*0.13,
-            width: Get.width*0.052,
+            width: Get.width*0.055,
             decoration:  BoxDecoration(
                 gradient:  LinearGradient(
             // color: Colors.amber,
@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
           alignment: Alignment.bottomRight,
           child: Container(
             height: Get.height*0.13,
-            width: Get.width*0.052,
+            width: Get.width*0.055,
             decoration:  BoxDecoration(
                 gradient:  LinearGradient(
             // color: Colors.amber,

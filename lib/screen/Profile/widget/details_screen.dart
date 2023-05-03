@@ -19,7 +19,7 @@ class DetailScreen extends StatelessWidget {
         in profileController.viewBusinessModel.value.data!.openingHours!) {
       final parts = openingHour.split(' ');
       days.add(parts[0]);
-      time.add('${parts[1]} ${parts[2]} ${parts[3]} ');
+      time.add('${parts[1]} ${parts[2]} ${parts[3]} ${parts[4]}');
     }
     return Expanded(
       child: Padding(

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sketch/chat/user_side_screen/chat_fire_screen.dart';
 import 'package:sketch/common/widget/common_appbar.dart';
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Favourites/favourites_controller.dart';
 import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
+import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
+import 'package:sketch/utils/pref_key.dart';
 import '../../../common/widget/common_small_button.dart';
 
 class FavouriteBox extends StatelessWidget {
@@ -242,9 +245,13 @@ class FavouriteBox extends StatelessWidget {
                               CommonSmallButton(
                                 image: AssetsRes.message,
                                 ontap: () {
-                                  // homeController.update(["id"]);
-                                  dashBoardController.onItemTapped(3);
-                                  // dashBoardController.update(["bottomBar"]);
+                                  Get.to(()=>ChatFireScreen(
+                                    isManager: false,
+                                    roomId: PrefService.getString(PrefKeys.uid),
+
+                                  ));
+                                  // dashBoardController.onItemTapped(3);
+
                                   debugPrint(
                                       "-------${dashBoardController.selectedIndex}");
                                 },

@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +22,7 @@ import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
+import 'package:sketch/main.dart';
 import 'package:sketch/screen/dashbord_screen/dashboard_controller.dart';
 import 'package:sketch/screen/dashbord_screen/dashbord.dart';
 import 'package:sketch/services/pref_service.dart';
@@ -50,6 +53,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
   String? chatId;
   MMessage? message;
   bool? isManager;
+
   bool isReply = false;
   final dashController = Get.find<DashBoardController>();
 
@@ -122,6 +126,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     if (controller.text.isNotEmpty) {
       sendMessage("text", controller.text.trim(), message);
       roomIdExist();
+      print("object==========");
       controller.clear();
       isTyping = false;
     }
@@ -226,7 +231,8 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
 
     if (isManager == false) {
       tokenList = tokenList!.toSet().toList();
-      for (int i = 0; i < fcmToken!.length; i++) {
+      for (int i = 0; i < tokenList!.length; i++) {
+        print("--------: ${tokenList!.length}");
         SendNotificationModel notificationModel1 = SendNotificationModel(
           isGroup: false,
           title: username,
@@ -240,6 +246,27 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
     } else {
       MessageService().sendNotification(notificationModel);
     }
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+              ),
+            ));
+      }
+    });
     controller.clear();
     setState(() {});
   }
@@ -381,7 +408,8 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-          isManager == false ? dashController.onItemTapped(0):  Navigator.pop(context);
+
+           isManager == false ? dashController.onItemTapped(0) : Get.back() ;
           },
           child: Container(
               padding: const EdgeInsets.symmetric(vertical: 19),

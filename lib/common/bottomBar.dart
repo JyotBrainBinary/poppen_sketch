@@ -11,8 +11,10 @@ import 'package:sketch/utils/color_res.dart';
 
 Widget bottomNavigationBar(BuildContext context,
     ) {
+
   final controller = Get.find<DashBoardController>();
   return Container(
+    key:   controller.glbKey,
     width: Get.width,
     height: Get.height * 0.11,
     decoration: BoxDecoration(
@@ -159,7 +161,7 @@ Widget bottomNavigationBar(BuildContext context,
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  StringRes.me,
+                  " ${StringRes.me} ",
                   style: regular(
                     color: (controller.selectedIndex == 4)
                         ? ColorRes.colorWhite

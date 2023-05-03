@@ -30,18 +30,14 @@ class FeedScreen extends StatelessWidget {
                 .viewBusinessModel.value.data!.galleryList![index];
             return GestureDetector(
               onTap: () {
-                /*   item.endsWith("mp4")*/
-                index == 1
-                    ? Get.to(() => const VideoPreview(
-                        "https://poppen-storage.s3.amazonaws.com/eb7302d72ac243289fa21b700_1920_1080.mp4"))
+                item.endsWith("mp4")
+                    ? Get.to(() => VideoPreview(item))
                     : Get.to(() => ImagePreview(item));
               },
               child: Hero(
                 tag: item,
                 child: Image.network(
-                  index == 0
-                      ? item.toString()
-                      : "https://poppen-storage.s3.amazonaws.com/eb7302d72ac243289fa21b700_1920_1080.mp4",
+                  item.toString(),
                   height: Get.height * 0.2,
                   width: Get.height * 0.2,
                   fit: BoxFit.cover,
@@ -52,6 +48,7 @@ class FeedScreen extends StatelessWidget {
                       AssetsRes.homeImage,
                       height: Get.height * 0.2,
                       width: Get.height * 0.2,
+                      fit: BoxFit.cover,
                     );
                   },
                   errorBuilder: (context, error, stackTrace) {

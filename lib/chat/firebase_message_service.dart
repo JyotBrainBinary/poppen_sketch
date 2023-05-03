@@ -23,7 +23,7 @@ class MessageService {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'key=$serverToken',
       },
-      body: jsonEncode(notification.toMap()),
+      body: jsonEncode(notification.toMap(),),
     );
 
     debugPrint("code: ----------- ${response.statusCode}");

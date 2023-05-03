@@ -24,6 +24,7 @@ class HomeBottomArea extends StatelessWidget {
         homeController.businessListModel.value.data![index].favouriteCount!.obs;
 
     return Container(
+      width: Get.width,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               // color: Colors.amber,

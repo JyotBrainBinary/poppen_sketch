@@ -17,10 +17,10 @@ class HomeController extends GetxController {
   // final homeController = Get.put(HomeController());
   @override
   void onInit() {
-    callBusinessListApi();
-    getIntrestList().then((value) {
-      selectedIntrestValue = intrestListData.value.data![0].name.toString();
-    });
+    // callBusinessListApi();
+    // getIntrestList().then((value) {
+    //   selectedIntrestValue = intrestListData.value.data![0].name.toString();
+    // });
 
     print("===============");
     update(["id"]);
@@ -64,8 +64,8 @@ class HomeController extends GetxController {
               update(["id"]);
             });
             print("list: ---------${categoryNameList.toString()}");
-            isLoading.value = false;
             update(["id"]);
+            isLoading.value = false;
           }
           isLoading.value = false;
           update(["id"]);

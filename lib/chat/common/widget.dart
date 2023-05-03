@@ -1,8 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/route_manager.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
+
+import '../../main.dart';
 
 class InputBottomBar extends StatelessWidget {
   InputBottomBar(
@@ -140,6 +144,7 @@ class InputBottomBar extends StatelessWidget {
                   GestureDetector(
                               onTap: () {
                                 onSend?.call(message ?? MMessage());
+
                               },
                               child: Container(
 

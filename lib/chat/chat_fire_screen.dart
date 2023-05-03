@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:media_picker/media_picker.dart';
@@ -17,6 +19,7 @@ import 'package:sketch/chat/firebase_message_service.dart';
 import 'package:sketch/chat/message_view.dart';
 import 'package:sketch/chat/model/message_model.dart';
 import 'package:sketch/chat/model/send_notification_model.dart';
+import 'package:sketch/main.dart';
 import 'package:sketch/services/pref_service.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -129,9 +132,11 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
 
 
   void onSend(MMessage message) async {
+   print("object{}{}");
     if (controller.text.isNotEmpty) {
       sendMessage("text", controller.text.trim(), message);
       roomIdExist();
+   print("object{}{}{}}}}}}}}}{}{{");
       controller.clear();
       isTyping = false;
     }
@@ -169,9 +174,11 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
           .then((value) {
         count = value.data()!['${mobile! + "_newMessage"}'];
         count = count + 1;
+
         setState(() {
           print(count);
         });
+
       });
     } else {
       await FirebaseFirestore.instance
@@ -249,6 +256,29 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
     } else {
       MessageService().sendNotification(notificationModel);
     }
+
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+              ),
+            ));
+      }
+    });
+
     controller.clear();
     setState(() {});
   }
