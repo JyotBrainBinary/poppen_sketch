@@ -37,8 +37,13 @@ class ChatFireScreen extends StatefulWidget {
   final bool? isManager;
   final String? fcmToken;
   final String? name;
-
-  ChatFireScreen({this.roomId, this.isManager, this.fcmToken, this.name});
+  final bool? isFromProfile;
+  ChatFireScreen(
+      {this.roomId,
+      this.isManager,
+      this.fcmToken,
+      this.name,
+      this.isFromProfile});
 
   @override
   State<ChatFireScreen> createState() => _ChatFireScreenState();
@@ -408,8 +413,11 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
       appBar: AppBar(
         leading: InkWell(
           onTap: () {
-
-           isManager == false ? dashController.onItemTapped(0) : Get.back() ;
+            isManager == false && widget.isFromProfile == false
+                ? dashController.onItemTapped(0)
+                : isManager == false && widget.isFromProfile == true
+                    ? Get.back()
+                    : Get.back();
           },
           child: Container(
               padding: const EdgeInsets.symmetric(vertical: 19),

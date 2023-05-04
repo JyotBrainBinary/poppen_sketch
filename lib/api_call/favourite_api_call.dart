@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/business_list_model.dart';
 import 'package:sketch/model/favourite_list_model.dart';
+import 'package:sketch/screen/Favourites/favourites_controller.dart';
 import 'package:sketch/services/http_services.dart';
 import 'package:http/http.dart' as http;
 import 'package:sketch/utils/end_points.dart';
 
 class FavouriteApi {
   static Future addFavourite({ required String id}) async {
+   FavouritesController controller = Get.find< FavouritesController>();
     try {
       Map<String, dynamic> body = {"id_business": id};
       http.Response? response = await HttpService.postApi(
@@ -19,7 +22,7 @@ class FavouriteApi {
       );
       if (response != null && response.statusCode == 200) {
         debugPrint("body8----------${response.body}");
-
+        controller.callFavouriteListApi();
         return businessListModelFromJson(response.body);
       } else {
         errorToast(jsonDecode(response!.body)["message"]);
@@ -36,6 +39,7 @@ class FavouriteApi {
 
 
   static Future removeFavourite({ required String id}) async {
+    FavouritesController controller = Get.find< FavouritesController>();
     try {
       Map<String, dynamic> body = {"id_business": id};
       http.Response? response = await HttpService.postApi(
@@ -46,7 +50,7 @@ class FavouriteApi {
       );
       if (response != null && response.statusCode == 200) {
         debugPrint("body7----------${response.body}");
-
+        controller.callFavouriteListApi();
         return businessListModelFromJson(response.body);
       } else {
         errorToast(jsonDecode(response!.body)["message"]);

@@ -7,11 +7,12 @@ class CommonCreateAccText extends StatelessWidget {
     super.key,
     required this.text1,
     required this.text2,
-    required this.onTap,
+    required this.onTap,  this.canResend,
   });
   final String text1;
   final String text2;
   final VoidCallback onTap;
+  final bool? canResend;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CommonCreateAccText extends StatelessWidget {
             TextSpan(
                 text: text2,
                 style:
-                const TextStyle(color: ColorRes.color8401FF, fontSize: 14),
+                 TextStyle(color:  canResend == false  ?  ColorRes.color707070 : ColorRes.color8401FF, fontSize: 14),
                 recognizer: TapGestureRecognizer()..onTap = onTap),
           ],
         ),

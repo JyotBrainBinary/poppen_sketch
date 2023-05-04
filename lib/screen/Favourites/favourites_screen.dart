@@ -23,7 +23,7 @@ class FavouritesScreen extends StatelessWidget {
             ? const Center(
                 child: FullScreenLoader(enableBgColor: true),
               )
-            : const SizedBox())
+            :  const SizedBox())
       ],
     );
   }

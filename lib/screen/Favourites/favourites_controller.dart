@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sketch/api_call/favourite_api_call.dart';
@@ -28,18 +29,20 @@ class FavouritesController extends GetxController {
     // generateThumbnail().then((value) {
     //   print("====================${value}");
     // });
-    // callFavouriteListApi();
+    callFavouriteListApi();
     super.onInit();
   }
 
   callFavouriteListApi() {
     try {
+      isLoading.value = true;
       FavouriteApi.favouriteList().then((value) {
         if (value != null) {
           favouriteListModel = value;
           isLoading.value = false;
 
           update(["id"]);
+          debugPrint("==========: ${favouriteListModel.data!.length}");
         }
       });
     } catch (e) {

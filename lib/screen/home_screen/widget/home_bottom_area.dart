@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_stack/image_stack.dart';
 import 'package:sketch/api_call/favourite_api_call.dart';
 import 'package:sketch/common/widget/textStyle.dart';
+import 'package:sketch/screen/Favourites/favourites_controller.dart';
 import 'package:sketch/screen/home_screen/home_controller.dart';
 import 'package:sketch/utils/assets_res.dart';
 import 'package:sketch/utils/color_res.dart';
@@ -15,6 +16,7 @@ class HomeBottomArea extends StatelessWidget {
   final int index;
 
   final HomeController homeController = Get.find<HomeController>();
+  final FavouritesController favController = Get.find<FavouritesController>();
 
   @override
   Widget build(BuildContext context) {

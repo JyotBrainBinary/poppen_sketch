@@ -97,10 +97,11 @@ class OtpVerifyScreen extends StatelessWidget {
                         ),
                         CommonCreateAccText(
                           text1: StringRes.didNotRecive,
-                          text2: StringRes.plsResend,
+                          text2: "${StringRes.plsResend} in ${controller.remainingTime}",
                           onTap: () {
-                            controller.verifyUserPhoneNumber(phone: controller.mobileController.text);
+                            controller.canResend ? controller.verifyUserPhoneNumber(phone: controller.mobileController.text) : null ;
                           },
+                          canResend: controller.canResend,
                         ),
                         SizedBox(
                           height: height * 0.03,

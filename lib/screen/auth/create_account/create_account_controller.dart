@@ -1,10 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/popup.dart';
-import 'package:sketch/common/widget/loaders.dart';
-import 'package:sketch/model/user_model.dart';
 import 'package:sketch/screen/auth/create_account/sign_up_with_mobile/signup_with_mobile.dart';
 import 'package:sketch/utils/StringRes.dart';
 
@@ -28,10 +24,10 @@ class CreateAccountController extends GetxController {
       errorToast(StringRes.passwordValidation);
     } else {
       Get.to(() => SignUpWithMobile(), arguments: {
-        "firstName":firstNameController.text,
-        "lastName":lastNameController.text,
-        "email":emailController.text,
-        "password":passController.text
+        "firstName":firstNameController.text.trim(),
+        "lastName":lastNameController.text.trim(),
+        "email":emailController.text.trim(),
+        "password":passController.text.trim()
       }
 
       );

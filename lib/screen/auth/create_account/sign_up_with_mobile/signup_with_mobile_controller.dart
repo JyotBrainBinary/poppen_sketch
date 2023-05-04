@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +31,7 @@ class SignUpWithMobileController extends GetxController {
     if (mobileController.text.isEmpty) {
       errorToast(StringRes.mobileNumberValidation);
     } else {
-      verifyUserPhoneNumber(phone: mobileController.text);
+      verifyUserPhoneNumber(phone: mobileController.text.trim());
     }
   }
 
@@ -104,6 +105,8 @@ class SignUpWithMobileController extends GetxController {
                   "password": Get.arguments["password"],
                   "phone": number
                 });
+          startTimer();
+
           debugPrint("verificationId:--------$verificationId");
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
@@ -219,4 +222,44 @@ class SignUpWithMobileController extends GetxController {
     isLoading.value = false;
     return result;
   }
+
+
+
+  bool canResend = false;
+  int remainingTime = 30;
+   Timer? timer;
+
+  void startTimer() {
+    canResend = false;
+    remainingTime = 30;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (remainingTime > 0) {
+        remainingTime--;
+      } else {
+        canResend = true;
+        stopTimer();
+      }
+      update(["id"]);
+    });
+  }
+
+  void stopTimer() {
+    if (timer != null) {
+      timer?.cancel();
+    }
+  }
+
+
+
+  @override
+  void onClose() {
+    stopTimer();
+    super.onClose();
+  }
+
+
+
+
+
+
 }
