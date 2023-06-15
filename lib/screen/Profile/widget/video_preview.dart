@@ -1,7 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:sketch/utils/color_res.dart';
 import 'package:video_player/video_player.dart';
@@ -24,38 +27,76 @@ class _VideoPreviewState extends State<VideoPreview> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.url);
-    // _controller = VideoPlayerController.contentUri(Uri.parse(widget.url));
-    chewieController = ChewieController(
-      videoPlayerController: _controller,
-      aspectRatio: 16 / 9,
-      errorBuilder: (context, errorMessage) {
-        return const Text(
-          "video error",
-          style: TextStyle(fontSize: 20),
+    convertToCache(url: widget.url).then((value) {
+    if(value != null)
+      {
+        _controller = VideoPlayerController.file(File(value));
+        // _controller = VideoPlayerController.contentUri(Uri.parse(widget.url));
+        chewieController = ChewieController(
+          videoPlayerController: _controller,
+          aspectRatio: 16 / 9,
+          errorBuilder: (context, errorMessage) {
+            return const Text(
+              "video error",
+              style: TextStyle(fontSize: 20),
+            );
+          },
+          showControls: true,
+          autoInitialize: true,
+          looping: false,
+          autoPlay: true,
+          hideControlsTimer: const Duration(seconds: 2),
+          materialProgressColors: ChewieProgressColors(
+            playedColor: ColorRes.color8401FF,
+            handleColor: ColorRes.colorWhite,
+            backgroundColor: ColorRes.color8401FF.withOpacity(.3),
+          ),
+          allowPlaybackSpeedChanging: false,
         );
-      },
-      showControls: true,
-      autoInitialize: true,
-      looping: false,
-      autoPlay: true,
-      hideControlsTimer: const Duration(seconds: 2),
-      materialProgressColors: ChewieProgressColors(
-        playedColor: ColorRes.color8401FF,
-        handleColor: ColorRes.colorWhite,
-        backgroundColor: ColorRes.color8401FF.withOpacity(.3),
-      ),
-      allowPlaybackSpeedChanging: false,
-    );
-    _controller.addListener(() {
-      if (_controller.value.isInitialized) {
-        if (isVideoLoading && !_controller.value.isPlaying) {
-          setState(() {
-            isVideoLoading = false;
-          });
-        }
+        _controller.addListener(() {
+          if (_controller.value.isInitialized) {
+            if (isVideoLoading && !_controller.value.isPlaying) {
+              setState(() {
+                isVideoLoading = false;
+              });
+            }
+          }
+        });
       }
     });
+
+
+    // // _controller = VideoPlayerController.contentUri(Uri.parse(widget.url));
+    // chewieController = ChewieController(
+    //   videoPlayerController: _controller,
+    //   aspectRatio: 16 / 9,
+    //   errorBuilder: (context, errorMessage) {
+    //     return const Text(
+    //       "video error",
+    //       style: TextStyle(fontSize: 20),
+    //     );
+    //   },
+    //   showControls: true,
+    //   autoInitialize: true,
+    //   looping: false,
+    //   autoPlay: true,
+    //   hideControlsTimer: const Duration(seconds: 2),
+    //   materialProgressColors: ChewieProgressColors(
+    //     playedColor: ColorRes.color8401FF,
+    //     handleColor: ColorRes.colorWhite,
+    //     backgroundColor: ColorRes.color8401FF.withOpacity(.3),
+    //   ),
+    //   allowPlaybackSpeedChanging: false,
+    // );
+    // _controller.addListener(() {
+    //   if (_controller.value.isInitialized) {
+    //     if (isVideoLoading && !_controller.value.isPlaying) {
+    //       setState(() {
+    //         isVideoLoading = false;
+    //       });
+    //     }
+    //   }
+    // });
     /*_controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) {
         final duration = _controller.value.duration;
@@ -75,6 +116,20 @@ class _VideoPreviewState extends State<VideoPreview> {
     _initializeVideoPlayerFuture = _controller.initialize();
     _controller.setLooping(true);
     _controller.setVolume(1.0);*/
+  }
+
+  Future<String?> convertToCache({required String url})
+  async{
+    try{
+      final file = await DefaultCacheManager().getSingleFile(url);
+      return file.path;
+    }
+    catch(e)
+    {
+      return null;
+    }
+
+
   }
 
   @override

@@ -36,29 +36,44 @@ class FeedScreen extends StatelessWidget {
               },
               child: Hero(
                 tag: item,
-                child: Image.network(
-                  item.toString(),
-                  height: Get.height * 0.2,
-                  width: Get.height * 0.2,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Image.asset(
-                      AssetsRes.homeImage,
-                      height: Get.height * 0.2,
-                      width: Get.height * 0.2,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      AssetsRes.homeImage,
-                      height: Get.height * 0.2,
-                      width: Get.height * 0.2,
-                      fit: BoxFit.cover,
-                    );
-                  },
+
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      child: Image.network(
+                        item.toString(),
+                        height: Get.height * 0.27,
+                        width: Get.height * 0.2,
+                        fit: BoxFit.fitWidth,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Image.asset(
+                            AssetsRes.homeImage,
+                            height: Get.height * 0.27,
+                            width: Get.height * 0.2,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            AssetsRes.homeImage,
+                            height: Get.height * 0.27,
+                            width: Get.height * 0.2,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                    item.toString().contains(".mp4") ?const Align(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.play_circle_outline_outlined,
+                        color: Colors.grey,
+                        size: 35,
+                      ),
+                    ) : const SizedBox(),
+                  ],
                 ),
               ),
             );

@@ -54,6 +54,7 @@ class Datum {
     this.isFavourite,
     this.createdAt,
     this.updatedAt,
+     required this.cachedPath
   });
 
   int? id;
@@ -76,6 +77,7 @@ class Datum {
   bool? isFavourite;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? cachedPath;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
@@ -98,6 +100,7 @@ class Datum {
     isFavourite: json["isFavourite"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    cachedPath: json["cachedPath"].toString() == "null" ? "":json["cachedPath"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -121,5 +124,7 @@ class Datum {
     "isFavourite": isFavourite,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
+    "cachedPath": cachedPath ?? "",
+
   };
 }

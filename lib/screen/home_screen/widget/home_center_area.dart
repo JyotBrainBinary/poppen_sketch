@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+
 import 'package:sketch/common/widget/textStyle.dart';
 import 'package:sketch/screen/Profile/profileController.dart';
 import 'package:sketch/screen/Profile/profileScreen.dart';
@@ -46,7 +46,7 @@ SizedBox(height: height*0.015,),
             height: height * 0.085,
             width: height * 0.085,
             // padding: EdgeInsets.only(bottom: height*0.02,),
-            decoration: BoxDecoration(shape: BoxShape.circle),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(99),
               child: Image.network(
@@ -102,7 +102,7 @@ SizedBox(height: height*0.015,),
           height: height * 0.045,
           // width: width,
 
-          child: Align(
+          child:catagoryList.isNotEmpty ? Align(
             alignment: Alignment.center,
             child: ListView.separated(
               shrinkWrap: true,
@@ -146,7 +146,7 @@ SizedBox(height: height*0.015,),
                 );
               },
             ),
-          ),
+          ) : const SizedBox(),
         ),
 
 

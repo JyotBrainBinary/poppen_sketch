@@ -8,31 +8,21 @@ class ImageMessage extends StatelessWidget {
   final bool selectionMode;
   final bool sender;
 
-  ImageMessage(this.message, this.selectionMode, this.sender);
+  const ImageMessage(this.message, this.selectionMode, this.sender, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(
+        left: sender ? 10 : 0,
+        right: sender ? 0 : 10,
+        bottom: 10,
+      ),
+      height: 200,
+      width: 200,
       child: Stack(
         children: <Widget>[
           InkWell(
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              child: CachedNetworkImage(
-                imageUrl: message.content ??'',
-                width: 200.0,
-                height: 200.0,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) {
-                  return Padding(
-                    padding: EdgeInsets.all(80),
-                    child: CircularProgressIndicator(
-                        value: downloadProgress.progress),
-                  );
-                },
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-            ),
             onTap: selectionMode
                 ? null
                 : () async {
@@ -55,10 +45,28 @@ class ImageMessage extends StatelessWidget {
                       ),
                     );*/
                   },
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+              child: CachedNetworkImage(
+                imageUrl: message.content ??'',
+                width: 200.0,
+                height: 200.0,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, downloadProgress) {
+                  return Padding(
+                    padding: const EdgeInsets.all(80),
+                    child: CircularProgressIndicator(
+                        value: downloadProgress.progress),
+                  );
+                },
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
+              margin: const EdgeInsets.only(right: 10, bottom: 5),
               child: Text(
                 hFormat(DateTime.fromMillisecondsSinceEpoch(message.sendTime??0)),
                 style: TextStyle(
@@ -66,18 +74,10 @@ class ImageMessage extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              margin: EdgeInsets.only(right: 10, bottom: 5),
             ),
           )
         ],
       ),
-      margin: EdgeInsets.only(
-        left: sender ? 10 : 0,
-        right: sender ? 0 : 10,
-        bottom: 10,
-      ),
-      height: 200,
-      width: 200,
     );
   }
 }

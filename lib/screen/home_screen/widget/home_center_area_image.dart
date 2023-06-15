@@ -102,7 +102,7 @@ class HomeCenterAreaImage extends StatelessWidget {
           height: height * 0.045,
           // width: width,
 
-          child: Align(
+          child:catagoryList.isNotEmpty ?  Align(
             alignment: Alignment.center,
             child: ListView.separated(
               shrinkWrap: true,
@@ -142,7 +142,7 @@ class HomeCenterAreaImage extends StatelessWidget {
                 );
               },
             ),
-          ),
+          ) : const SizedBox(),
         ),
 
         ///---- static data-----

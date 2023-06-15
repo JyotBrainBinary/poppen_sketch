@@ -43,203 +43,201 @@ class ProfileScreen extends StatelessWidget {
                       CommonAppBar(
                         index: 4,
                       ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: height * 0.025,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // PrefService.clear();
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(99),
-                                  child: Image.network(
-                                    controller
-                                        .viewBusinessModel.value.data!.logoUrl
-                                        .toString(),
-                                    height: height * 0.15,
-                                    width: height * 0.15,
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Image.asset(
-                                        AssetsRes.restaurantLogo,
-                                        height: height * 0.15,
-                                        width: height * 0.15,
-                                      );
-                                    },
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                        AssetsRes.restaurantLogo,
-                                        height: height * 0.15,
-                                        width: height * 0.15,
-                                        fit: BoxFit.cover,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.015,
-                              ),
-                              Text(
-                                controller.viewBusinessModel.value.data!.name
-                                    .toString(),
-                                style: regular(
-                                    fontSize: 17,
-                                    color: ColorRes.color161823,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                controller.viewBusinessModel.value.data!.website
-                                    .toString(),
-                                style: regular(
-                                    color: ColorRes.color7F0E1A,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12),
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.025,
-                              ),
-                              SizedBox(
-                                width: width * 0.9,
-                                child: Text(
-                                  controller.viewBusinessModel.value.data!.bio
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: height * 0.025,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                // PrefService.clear();
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(99),
+                                child: Image.network(
+                                  controller
+                                      .viewBusinessModel.value.data!.logoUrl
                                       .toString(),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.center,
-                                  style: regular(
-                                      fontSize: 12,
-                                      color: ColorRes.color6C6C6C),
+                                  height: height * 0.15,
+                                  width: height * 0.15,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Image.asset(
+                                      AssetsRes.restaurantLogo,
+                                      height: height * 0.15,
+                                      width: height * 0.15,
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      AssetsRes.restaurantLogo,
+                                      height: height * 0.15,
+                                      width: height * 0.15,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
                                 ),
                               ),
-                              // Text(
-                              //   "🍸 World Class Bar",
-                              //   style: regular(
-                              //       fontSize: 12, color: ColorRes.color6C6C6C),
-                              // ),
-                              // Text(
-                              //   "📍 Heart of Brighton-Le-Sands",
-                              //   style: regular(
-                              //       fontSize: 12, color: ColorRes.color6C6C6C),
-                              // ),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.015,
+                            ),
+                            Text(
+                              controller.viewBusinessModel.value.data!.name
+                                  .toString(),
+                              style: regular(
+                                  fontSize: 17,
+                                  color: ColorRes.color161823,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              controller.viewBusinessModel.value.data!.website
+                                  .toString(),
+                              style: regular(
+                                  color: ColorRes.color7F0E1A,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.025,
+                            ),
+                            SizedBox(
+                              width: width * 0.9,
+                              child: Text(
+                                controller.viewBusinessModel.value.data!.bio
+                                    .toString(),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: regular(
+                                    fontSize: 12,
+                                    color: ColorRes.color6C6C6C),
+                              ),
+                            ),
+                            // Text(
+                            //   "🍸 World Class Bar",
+                            //   style: regular(
+                            //       fontSize: 12, color: ColorRes.color6C6C6C),
+                            // ),
+                            // Text(
+                            //   "📍 Heart of Brighton-Le-Sands",
+                            //   style: regular(
+                            //       fontSize: 12, color: ColorRes.color6C6C6C),
+                            // ),
 
-                              /// ---------- containers ------
+                            /// ---------- containers ------
 
-                              SizedBox(height: Get.height * 0.03),
-                              SizedBox(
-                                height: height * 0.043,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  itemCount: controller
+                            SizedBox(height: Get.height * 0.03),
+                            SizedBox(
+                              height: height * 0.043,
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: controller
+                                    .viewBusinessModel.value.data!.category
+                                    .toString()
+                                    .split(",")
+                                    .toList()
+                                    .length,
+                                scrollDirection: Axis.horizontal,
+                                separatorBuilder: (context, index) {
+                                  return SizedBox(
+                                    width: width * 0.01,
+                                  );
+                                },
+                                itemBuilder: (context, index2) {
+                                  var data = controller
                                       .viewBusinessModel.value.data!.category
                                       .toString()
                                       .split(",")
-                                      .toList()
-                                      .length,
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: width * 0.01,
-                                    );
-                                  },
-                                  itemBuilder: (context, index2) {
-                                    var data = controller
-                                        .viewBusinessModel.value.data!.category
-                                        .toString()
-                                        .split(",")
-                                        .toList()[index2];
-                                    return Container(
-                                      // width: width * 0.25,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: width * 0.03,
-                                          vertical: height * 0.005),
-                                      decoration: BoxDecoration(
-                                          color: ColorRes.color161823,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            AssetsRes.message,
-                                            width: width * 0.053,
-                                          ),
-                                          SizedBox(
-                                            width: width * 0.02,
-                                          ),
-                                          Text(
-                                            homeController.categoryNameList[
-                                                int.parse(data) - 1],
-                                            style: const TextStyle(
-                                                color: ColorRes.colorWhite,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                      .toList()[index2];
+                                  return Container(
+                                    // width: width * 0.25,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: width * 0.03,
+                                        vertical: height * 0.005),
+                                    decoration: BoxDecoration(
+                                        color: ColorRes.color161823,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          AssetsRes.message,
+                                          width: width * 0.053,
+                                        ),
+                                        SizedBox(
+                                          width: width * 0.02,
+                                        ),
+                                        Text(
+                                          homeController.categoryNameList[
+                                              int.parse(data) - 1],
+                                          style: const TextStyle(
+                                              color: ColorRes.colorWhite,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
+                            ),
 
-                              SizedBox(height: Get.height * 0.03),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: width * 0.04),
-                                child: Row(
-                                  children: [
-                                    CommonSmallButton(
-                                      image: AssetsRes.direction,
-                                      ontap: () {
-                                        favController.openMap(
-                                            lat: controller.viewBusinessModel
-                                                .value.data!.latitude
-                                                .toString(),
-                                            long: controller.viewBusinessModel
-                                                .value.data!.longitude
-                                                .toString());
-                                      },
-                                      text: StringRes.directions,
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.015,
-                                    ),
-                                    CommonSmallButton(
-                                      image: AssetsRes.message,
-                                      ontap: () {
-                                        Get.to(() => ChatFireScreen(
-                                              isManager: false,
-                                              roomId: PrefService.getString(
-                                                  PrefKeys.uid),
-                                            ));
-                                        // Container navigationBar =dashBoardController.glbKey.currentWidget as Container;
-                                        // // navigationBar.onTap!(3);
-                                        // // print("object");
-                                        // dashBoardController.onItemTapped(3);
-                                        // dashBoardController.update(["bottomBar"]);
-                                        // controller.update(["id"]);
-                                      },
-                                      text: StringRes.message,
-                                    ),
-                                  ],
-                                ),
+                            SizedBox(height: Get.height * 0.03),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: width * 0.04),
+                              child: Row(
+                                children: [
+                                  CommonSmallButton(
+                                    image: AssetsRes.direction,
+                                    ontap: () {
+                                      favController.openMap(
+                                          lat: controller.viewBusinessModel
+                                              .value.data!.latitude
+                                              .toString(),
+                                          long: controller.viewBusinessModel
+                                              .value.data!.longitude
+                                              .toString());
+                                    },
+                                    text: StringRes.directions,
+                                  ),
+                                  SizedBox(
+                                    width: width * 0.015,
+                                  ),
+                                  CommonSmallButton(
+                                    image: AssetsRes.message,
+                                    ontap: () {
+                                      Get.to(() => ChatFireScreen(
+                                            isManager: false,
+                                            roomId: PrefService.getString(
+                                                PrefKeys.uid),
+                                          ));
+                                      // Container navigationBar =dashBoardController.glbKey.currentWidget as Container;
+                                      // // navigationBar.onTap!(3);
+                                      // // print("object");
+                                      // dashBoardController.onItemTapped(3);
+                                      // dashBoardController.update(["bottomBar"]);
+                                      // controller.update(["id"]);
+                                    },
+                                    text: StringRes.message,
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: Get.height * 0.02),
+                            ),
+                            SizedBox(height: Get.height * 0.02),
 
-                              /// ------ Post --------------
-                              post(),
-                            ],
-                          ),
+                            /// ------ Post --------------
+                            post(),
+                          ],
                         ),
                       ),
                     ],

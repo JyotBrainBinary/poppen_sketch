@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sketch/api_call/view_business_api.dart';
 import 'package:sketch/common/popup.dart';
 import 'package:sketch/model/view_business_model.dart';
 import 'package:sketch/utils/StringRes.dart';
 import 'package:sketch/utils/assets_res.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 
 class ProfileController extends GetxController {
   // PageController pageController = PageController();
@@ -76,10 +74,10 @@ class ProfileController extends GetxController {
         if (value != null) {
           viewBusinessModel.value = value;
           isLoading.value = false;
-          await generateThumb();
+          // await generateThumb();
           update(["id"]);
 // update(["tab"]);
-          print(
+          debugPrint(
               "viewBusinessList  --------->  ${viewBusinessModel.value.status}");
         } else {
           isLoading.value = false;
@@ -88,37 +86,41 @@ class ProfileController extends GetxController {
       });
       // update(["id"]);
     } catch (e) {
-      print("error: =======>> $e");
+      debugPrint("error: =======>> $e");
       isLoading.value = false;
       errorToast(StringRes.errText);
       rethrow;
     }
   }
 
-  Future generateThumb() async {
-    try {
-      viewBusinessModel.value.data!.galleryList!.forEach((element) async {
-        if (element.endsWith(".mp4")) {
-          final fileName = await VideoThumbnail.thumbnailFile(
-            video: element,
-            thumbnailPath: (await getTemporaryDirectory()).path,
-            imageFormat: ImageFormat.WEBP,
-            maxHeight:
-                64, // specify the height of the thumbnail, let the width auto-scaled to keep the source aspect ratio
-            quality: 75,
-          );
-          debugPrint("=========: $fileName");
-          galleryList.add(fileName);
-        } else {
-          galleryList.add(element);
-        }
-      });
-
-      debugPrint("thumb list----------: $galleryList");
-      // return galleryList;
-    } catch (e) {
-      debugPrint("----------: $e");
-    }
-    // return null;
-  }
+  // Future generateThumb() async {
+  //   try {
+  //     viewBusinessModel.value.data!.galleryList!.forEach((element) async {
+  //       if (element.endsWith(".mp4")) {
+  //         final fileName = await VideoThumbnail.thumbnailFile(
+  //           video: element,
+  //           thumbnailPath: (await getTemporaryDirectory()).path,
+  //           imageFormat: ImageFormat.WEBP,
+  //           maxHeight:
+  //               64, // specify the height of the thumbnail, let the width auto-scaled to keep the source aspect ratio
+  //           quality: 75,
+  //         );
+  //         debugPrint("=========: $fileName");
+  //         galleryList.add(fileName);
+  //       } else {
+  //         galleryList.add(element);
+  //         print("length: -----+======${galleryList.length}");
+  //       }
+  //     });
+  //
+  //     debugPrint("thumb list----------: $galleryList");
+  //     // return galleryList;
+  //   } catch (e) {
+  //     debugPrint("----------: $e");
+  //     galleryList.clear();
+  //     galleryList = viewBusinessModel.value.data!.galleryList!;
+  //     update(["id"]);
+  //   }
+  //   // return null;
+  // }
 }

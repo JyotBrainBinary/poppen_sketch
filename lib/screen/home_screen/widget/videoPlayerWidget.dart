@@ -137,6 +137,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 */
 
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sketch/common/popup.dart';
@@ -153,6 +154,7 @@ class VideoPlayerWidget extends StatefulWidget {
   final bool showVideoIcon;
   final bool touchToSeePlayPause;
   final int index;
+  final bool? isFromFile;
 
   const VideoPlayerWidget(
       {Key? key,
@@ -162,7 +164,7 @@ class VideoPlayerWidget extends StatefulWidget {
       this.showPlayPause = true,
       this.showVideoIcon = false,
       this.touchToSeePlayPause = true,
-      required this.index})
+      required this.index, this.isFromFile})
       : super(key: key);
 
   @override
@@ -194,6 +196,18 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     });
 
     // load and play video from url
+  if(widget.isFromFile == true )
+    {videoPlayerController = VideoPlayerController.file(File(widget.video))
+      ..initialize().then((value) {
+        setState(() {
+          isLoading = false;
+        });
+        videoPlayerController.setVolume(3);
+        if (widget.autoPlay) {
+          videoPlayerController.play();
+        }
+      });}
+  else{
     videoPlayerController = VideoPlayerController.network(widget.video)
       ..initialize().then((value) {
         setState(() {
@@ -204,6 +218,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           videoPlayerController.play();
         }
       });
+  }
+
     videoPlayerController.addListener(() {
       if (videoPlayerController.value.hasError) {
         setState(() {
