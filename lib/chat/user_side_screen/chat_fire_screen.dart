@@ -434,7 +434,7 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         ),
         centerTitle: true,
         elevation: 1,
-        actions: [
+        actions: const [
           // InkWell(
           //   onTap: () async {
           //     // launch('tel://9409075553');
@@ -452,9 +452,9 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
         ],
       ),
       body: (isLoading == true
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ?const SizedBox()/* const Center(*/
+           /*   child: CircularProgressIndicator(),*/
+           /* )*/
           : doc!.exists == false
               ? Stack(
                   alignment: Alignment.bottomCenter,
@@ -498,11 +498,12 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                                   color:
                                       const Color(0xFF696969).withOpacity(0.3),
                                   child: Column(
-                                    children: [
+                                    children:  [
+
                                       Platform.isIOS
                                           ? const CupertinoActivityIndicator()
                                           : const CircularProgressIndicator(),
-                                      const Text("Uploading media")
+                                      Text("Uploading media")
                                     ],
                                   ),
                                 )
@@ -586,11 +587,11 @@ class _ChatFireScreenState extends State<ChatFireScreen> {
                             width: MediaQuery.of(context).size.width,
                             color: const Color(0xFF696969).withOpacity(0.3),
                             child: Column(
-                              children: [
-                                Platform.isIOS
-                                    ? const CupertinoActivityIndicator()
-                                    : const CircularProgressIndicator(),
-                                const Text("Uploading media")
+                              children:  [
+                              Platform.isIOS
+                                     ? const CupertinoActivityIndicator()
+                                     : const CircularProgressIndicator(),
+                                Text("Uploading media")
                               ],
                             ),
                           )

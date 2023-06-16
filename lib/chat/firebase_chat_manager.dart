@@ -278,8 +278,8 @@ class _ChatManagerState extends State<ChatManager> {
                 } else {
                   return Center(
                     child: Platform.isIOS
-                        ? const CupertinoActivityIndicator()
-                        : const CircularProgressIndicator(),
+                        ? const SizedBox()/*const CupertinoActivityIndicator()*/
+                        : const SizedBox(),/*const CircularProgressIndicator(),*/
                   );
                 }
               },

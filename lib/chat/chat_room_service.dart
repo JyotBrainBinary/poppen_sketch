@@ -16,7 +16,7 @@ class ChatRoomservice {
     } catch (e) {
       print(e);
       //handleException(e);
-      throw e;
+      rethrow;
     }
   }
 
@@ -26,7 +26,7 @@ class ChatRoomservice {
     } catch (e) {
       print(e);
       //handleException(e);
-      throw e;
+      rethrow;
     }
   }
 
@@ -52,7 +52,7 @@ class ChatRoomservice {
     } catch (e) {
       print(e);
       //   handleException(e);
-      throw e;
+      rethrow;
     }
   }
 
@@ -62,7 +62,7 @@ class ChatRoomservice {
     } catch (e) {
       print(e);
       // handleException(e);
-      throw e;
+      rethrow;
     }
   }
 

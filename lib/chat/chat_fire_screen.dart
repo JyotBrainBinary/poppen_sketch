@@ -461,9 +461,9 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
         ],
       ),
       body: (isLoading == true
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ?const SizedBox() /* const Center(*/
+           /*   child: CircularProgressIndicator(),*/
+           /* )*/
           : doc!.exists == false
               ? Stack(
                   alignment: Alignment.bottomCenter,
@@ -530,8 +530,7 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
                           Expanded(
                               child: PaginateFirestore(
                             padding: const EdgeInsets.all(10.0),
-                            query: ChatRoomservice()
-                                .getMessages(roomId!, chatLimit),
+                            query: ChatRoomservice().getMessages(roomId!, chatLimit),
                             itemBuilderType: PaginateBuilderType.listView,
                             isLive: true,
                             itemsPerPage: 10,
@@ -539,15 +538,14 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
                             itemBuilder: (context,documentsnapshot, index) {
                               if (!listMessage.contains(documentsnapshot)) {
                                 listMessage.add(documentsnapshot[index] as DocumentSnapshot<Object?>);
+                                debugPrint('------- message -----: ${listMessage[index].toString()}');
                               }
+
                               return MessageView(
                                 index,
                                 MessageModel.fromMap(
-                                  documentsnapshot[index].data() as Map<String,dynamic>
-
-                                  ,
-                                  documentsnapshot[index].id,
-                                ),
+                                  documentsnapshot[index].data() as Map<String,dynamic>,
+                                  documentsnapshot[index].id,),
                                 selectedMessages,
                                 onTapPress,
                                 onLongPressMessage,
@@ -606,7 +604,10 @@ class _ChatManegerFireScreenState extends State<ChatManegerFireScreen> {
                         : const SizedBox()
                   ],
                 )),
-    ); /*Scaffold(
+    );
+
+
+    /*Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: Text("Odeva manager"),
